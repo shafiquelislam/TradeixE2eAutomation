@@ -6,7 +6,7 @@ const { SpecReporter } = require('jasmine-spec-reporter');
 exports.config = {
   allScriptsTimeout: 11000,
   specs: [
-    './e2e/**/*.e2e-spec.ts'
+    './e2e/tests/*.login-spec.ts'
   ],
   capabilities: {
     'browserName': 'chrome'
@@ -23,6 +23,7 @@ exports.config = {
     require('ts-node').register({
       project: 'e2e/tsconfig.e2e.json'
     });
+    browser.driver.manage().window().maximize();
     jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
   }
 };
