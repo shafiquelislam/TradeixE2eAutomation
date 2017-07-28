@@ -1,6 +1,7 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, protractor } from 'protractor';
 
 let configs = require("../resources/tix.login-data.json");
+let defaultSpecDelayTime = require("../../tix.global-config.json").defaultSpecDelayTime;
 
 export class LoginPage {
   
@@ -16,7 +17,7 @@ export class LoginPage {
   }
 
   delayAfterActionForVisibility() {
-    browser.sleep(configs.defaultSpecDelayTime);
+    browser.sleep(defaultSpecDelayTime);
   }
 
   getEmailAddressField() {
@@ -28,13 +29,15 @@ export class LoginPage {
   }
 
   setEmailAddress() {
-    this.getEmailAddressField().sendKeys(this.loginCredentials.username);
-    this.delayAfterActionForVisibility();
+    this.getEmailAddressField().sendKeys(this.loginCredentials.username).then((prom) => {
+      this.delayAfterActionForVisibility();
+    });;
   }
 
   setPassword() {
-    this.getPasswordField().sendKeys(this.loginCredentials.password);
-    this.delayAfterActionForVisibility();
+    this.getPasswordField().sendKeys(this.loginCredentials.password).then((prom) => {
+      this.delayAfterActionForVisibility();
+    });
   }
 
   clickLoginButton() {
@@ -45,10 +48,15 @@ export class LoginPage {
     element(by.css("form.login-form")).submit();
   }
 
+  pressEnter() {
+    browser.actions().sendKeys(protractor.Key.ENTER).perform();
+  }
+
   performLoginAction() {
     this.setEmailAddress();
     this.setPassword();
-    this.clickLoginButton();
+    this.pressEnter();
+    // need to check if login done
     return true;
   }
 
