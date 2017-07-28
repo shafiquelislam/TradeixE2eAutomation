@@ -3,12 +3,12 @@ import { browser, by, element } from 'protractor';
 let configs = require("../resources/tix.login-data.json");
 
 export class LoginPage {
+  
+  private loginCredentials: any = configs.loginCredentials[configs.loginUserType];
 
   constructor() {
     this.navigateTo();
   }
-
-  private loginCredentials: any = configs.loginCredentials[configs.loginUserType];
 
   navigateTo() {
     browser.ignoreSynchronization = true;
@@ -49,6 +49,7 @@ export class LoginPage {
     this.setEmailAddress();
     this.setPassword();
     this.clickLoginButton();
+    return true;
   }
 
 }

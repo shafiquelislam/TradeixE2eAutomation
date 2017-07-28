@@ -1,6 +1,5 @@
 {
     "appUrl": "https://app.uat.tradeix.com/",
-    "defaultSpecDelayTime": 1000,
     "loginUserType": "supplier",
     "loginCredentials": {
         "admin": {
@@ -8,7 +7,7 @@
             "password": "tradeix~1"
         },
         "supplier": {
-            "username": "supplier3@tix.com",
+            "username": "supplier1@tix.com",
             "password": "tradeix~1"
         }
     }
