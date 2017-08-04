@@ -17,19 +17,22 @@ describe('Producer Dashboard', () => {
       browser.sleep(defaultSpecDelayTime);
     });
 
-    it('should display tradeix logo', () => {
+    it('should display tradeix logo', done => {
       expect(dashboardPage.hasTradeixLogo()).toBeTruthy();
+      done();
     });
 
-    it('should contain three options in left menu', () => {
+    it('should contain three options in left menu', done => {
       expect(dashboardPage.isProducerDashboardMenuExists()).toBeTruthy();
       expect(dashboardPage.isFileUploadMenuExists()).toBeTruthy();
       expect(dashboardPage.isProfileMenuExits()).toBeTruthy();
+      done();
     });
 
-    it('should display minimum 1 and maximum 3 currency box at producer dashboard', () => {
+    it('should display minimum 1 and maximum 3 currency box at producer dashboard', done => {
       dashboardPage.getNumberOfCurrencyBoxes().then((count) => {
         expect(count >= 1 && count <=3).toBeTruthy();
+        done();
       });
     });
   });
@@ -39,26 +42,31 @@ describe('Producer Dashboard', () => {
       browser.sleep(defaultSpecDelayTime);
     });
 
-    it('should found at least one button as enabled of Fund USD/GBP/EUR', () => {
+    it('should found at least one button as enabled of Fund USD/GBP/EUR', done => {
       dashboardPage.getCountOfEnabledFundButtons().then((count) => {
         expect(count).toBeGreaterThanOrEqual(1);
+        done();
       });
     });
 
-    it('should click on Fund USD button', () => {
+    it('should click on Fund USD button', done => {
       expect(dashboardPage.clickOnActiveFundButton()).toBeTruthy();
+      done();
     });
 
-    it('should choose any one Buyer from the list and then click on "Next" button', () => {
+    it('should choose any one Buyer from the list and then click on "Next" button', done => {
       expect(dashboardPage.chooseFirstAvailabaleBuyerAndClickNext()).toBeTruthy();
+      done();
     });
 
-    it('should choose any one Invoice from the list and then click on "Next" button', () => {
-      expect(dashboardPage.chooseFirstAvailableInvoiceAndClickNext()).toBeTruthy();      
+    it('should choose any one Invoice from the list and then click on "Next" button', done => {
+      expect(dashboardPage.chooseFirstAvailableInvoiceAndClickNext()).toBeTruthy();  
+      done();    
     });
 
-    it('should click on "Return to dashboard" button from pop-up', () => {
+    it('should click on "Return to dashboard" button from pop-up', done => {
       expect(dashboardPage.clickReturnToDashboardButtonFromPopup()).toBeTruthy();    
+      done();
     });
 
   });
@@ -68,34 +76,41 @@ describe('Producer Dashboard', () => {
       browser.sleep(defaultSpecDelayTime);
     });
 
-    it('should found at least one button as enabled of Fund USD/GBP/EUR', () => {
+    it('should found at least one button as enabled of Fund USD/GBP/EUR', done => {
       dashboardPage.getCountOfEnabledFundButtons().then((count) => {
         expect(count).toBeGreaterThanOrEqual(1);
+        done();
       });
     });
 
-    it('should click on first enabled Fund button of USD/GBP/EUR', () => {
+    it('should click on first enabled Fund button of USD/GBP/EUR', done => {
       expect(dashboardPage.clickOnActiveFundButton()).toBeTruthy();
+      done();
     });
 
-    it('should choose any one Buyer from the list and then click on "Next" button', () => {
+    it('should choose any one Buyer from the list and then click on "Next" button', done => {
       expect(dashboardPage.chooseFirstAvailabaleBuyerAndClickNext()).toBeTruthy();
+      done();
     });
 
-    it('should choose any one Invoice from the list and then click on "Next" button', () => {
+    it('should choose any one Invoice from the list and then click on "Next" button', done => {
       expect(dashboardPage.chooseFirstAvailableInvoiceAndClickNext()).toBeTruthy();      
+      done();
     });
 
-    it('should click on Review Pricing / bid(s) button', () => {
+    it('should click on Review Pricing / bid(s) button', done => {
       expect(dashboardPage.clickReviewPricingOrBidsButtonFromPopup()).toBeTruthy();    
+      done();
     });
 
-    it('should click  on "Accept" button', () => {
+    it('should click  on "Accept" button', done => {
       expect(dashboardPage.clickAcceptButtonFromBidDetails()).toBeTruthy();    
+      done();
     });
 
-    it('should click on Review Pricing / bid(s) button', () => {
+    it('should click on Review Pricing / bid(s) button', done => {
       expect(dashboardPage.clickOkButtonFromBidAcceptedPopup()).toBeTruthy();    
+      done();
     });
 
   });
@@ -105,22 +120,26 @@ describe('Producer Dashboard', () => {
       browser.sleep(defaultSpecDelayTime);
     });
 
-    it('should found at least one "View Offers" button as enabled for Fund USD/GBP/EUR', () => {
+    it('should found at least one "View Offers" button as enabled for Fund USD/GBP/EUR', done => {
       dashboardPage.getCountOfEnabledViewOffersButtons().then((count) => {
         expect(count).toBeGreaterThanOrEqual(1);
+        done();
       });
     });
 
-    it('should click on first enabled "View Offers" button of USD/GBP/EUR', () => {
+    it('should click on first enabled "View Offers" button of USD/GBP/EUR', done => {
       expect(dashboardPage.clickOnActiveViewOffersButton()).toBeTruthy();
+      done();
     });
 
-    it('should click on any "View bid(s)/ Pricing Summary" button', () => {
+    it('should click on any "View bid(s)/ Pricing Summary" button', done => {
       expect(dashboardPage.clickFirstViewBidsOrPricingSummaryButton()).toBeTruthy();
+      done();
     });
 
-    it('should click on "Cancel" button of view bid(s) or pricing summary', () => {
-      expect(dashboardPage.clickCancelButtonOfViewBidsOrPricingSummary()).toBeTruthy();      
+    it('should click on "Cancel" button of view bid(s) or pricing summary', done => {
+      expect(dashboardPage.clickCancelButtonOfViewBidsOrPricingSummary()).toBeTruthy();   
+      done();   
     });
 
   });

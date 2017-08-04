@@ -40,7 +40,9 @@ exports.config = {
       project: 'e2e/tsconfig.e2e.json'
     });
     jasmine.getEnv().addReporter(specReporter);
-    jasmine.getEnv().addReporter(htmlScreenshotReporter);
+    if(showHtmlReport) {
+      jasmine.getEnv().addReporter(htmlScreenshotReporter);
+    }
   },
   beforeLaunch: () => {
     return new Promise((resolve) => {
