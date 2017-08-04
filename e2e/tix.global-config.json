@@ -1,3 +1,13 @@
 {
-    "defaultSpecDelayTime": 1500
+    "loginUserType": "supplier",
+    "specsList": {
+        "admin": [],
+        "supplier": [
+            "./e2e/user-login/tests/*.login-spec.ts",
+            "./e2e/supplier/tests/*.dashboard-spec.ts"
+        ]
+    },
+    "browserName": "chrome",
+    "defaultSpecDelayTime": 1500,
+    "showHtmlReport": true
 }

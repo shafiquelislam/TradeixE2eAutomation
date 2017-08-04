@@ -1,11 +1,12 @@
 import { browser, by, element, protractor } from 'protractor';
 
-let configs = require("../resources/tix.login-data.json");
-let defaultSpecDelayTime = require("../../tix.global-config.json").defaultSpecDelayTime;
+let loginConfigs = require("../resources/tix.login-data.json");
+let globalConfigs = require("../../tix.global-config.json");
 
 export class LoginPage {
   
-  private loginCredentials: any = configs.loginCredentials[configs.loginUserType];
+  private loginCredentials: any = loginConfigs.loginCredentials[globalConfigs.loginUserType];
+  private defaultSpecDelayTime: number = globalConfigs.defaultSpecDelayTime;
 
   constructor() {
     this.navigateTo();
@@ -13,11 +14,11 @@ export class LoginPage {
 
   navigateTo() {
     browser.ignoreSynchronization = true;
-    return browser.driver.get(configs.appUrl);
+    return browser.driver.get(loginConfigs.appUrl);
   }
 
   delayAfterActionForVisibility() {
-    browser.sleep(defaultSpecDelayTime);
+    return browser.sleep(this.defaultSpecDelayTime);
   }
 
   getEmailAddressField() {
@@ -29,35 +30,37 @@ export class LoginPage {
   }
 
   setEmailAddress() {
-    this.getEmailAddressField().sendKeys(this.loginCredentials.username).then((prom) => {
-      this.delayAfterActionForVisibility();
+    return this.getEmailAddressField().sendKeys(this.loginCredentials.username).then(() => {
+      return this.delayAfterActionForVisibility().then(() => {
+          return true;
+      });
     });;
   }
 
   setPassword() {
-    this.getPasswordField().sendKeys(this.loginCredentials.password).then((prom) => {
-      this.delayAfterActionForVisibility();
+    return this.getPasswordField().sendKeys(this.loginCredentials.password).then(() => {
+      return this.delayAfterActionForVisibility().then(() => {
+        return true;
+      });
     });
   }
 
   clickLoginButton() {
-    element(by.id("login-button")).click();
+    return element(by.id("login-button")).click().then(() => {
+      return true;
+    });
   }
 
   submitLoginForm() {
-    element(by.css("form.login-form")).submit();
+    return element(by.css("form.login-form")).submit().then(() => {
+        return true;
+    });
   }
 
   pressEnter() {
-    browser.actions().sendKeys(protractor.Key.ENTER).perform();
-  }
-
-  performLoginAction() {
-    this.setEmailAddress();
-    this.setPassword();
-    this.pressEnter();
-    // need to check if login done
-    return true;
+    browser.actions().sendKeys(protractor.Key.ENTER).perform().then(() => {
+        return true;
+    });
   }
 
 }

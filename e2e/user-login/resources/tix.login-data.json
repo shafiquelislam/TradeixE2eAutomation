@@ -1,13 +1,12 @@
 {
-    "appUrl": "https://app.uat.tradeix.com/",
-    "loginUserType": "supplier",
+    "appUrl": "https://app.staging.tradeix.net/",
     "loginCredentials": {
         "admin": {
             "username": "admin@tix.com",
             "password": "tradeix~1"
         },
         "supplier": {
-            "username": "supplier1@tix.com",
+            "username": "supplier5@tix.com",
             "password": "tradeix~1"
         }
     }
