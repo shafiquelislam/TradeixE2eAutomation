@@ -217,7 +217,7 @@ export class DashboardPage {
                 return true;
             });
           } else {
-              return false
+              return false;
           }
         });
     }

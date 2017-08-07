@@ -108,7 +108,7 @@ describe('Producer Dashboard', () => {
       done();
     });
 
-    it('should click on Review Pricing / bid(s) button', done => {
+    it('should click on "Ok" button from the "Bid Accepted" pop-up', done => {
       expect(dashboardPage.clickOkButtonFromBidAcceptedPopup()).toBeTruthy();    
       done();
     });
@@ -140,6 +140,33 @@ describe('Producer Dashboard', () => {
     it('should click on "Cancel" button of view bid(s) or pricing summary', done => {
       expect(dashboardPage.clickCancelButtonOfViewBidsOrPricingSummary()).toBeTruthy();   
       done();   
+    });
+
+  });
+
+  describe('C113 - View Offers, view Bid details and Accept Bid process validation', () => {
+    afterEach(() => {
+      browser.sleep(defaultSpecDelayTime);
+    });
+
+    it('should click on first enabled "View Offers" button of USD/GBP/EUR', done => {
+      expect(dashboardPage.clickOnActiveViewOffersButton()).toBeTruthy();
+      done();
+    });
+
+    it('should click on any "View bid(s)/ Pricing Summary" button', done => {
+      expect(dashboardPage.clickFirstViewBidsOrPricingSummaryButton()).toBeTruthy();
+      done();
+    });
+
+    it('should click on "Accept" button from Bid Details', done => {
+      expect(dashboardPage.clickAcceptButtonFromBidDetails()).toBeTruthy();
+      done();   
+    });
+
+    it('should click on "Ok" button from the "Bid Accepted" pop-up', done => {
+      expect(dashboardPage.clickOkButtonFromBidAcceptedPopup()).toBeTruthy();    
+      done();
     });
 
   });

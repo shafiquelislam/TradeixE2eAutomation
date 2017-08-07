@@ -1,7 +1,9 @@
 {
     "loginUserType": "supplier",
     "specsList": {
-        "admin": [],
+        "admin": [
+            "./e2e/user-login/tests/*.login-spec.ts"
+        ],
         "supplier": [
             "./e2e/user-login/tests/*.login-spec.ts",
             "./e2e/supplier/tests/*.dashboard-spec.ts"
