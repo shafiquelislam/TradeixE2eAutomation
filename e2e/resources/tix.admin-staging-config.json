@@ -1,0 +1,13 @@
+{
+    "appUrl": "https://app.staging.tradeix.net/",
+    "loginCredentials": {
+        "admin": {
+            "username": "admin@tix.com",
+            "password": "tradeix~1"
+        },
+        "supplier": {
+            "username": "supplier5@tix.com",
+            "password": "tradeix~1"
+        }
+    }
+}

@@ -1,7 +1,7 @@
 import { browser, by, element } from 'protractor';
 
-var configs = require("../../user-login/resources/tix.login-data.json");
 var globalConfigs = require("../../tix.global-config.json");
+let data = require("../../resources/tix." + globalConfigs.loginUserType + "-" + globalConfigs.envName + "-config.json");
 
 export class DashboardPage {
 
@@ -16,7 +16,7 @@ export class DashboardPage {
     }
 
     getDashboardUrl() {
-        return configs.appUrl + '/' + this.action;
+        return data.appUrl + '/' + this.action;
     }
 
     /***************    C109    ***************/

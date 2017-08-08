@@ -1,11 +1,10 @@
 import { browser, by, element, protractor } from 'protractor';
 
-let loginConfigs = require("../resources/tix.login-data.json");
 let globalConfigs = require("../../tix.global-config.json");
+let data = require("../../resources/tix." + globalConfigs.loginUserType + "-" + globalConfigs.envName + "-config.json");
 
 export class LoginPage {
-  
-  private loginCredentials: any = loginConfigs.loginCredentials[globalConfigs.loginUserType];
+  private loginCredentials: any = data.loginCredentials[globalConfigs.loginUserType];
   private defaultSpecDelayTime: number = globalConfigs.defaultSpecDelayTime;
 
   constructor() {
@@ -14,7 +13,7 @@ export class LoginPage {
 
   navigateTo() {
     browser.ignoreSynchronization = true;
-    return browser.driver.get(loginConfigs.appUrl);
+    return browser.driver.get(data.appUrl);
   }
 
   delayAfterActionForVisibility() {
