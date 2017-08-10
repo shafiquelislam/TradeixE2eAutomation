@@ -1,5 +1,6 @@
 import { browser, by, element } from 'protractor';
 import { NumberUtil } from '../../utils/tix.number-util';
+import { StringUtil } from '../../utils/tix.string-util';
 
 var globalConfigs = require("../../tix.global-config.json");
 var data = require("../resources/tix." + globalConfigs.envName + "-config.json");
@@ -283,6 +284,22 @@ export class DashboardPage {
 
     getSumOfSelectedInvoiceValuesInList() {
         return NumberUtil.getSumFromArrayOfElements(element.all(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers data-grid table tbody tr.selected [ng-reflect-ng-switch='currency']")));
+    }
+
+    checkIfDataGridColumnsNamesAsPerExpectation() {
+        let columns = ["Buyer Name", "Entity Id", "Num. Invoices", "Total Invoice Value"];
+        return element.all(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers data-grid table thead th > div:nth-child(1):not(.mat-checkbox)")).map((elm) => {
+            return elm.getText();
+        }).then((texts) => {
+            return StringUtil.checkIfTwoArraysContainSimilarElements(columns, texts as Array<string>);
+        });
+    }
+
+    clickOnCancelButtonFromBuyersListView() {
+        let elm = element(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers app-breadcrumb button.mat-button"));
+        return browser.actions().mouseMove(elm).click().perform().then(() => {
+            return true;
+        });
     }
 
 }

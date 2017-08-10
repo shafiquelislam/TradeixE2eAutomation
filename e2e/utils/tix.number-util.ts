@@ -1,13 +1,14 @@
+import { StringUtil } from './tix.string-util';
 
 export class NumberUtil {
 
-    static isValidNumber(str) {
-        return str != null && str != undefined && (str.length > 0);
+    static isNumber(n): boolean {
+        return typeof n == 'number' && !isNaN(n) && isFinite(n);
     }
 
-    static stringToNumber(str) {
+    static stringToNumber(str: string): number {
         let numString: string = str.replace(/[^\d\.]*/g, '');
-        if(this.isValidNumber(numString)) {
+        if(StringUtil.isValidString(numString)) {
             if(numString.indexOf('.') >= 0) {
                 return parseFloat(numString);
             } else {
@@ -18,7 +19,7 @@ export class NumberUtil {
         }
     }
 
-    static addNumbersFromListOfString(strList) {
+    static addNumbersFromListOfString(strList): number {
         let sum: number = 0;
         strList.forEach(str => {
             let num = this.stringToNumber(str);
@@ -27,11 +28,11 @@ export class NumberUtil {
         return sum;
     }
 
-    static getSumFromArrayOfElements(elements) {
+    static getSumFromArrayOfElements(elements): number {
         return elements.map((elm) => {
             return elm.getText();
         }).then((texts) => {
-            return NumberUtil.addNumbersFromListOfString(texts);
+            return this.addNumbersFromListOfString(texts);
         });
     }
 };

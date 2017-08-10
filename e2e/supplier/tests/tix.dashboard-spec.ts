@@ -215,6 +215,15 @@ describe('Producer Dashboard', () => {
       done();
     });
 
+    it('should have appropriate column names in Data Grid columns', done => {
+      expect(dashboardPage.checkIfDataGridColumnsNamesAsPerExpectation()).toBe(true);
+      done();
+    });
+
+    it('should click on "Cancel" button and back to Producer Dashboard', done => {
+      expect(dashboardPage.clickOnCancelButtonFromBuyersListView()).toBe(true);
+      done();
+    });
   });
 
 });
