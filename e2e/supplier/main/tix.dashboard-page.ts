@@ -1,7 +1,8 @@
 import { browser, by, element } from 'protractor';
+import { NumberUtil } from '../../utils/tix.number-util';
 
 var globalConfigs = require("../../tix.global-config.json");
-let data = require("../../resources/tix." + globalConfigs.loginUserType + "-" + globalConfigs.envName + "-config.json");
+var data = require("../../resources/tix." + globalConfigs.loginUserType + "-" + globalConfigs.envName + "-config.json");
 
 export class DashboardPage {
 
@@ -67,22 +68,22 @@ export class DashboardPage {
 
     clickOnActiveFundButton() {
         let fundButton: any;
-        if(this.checkIfFundButtonIsEnabledByType("USD")) {
+        if (this.checkIfFundButtonIsEnabledByType("USD")) {
             fundButton = this.getFundButtonByType("USD");
-        } else if(this.checkIfFundButtonIsEnabledByType("EUR")) {
+        } else if (this.checkIfFundButtonIsEnabledByType("EUR")) {
             fundButton = this.getFundButtonByType("EUR");
-        } else if(this.checkIfFundButtonIsEnabledByType("GBP")) {
+        } else if (this.checkIfFundButtonIsEnabledByType("GBP")) {
             fundButton = this.getFundButtonByType("GBP");
         }
 
         return fundButton.isDisplayed().then((displayed) => {
-          if(displayed) {
-            return fundButton.click().then(() => {
-                return true;
-            });
-          } else {
-              return false
-          }
+            if (displayed) {
+                return fundButton.click().then(() => {
+                    return true;
+                });
+            } else {
+                return false
+            }
         });
     }
 
@@ -95,7 +96,7 @@ export class DashboardPage {
     }
 
     checkFirstBuyerInList() {
-         return browser.actions().mouseMove(this.getListOfAvailableItemsInList().get(1)).click().perform();
+        return browser.actions().mouseMove(this.getListOfAvailableItemsInList().get(1)).click().perform();
     }
 
     clickNextButtonFromAvailabaleBuyersList() {
@@ -120,7 +121,7 @@ export class DashboardPage {
     }
 
     chooseFirstAvailabaleBuyerAndClickNext() {
-        try{
+        try {
             return this.uncheckAllBuyersInList().then(() => {
                 return this.keepBrowserWaiting().then(() => {
                     return this.checkFirstBuyerInList().then(() => {
@@ -132,14 +133,14 @@ export class DashboardPage {
                     });
                 });
             });
-        } catch(ex) {
+        } catch (ex) {
             console.log(ex.status);
             return false;
         }
     }
 
     chooseFirstAvailableInvoiceAndClickNext() {
-        try{
+        try {
             return this.uncheckAllBuyersInList().then(() => {
                 return this.keepBrowserWaiting().then(() => {
                     return this.checkFirstBuyerInList().then(() => {
@@ -147,11 +148,11 @@ export class DashboardPage {
                             return this.clickNextButtonFromAvailabaleInvoicesList().then(() => {
                                 return true;
                             });
-                        });                
+                        });
                     });
                 });
             });
-        } catch(ex) {
+        } catch (ex) {
             console.log(ex.status);
             return false;
         }
@@ -180,7 +181,7 @@ export class DashboardPage {
         });
     }
 
-    
+
     /***************************    C112    ****************************/
 
     getViewOffersButtonByType(type) {
@@ -203,22 +204,22 @@ export class DashboardPage {
 
     clickOnActiveViewOffersButton() {
         let fundButton: any;
-        if(this.checkIfViewOffersButtonIsEnabledByType("USD")) {
+        if (this.checkIfViewOffersButtonIsEnabledByType("USD")) {
             fundButton = this.getViewOffersButtonByType("USD");
-        } else if(this.checkIfViewOffersButtonIsEnabledByType("EUR")) {
+        } else if (this.checkIfViewOffersButtonIsEnabledByType("EUR")) {
             fundButton = this.getViewOffersButtonByType("EUR");
-        } else if(this.checkIfViewOffersButtonIsEnabledByType("GBP")) {
+        } else if (this.checkIfViewOffersButtonIsEnabledByType("GBP")) {
             fundButton = this.getViewOffersButtonByType("GBP");
         }
 
         return fundButton.isDisplayed().then((displayed) => {
-          if(displayed) {
-            return fundButton.click().then(() => {
-                return true;
-            });
-          } else {
-              return false;
-          }
+            if (displayed) {
+                return fundButton.click().then(() => {
+                    return true;
+                });
+            } else {
+                return false;
+            }
         });
     }
 
@@ -235,5 +236,55 @@ export class DashboardPage {
             return true;
         });
     }
+
+    /***************************    C114    ****************************/
+
+    getUiHeaderTextOfBuyersList() {
+        return element(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers .padding-container .padding-top h1")).getText().then((innerText) => {
+            return innerText;
+        });
+    }
+
+    getTotalNumberOfAvailableBuyers() {
+        return element.all(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers data-grid table tbody tr")).count();
+    }
+
+    getTotalNumberOfSelectedBuyers() {
+        return element.all(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers data-grid table tbody tr md-checkbox.mat-checkbox-checked")).count();
+    }
+
+    getCountShowedForTotalAvailableBuyers() {
+        return element(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers app-subtotal md-card .available summary")).getText().then((innerText) => {
+            return NumberUtil.stringToNumber(innerText);
+        });
+    }
+
+    getCountShowedForTotalSelectedBuyers() {
+        return element(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers app-subtotal md-card .selected summary")).getText().then((innerText) => {
+            return NumberUtil.stringToNumber(innerText);
+        });
+    }
+
+    getValueShowedForTotalAvailableBuyers() {
+        return element(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers app-subtotal md-card .available span")).getText().then((innerText) => {
+            return NumberUtil.stringToNumber(innerText);
+        });
+    }
+
+    getValueShowedForTotalSelectedBuyers() {
+        return element(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers app-subtotal md-card .selected span")).getText().then((innerText) => {
+            return NumberUtil.stringToNumber(innerText);
+        });
+    }
+
+    getSumOfAllInvoiceValuesInList() {
+        return NumberUtil.getSumFromArrayOfElements(element.all(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers data-grid table tbody [ng-reflect-ng-switch='currency']")));
+    }
+
+    getSumOfSelectedInvoiceValuesInList() {
+        return NumberUtil.getSumFromArrayOfElements(element.all(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers data-grid table tbody tr.selected [ng-reflect-ng-switch='currency']")));
+    }
+
+    
 
 }

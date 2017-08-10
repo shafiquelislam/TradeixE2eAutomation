@@ -4,7 +4,7 @@ import { DashboardPage } from '../main/tix.dashboard-page';
 var globalConfig = require("../../tix.global-config.json");
 
 describe('Producer Dashboard', () => {
-    
+
   let dashboardPage: DashboardPage = new DashboardPage();
   let defaultSpecDelayTime = globalConfig.defaultSpecDelayTime;
 
@@ -31,13 +31,13 @@ describe('Producer Dashboard', () => {
 
     it('should display minimum 1 and maximum 3 currency box at producer dashboard', done => {
       dashboardPage.getNumberOfCurrencyBoxes().then((count) => {
-        expect(count >= 1 && count <=3).toBeTruthy();
+        expect(count >= 1 && count <= 3).toBeTruthy();
         done();
       });
     });
   });
 
-  describe('C110 - Create Offer and back to Dashboard process validation', () => {
+  xdescribe('C110 - Create Offer and back to Dashboard process validation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -60,18 +60,18 @@ describe('Producer Dashboard', () => {
     });
 
     it('should choose any one Invoice from the list and then click on "Next" button', done => {
-      expect(dashboardPage.chooseFirstAvailableInvoiceAndClickNext()).toBeTruthy();  
-      done();    
+      expect(dashboardPage.chooseFirstAvailableInvoiceAndClickNext()).toBeTruthy();
+      done();
     });
 
     it('should click on "Return to dashboard" button from pop-up', done => {
-      expect(dashboardPage.clickReturnToDashboardButtonFromPopup()).toBeTruthy();    
+      expect(dashboardPage.clickReturnToDashboardButtonFromPopup()).toBeTruthy();
       done();
     });
 
   });
 
-  describe('C111 - Create Offer and Bid Accept process vaidation', () => {
+  xdescribe('C111 - Create Offer and Bid Accept process vaidation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -94,28 +94,28 @@ describe('Producer Dashboard', () => {
     });
 
     it('should choose any one Invoice from the list and then click on "Next" button', done => {
-      expect(dashboardPage.chooseFirstAvailableInvoiceAndClickNext()).toBeTruthy();      
+      expect(dashboardPage.chooseFirstAvailableInvoiceAndClickNext()).toBeTruthy();
       done();
     });
 
     it('should click on Review Pricing / bid(s) button', done => {
-      expect(dashboardPage.clickReviewPricingOrBidsButtonFromPopup()).toBeTruthy();    
+      expect(dashboardPage.clickReviewPricingOrBidsButtonFromPopup()).toBeTruthy();
       done();
     });
 
     it('should click  on "Accept" button', done => {
-      expect(dashboardPage.clickAcceptButtonFromBidDetails()).toBeTruthy();    
+      expect(dashboardPage.clickAcceptButtonFromBidDetails()).toBeTruthy();
       done();
     });
 
     it('should click on "Ok" button from the "Bid Accepted" pop-up', done => {
-      expect(dashboardPage.clickOkButtonFromBidAcceptedPopup()).toBeTruthy();    
+      expect(dashboardPage.clickOkButtonFromBidAcceptedPopup()).toBeTruthy();
       done();
     });
 
   });
 
-  describe('C112 - View Offers, view Bid details and back to Dashboard process validation', () => {
+  xdescribe('C112 - View Offers, view Bid details and back to Dashboard process validation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -138,13 +138,13 @@ describe('Producer Dashboard', () => {
     });
 
     it('should click on "Cancel" button of view bid(s) or pricing summary', done => {
-      expect(dashboardPage.clickCancelButtonOfViewBidsOrPricingSummary()).toBeTruthy();   
-      done();   
+      expect(dashboardPage.clickCancelButtonOfViewBidsOrPricingSummary()).toBeTruthy();
+      done();
     });
 
   });
 
-  describe('C113 - View Offers, view Bid details and Accept Bid process validation', () => {
+  xdescribe('C113 - View Offers, view Bid details and Accept Bid process validation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -161,11 +161,57 @@ describe('Producer Dashboard', () => {
 
     it('should click on "Accept" button from Bid Details', done => {
       expect(dashboardPage.clickAcceptButtonFromBidDetails()).toBeTruthy();
-      done();   
+      done();
     });
 
     it('should click on "Ok" button from the "Bid Accepted" pop-up', done => {
-      expect(dashboardPage.clickOkButtonFromBidAcceptedPopup()).toBeTruthy();    
+      expect(dashboardPage.clickOkButtonFromBidAcceptedPopup()).toBeTruthy();
+      done();
+    });
+
+  });
+
+  describe('C114 - Choose Buyers - UI validation and back to Dashboard', () => {
+    afterEach(() => {
+      browser.sleep(defaultSpecDelayTime);
+    });
+
+    it('should click on first enabled Fund USD/GBP/EUR button', done => {
+      expect(dashboardPage.clickOnActiveFundButton()).toBeTruthy();
+      done();
+    });
+
+    it('check if all buyers are selected by default', done => {
+      dashboardPage.getTotalNumberOfAvailableBuyers().then((totalRow) => {
+        dashboardPage.getTotalNumberOfSelectedBuyers().then((totalSelected) => {
+          expect(totalRow).toEqual(totalSelected);
+          done();
+        });
+      });
+    });
+
+    it('check UI header text equals to "Available Buyers"', done => {
+      expect(dashboardPage.getUiHeaderTextOfBuyersList()).toEqual("Available Buyers");
+      done();
+    });
+
+    it('check "Total Available (n)" count, where n should be equal to total number of Buyers in list', done => {
+      expect(dashboardPage.getTotalNumberOfAvailableBuyers()).toEqual(dashboardPage.getCountShowedForTotalAvailableBuyers());
+      done();
+    });
+
+    it('check "Total Available (n)" value, where value should be equal to sum of the values of "Total Invoice Value" column', done => {
+      expect(dashboardPage.getValueShowedForTotalAvailableBuyers()).toEqual(dashboardPage.getSumOfAllInvoiceValuesInList());
+      done();
+    });
+
+    it('check "Total Selected (n)" count, where n should be equal to total number of selected Buyers in list', done => {
+      expect(dashboardPage.getTotalNumberOfSelectedBuyers()).toEqual(dashboardPage.getCountShowedForTotalSelectedBuyers());
+      done();
+    });
+
+    it('check "Total Selected (n)" value, where value should be equal to sum of the values of "Total Invoice Value" column of the selected Buyers', done => {
+      expect(dashboardPage.getValueShowedForTotalSelectedBuyers()).toEqual(dashboardPage.getSumOfSelectedInvoiceValuesInList());
       done();
     });
 
