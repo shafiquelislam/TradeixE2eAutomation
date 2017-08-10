@@ -2,7 +2,7 @@ import { browser, by, element } from 'protractor';
 import { NumberUtil } from '../../utils/tix.number-util';
 
 var globalConfigs = require("../../tix.global-config.json");
-var data = require("../../resources/tix." + globalConfigs.loginUserType + "-" + globalConfigs.envName + "-config.json");
+var data = require("../resources/tix." + globalConfigs.envName + "-config.json");
 
 export class DashboardPage {
 
@@ -284,7 +284,5 @@ export class DashboardPage {
     getSumOfSelectedInvoiceValuesInList() {
         return NumberUtil.getSumFromArrayOfElements(element.all(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers data-grid table tbody tr.selected [ng-reflect-ng-switch='currency']")));
     }
-
-    
 
 }

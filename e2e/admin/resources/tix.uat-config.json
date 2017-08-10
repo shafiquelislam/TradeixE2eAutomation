@@ -1,0 +1,13 @@
+{
+    "appUrl": "https://app.uat.tradeix.com/",
+    "loginCredentials": {
+        "admin": {
+            "username": "admin@tix.com",
+            "password": "tradeix~1"
+        },
+        "supplier": {
+            "username": "supplier1@tix.com",
+            "password": "tradeix~1"
+        }
+    }
+}

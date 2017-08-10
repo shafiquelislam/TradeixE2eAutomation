@@ -1,7 +1,7 @@
 import { browser, by, element, protractor } from 'protractor';
 
 let globalConfigs = require("../../tix.global-config.json");
-let data = require("../../resources/tix." + globalConfigs.loginUserType + "-" + globalConfigs.envName + "-config.json");
+let data = require("../../" + globalConfigs.loginUserType + "/resources/tix." + globalConfigs.envName + "-config.json");
 
 export class LoginPage {
   private loginCredentials: any = data.loginCredentials[globalConfigs.loginUserType];
