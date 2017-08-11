@@ -1,10 +1,10 @@
-import { browser, by, element, protractor } from 'protractor';
+import { browser, by, element, protractor, $, $$ } from 'protractor';
 
 let globalConfigs = require("../../tix.global-config.json");
 let data = require("../../" + globalConfigs.loginUserType + "/resources/tix." + globalConfigs.envName + "-config.json");
 
 export class LoginPage {
-  private loginCredentials: any = data.loginCredentials[globalConfigs.loginUserType];
+  private loginCredentials: any = data.loginCredentials;
   private defaultSpecDelayTime: number = globalConfigs.defaultSpecDelayTime;
 
   constructor() {
@@ -21,11 +21,11 @@ export class LoginPage {
   }
 
   getEmailAddressField() {
-    return element(by.id("emailAddress"));
+    return $("#emailAddress");
   }
 
   getPasswordField() {
-    return element(by.id("password"));
+    return $("#password");
   }
 
   setEmailAddress() {
@@ -45,21 +45,23 @@ export class LoginPage {
   }
 
   clickLoginButton() {
-    return element(by.id("login-button")).click().then(() => {
-      return true;
-    });
+    return $("#login-button").click();
   }
 
   submitLoginForm() {
-    return element(by.css("form.login-form")).submit().then(() => {
-        return true;
-    });
+    return $("form.login-form").submit();
   }
 
-  pressEnter() {
-    browser.actions().sendKeys(protractor.Key.ENTER).perform().then(() => {
-        return true;
-    });
+  pressEnterButton() {
+    return browser.actions().sendKeys(protractor.Key.ENTER).perform();
+  }
+
+  performLoginAction() {
+    return this.clickLoginButton().then(() => {
+      return $("app-root main").isPresent().then((result) => {
+        return result;
+      });
+    })
   }
 
 }

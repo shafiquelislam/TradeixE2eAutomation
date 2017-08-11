@@ -37,7 +37,7 @@ describe('Producer Dashboard', () => {
     });
   });
 
-  describe('C110 - Create Offer and back to Dashboard process validation', () => {
+  xdescribe('C110 - Create Offer and back to Dashboard process validation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -71,7 +71,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  describe('C111 - Create Offer and Bid Accept process vaidation', () => {
+  xdescribe('C111 - Create Offer and Bid Accept process vaidation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -115,7 +115,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  describe('C112 - View Offers, view Bid details and back to Dashboard process validation', () => {
+  xdescribe('C112 - View Offers, view Bid details and back to Dashboard process validation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -144,7 +144,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  describe('C113 - View Offers, view Bid details and Accept Bid process validation', () => {
+  xdescribe('C113 - View Offers, view Bid details and Accept Bid process validation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -171,7 +171,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  describe('C114 - Choose Buyers - UI validation and back to Dashboard', () => {
+  xdescribe('C114 - Choose Buyers - UI validation and back to Dashboard', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });

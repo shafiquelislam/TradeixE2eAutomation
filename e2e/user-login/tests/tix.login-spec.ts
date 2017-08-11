@@ -12,7 +12,7 @@ describe('C108 Login validation', () => {
     });
 
     it('should perform login action', done => {
-      expect(loginPage.clickLoginButton()).toBe(true);
+      expect(loginPage.performLoginAction()).toBe(true);
       done();
     });
 });
