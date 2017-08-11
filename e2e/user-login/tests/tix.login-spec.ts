@@ -6,13 +6,13 @@ describe('C108 Login validation', () => {
     let loginPage: LoginPage = new LoginPage();
 
     it('should fill email address and password field', done => {
-      expect(loginPage.setEmailAddress()).toBeTruthy();
-      expect(loginPage.setPassword()).toBeTruthy();
+      expect(loginPage.setEmailAddress()).toBe(true);
+      expect(loginPage.setPassword()).toBe(true);
       done();
     });
 
     it('should perform login action', done => {
-      expect(loginPage.clickLoginButton()).toBeTruthy();
+      expect(loginPage.clickLoginButton()).toBe(true);
       done();
     });
 });

@@ -24,15 +24,21 @@ export class DashboardPage {
     /***************    C109    ***************/
 
     isProducerDashboardMenuExists() {
-        return element(by.css("app-root app-menu aside a[href='/producer']")).isPresent();
+        return element(by.css("app-root app-menu aside a[href='/producer']")).isPresent().then((result) => {
+            return result;
+        });
     }
 
     isFileUploadMenuExists() {
-        return element(by.css("app-root app-menu aside a[href='/producer/file-upload']")).isPresent();
+        return element(by.css("app-root app-menu aside a[href='/producer/file-upload']")).isPresent().then((result) => {
+            return result;
+        });
     }
 
     isProfileMenuExits() {
-        return element(by.css("app-root app-menu aside nav ul li:nth-child(3) md-icon")).isPresent();
+        return element(by.css("app-root app-menu aside nav ul li:nth-child(3) md-icon")).isPresent().then((result) => {
+            return result;
+        });
     }
 
     getNumberOfCurrencyBoxes() {
@@ -40,7 +46,9 @@ export class DashboardPage {
     }
 
     hasTradeixLogo() {
-        return element(by.css("app-root app-menu-bar img[src*='logo-light.svg']")).isPresent();
+        return element(by.css("app-root app-menu-bar img[src*='logo-light.svg']")).isPresent().then((result) => {
+            return result;
+        });
     }
 
     hasThreeOptionsInLeftMenu() {
@@ -212,7 +220,6 @@ export class DashboardPage {
         } else if (this.checkIfViewOffersButtonIsEnabledByType("GBP")) {
             fundButton = this.getViewOffersButtonByType("GBP");
         }
-
         return fundButton.isDisplayed().then((displayed) => {
             if (displayed) {
                 return fundButton.click().then(() => {

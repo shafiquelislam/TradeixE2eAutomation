@@ -18,20 +18,20 @@ describe('Producer Dashboard', () => {
     });
 
     it('should display tradeix logo', done => {
-      expect(dashboardPage.hasTradeixLogo()).toBeTruthy();
+      expect(dashboardPage.hasTradeixLogo()).toBe(true);
       done();
     });
 
     it('should contain three options in left menu', done => {
-      expect(dashboardPage.isProducerDashboardMenuExists()).toBeTruthy();
-      expect(dashboardPage.isFileUploadMenuExists()).toBeTruthy();
-      expect(dashboardPage.isProfileMenuExits()).toBeTruthy();
+      expect(dashboardPage.isProducerDashboardMenuExists()).toBe(true);
+      expect(dashboardPage.isFileUploadMenuExists()).toBe(true);
+      expect(dashboardPage.isProfileMenuExits()).toBe(true);
       done();
     });
 
     it('should display minimum 1 and maximum 3 currency box at producer dashboard', done => {
       dashboardPage.getNumberOfCurrencyBoxes().then((count) => {
-        expect(count >= 1 && count <= 3).toBeTruthy();
+        expect(count >= 1 && count <= 3).toBe(true);
         done();
       });
     });
@@ -50,22 +50,22 @@ describe('Producer Dashboard', () => {
     });
 
     it('should click on Fund USD button', done => {
-      expect(dashboardPage.clickOnActiveFundButton()).toBeTruthy();
+      expect(dashboardPage.clickOnActiveFundButton()).toBe(true);
       done();
     });
 
     it('should choose any one Buyer from the list and then click on "Next" button', done => {
-      expect(dashboardPage.chooseFirstAvailabaleBuyerAndClickNext()).toBeTruthy();
+      expect(dashboardPage.chooseFirstAvailabaleBuyerAndClickNext()).toBe(true);
       done();
     });
 
     it('should choose any one Invoice from the list and then click on "Next" button', done => {
-      expect(dashboardPage.chooseFirstAvailableInvoiceAndClickNext()).toBeTruthy();
+      expect(dashboardPage.chooseFirstAvailableInvoiceAndClickNext()).toBe(true);
       done();
     });
 
     it('should click on "Return to dashboard" button from pop-up', done => {
-      expect(dashboardPage.clickReturnToDashboardButtonFromPopup()).toBeTruthy();
+      expect(dashboardPage.clickReturnToDashboardButtonFromPopup()).toBe(true);
       done();
     });
 
@@ -84,32 +84,32 @@ describe('Producer Dashboard', () => {
     });
 
     it('should click on first enabled Fund button of USD/GBP/EUR', done => {
-      expect(dashboardPage.clickOnActiveFundButton()).toBeTruthy();
+      expect(dashboardPage.clickOnActiveFundButton()).toBe(true);
       done();
     });
 
     it('should choose any one Buyer from the list and then click on "Next" button', done => {
-      expect(dashboardPage.chooseFirstAvailabaleBuyerAndClickNext()).toBeTruthy();
+      expect(dashboardPage.chooseFirstAvailabaleBuyerAndClickNext()).toBe(true);
       done();
     });
 
     it('should choose any one Invoice from the list and then click on "Next" button', done => {
-      expect(dashboardPage.chooseFirstAvailableInvoiceAndClickNext()).toBeTruthy();
+      expect(dashboardPage.chooseFirstAvailableInvoiceAndClickNext()).toBe(true);
       done();
     });
 
     it('should click on Review Pricing / bid(s) button', done => {
-      expect(dashboardPage.clickReviewPricingOrBidsButtonFromPopup()).toBeTruthy();
+      expect(dashboardPage.clickReviewPricingOrBidsButtonFromPopup()).toBe(true);
       done();
     });
 
     it('should click  on "Accept" button', done => {
-      expect(dashboardPage.clickAcceptButtonFromBidDetails()).toBeTruthy();
+      expect(dashboardPage.clickAcceptButtonFromBidDetails()).toBe(true);
       done();
     });
 
     it('should click on "Ok" button from the "Bid Accepted" pop-up', done => {
-      expect(dashboardPage.clickOkButtonFromBidAcceptedPopup()).toBeTruthy();
+      expect(dashboardPage.clickOkButtonFromBidAcceptedPopup()).toBe(true);
       done();
     });
 
@@ -128,17 +128,17 @@ describe('Producer Dashboard', () => {
     });
 
     it('should click on first enabled "View Offers" button of USD/GBP/EUR', done => {
-      expect(dashboardPage.clickOnActiveViewOffersButton()).toBeTruthy();
+      expect(dashboardPage.clickOnActiveViewOffersButton()).toBe(true);
       done();
     });
 
     it('should click on any "View bid(s)/ Pricing Summary" button', done => {
-      expect(dashboardPage.clickFirstViewBidsOrPricingSummaryButton()).toBeTruthy();
+      expect(dashboardPage.clickFirstViewBidsOrPricingSummaryButton()).toBe(true);
       done();
     });
 
     it('should click on "Cancel" button of view bid(s) or pricing summary', done => {
-      expect(dashboardPage.clickCancelButtonOfViewBidsOrPricingSummary()).toBeTruthy();
+      expect(dashboardPage.clickCancelButtonOfViewBidsOrPricingSummary()).toBe(true);
       done();
     });
 
@@ -150,22 +150,22 @@ describe('Producer Dashboard', () => {
     });
 
     it('should click on first enabled "View Offers" button of USD/GBP/EUR', done => {
-      expect(dashboardPage.clickOnActiveViewOffersButton()).toBeTruthy();
+      expect(dashboardPage.clickOnActiveViewOffersButton()).toBe(true);
       done();
     });
 
     it('should click on any "View bid(s)/ Pricing Summary" button', done => {
-      expect(dashboardPage.clickFirstViewBidsOrPricingSummaryButton()).toBeTruthy();
+      expect(dashboardPage.clickFirstViewBidsOrPricingSummaryButton()).toBe(true);
       done();
     });
 
     it('should click on "Accept" button from Bid Details', done => {
-      expect(dashboardPage.clickAcceptButtonFromBidDetails()).toBeTruthy();
+      expect(dashboardPage.clickAcceptButtonFromBidDetails()).toBe(true);
       done();
     });
 
     it('should click on "Ok" button from the "Bid Accepted" pop-up', done => {
-      expect(dashboardPage.clickOkButtonFromBidAcceptedPopup()).toBeTruthy();
+      expect(dashboardPage.clickOkButtonFromBidAcceptedPopup()).toBe(true);
       done();
     });
 
@@ -177,7 +177,7 @@ describe('Producer Dashboard', () => {
     });
 
     it('should click on first enabled Fund USD/GBP/EUR button', done => {
-      expect(dashboardPage.clickOnActiveFundButton()).toBeTruthy();
+      expect(dashboardPage.clickOnActiveFundButton()).toBe(true);
       done();
     });
 
