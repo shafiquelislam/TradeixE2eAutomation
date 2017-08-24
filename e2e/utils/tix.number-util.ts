@@ -28,6 +28,12 @@ export class NumberUtil {
         return sum;
     }
 
+    /*static addNumbersFromListOfStringUsingReduce(strList): number {
+        return strList.reduce((str1, str2) => {
+            return this.stringToNumber(str1) + this.stringToNumber(str1);
+        });
+    }*/
+
     static getSumFromArrayOfElements(elements): number {
         return elements.map((elm) => {
             return elm.getText();

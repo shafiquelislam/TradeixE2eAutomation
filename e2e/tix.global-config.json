@@ -1,5 +1,5 @@
 {
-    "envName": "staging",
+    "envName": "uat",
     "loginUserType": "supplier",
     "specsList": {
         "admin": [
