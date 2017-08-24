@@ -1,4 +1,4 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, $, $$ } from 'protractor';
 import { NumberUtil } from '../../utils/tix.number-util';
 import { StringUtil } from '../../utils/tix.string-util';
 
@@ -24,29 +24,29 @@ export class DashboardPage {
     /***************    C109    ***************/
 
     isProducerDashboardMenuExists() {
-        return element(by.css("app-root app-menu aside a[href='/producer']")).isPresent().then((result) => {
+        return $("app-root app-menu aside a[href='/producer']").isPresent().then((result) => {
             return result;
         });
     }
 
     isFileUploadMenuExists() {
-        return element(by.css("app-root app-menu aside a[href='/producer/file-upload']")).isPresent().then((result) => {
+        return $("app-root app-menu aside a[href='/producer/file-upload']").isPresent().then((result) => {
             return result;
         });
     }
 
     isProfileMenuExits() {
-        return element(by.css("app-root app-menu aside nav ul li:nth-child(3) md-icon")).isPresent().then((result) => {
+        return $("app-root app-menu aside nav ul li:nth-child(3) md-icon").isPresent().then((result) => {
             return result;
         });
     }
 
     getNumberOfCurrencyBoxes() {
-        return element.all(by.css("app-root app-producer-dashboard app-currency-summary")).count();
+        return $$("app-root app-producer-dashboard app-currency-summary").count();
     }
 
     hasTradeixLogo() {
-        return element(by.css("app-root app-menu-bar img[src*='logo-light.svg']")).isPresent().then((result) => {
+        return $("app-root app-menu-bar img[src*='logo-light.svg']").isPresent().then((result) => {
             return result;
         });
     }
@@ -58,7 +58,7 @@ export class DashboardPage {
     /***************    C110    ***************/
 
     getFundButtonByType(type) {
-        return element(by.css("app-root md-sidenav-container app-producer-dashboard app-currency-summary md-card a[href='/producer/create-offer/choose-buyers/" + type + "']"));
+        return $("app-root md-sidenav-container app-producer-dashboard app-currency-summary md-card a[href='/producer/create-offer/choose-buyers/" + type + "']");
     }
 
     checkIfFundButtonIsEnabledByType(type) {
@@ -68,7 +68,7 @@ export class DashboardPage {
     }
 
     getCountOfEnabledFundButtons() {
-        return element.all(by.css("app-root md-sidenav-container app-producer-dashboard app-currency-summary md-card a[href^='/producer/create-offer/choose-buyers/']")).filter((elm) => {
+        return $$("app-root md-sidenav-container app-producer-dashboard app-currency-summary md-card a[href^='/producer/create-offer/choose-buyers/']").filter((elm) => {
             return elm.getAttribute("disabled").then((result) => {
                 return result != "true";
             })
@@ -97,7 +97,7 @@ export class DashboardPage {
     }
 
     getListOfAvailableItemsInList() {
-        return element.all(by.css("*[for^='input-md-checkbox-']"));
+        return $$("*[for^='input-md-checkbox-']");
     }
 
     uncheckAllBuyersInList() {
@@ -109,17 +109,17 @@ export class DashboardPage {
     }
 
     clickNextButtonFromAvailabaleBuyersList() {
-        let elm = element(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers app-breadcrumb button.mat-raised-button"));
+        let elm = $("app-root md-sidenav-container app-producer-create-offer-choose-buyers app-breadcrumb button.mat-raised-button");
         return browser.actions().mouseMove(elm).click().perform();
     }
 
     clickNextButtonFromAvailabaleInvoicesList() {
-        let elm = element(by.css("app-root md-sidenav-container app-choose-invoices app-breadcrumb button.mat-raised-button"));
+        let elm = $("app-root md-sidenav-container app-choose-invoices app-breadcrumb button.mat-raised-button");
         return browser.actions().mouseMove(elm).click().perform();
     }
-
+    $
     clickReturnToDashboardButtonFromPopup() {
-        let elm = element(by.css("*[id^='cdk-overlay-'] md-dialog-container invoice-funders-dialog md-dialog-actions button.mat-button"));
+        let elm = $("*[id^='cdk-overlay-'] md-dialog-container invoice-funders-dialog md-dialog-actions button.mat-button");
         return browser.actions().mouseMove(elm).click().perform().then(() => {
             return true;
         });
@@ -170,21 +170,21 @@ export class DashboardPage {
     /***************************    C111    ****************************/
 
     clickReviewPricingOrBidsButtonFromPopup() {
-        let elm = element(by.css("*[id^='cdk-overlay-'] md-dialog-container invoice-funders-dialog md-dialog-actions button.mat-raised-button.mat-primary"));
+        let elm = $("*[id^='cdk-overlay-'] md-dialog-container invoice-funders-dialog md-dialog-actions button.mat-raised-button.mat-primary");
         return browser.actions().mouseMove(elm).click().perform().then(() => {
             return true;
         });
     }
 
     clickAcceptButtonFromBidDetails() {
-        let elm = element(by.css("app-root md-sidenav-container app-bid-summary section md-card button.mat-raised-button.mat-accent"));
+        let elm = $("app-root md-sidenav-container app-bid-summary section md-card button.mat-raised-button.mat-accent");
         return browser.actions().mouseMove(elm).click().perform().then(() => {
             return true;
         });
     }
 
     clickOkButtonFromBidAcceptedPopup() {
-        let elm = element(by.css("*[id^='cdk-overlay-'] md-dialog-container app-accept-dialog md-dialog-actions button.mat-button.mat-primary"));
+        let elm = $("*[id^='cdk-overlay-'] md-dialog-container app-accept-dialog md-dialog-actions button.mat-button.mat-primary");
         return browser.actions().mouseMove(elm).click().perform().then(() => {
             return true;
         });
@@ -194,7 +194,7 @@ export class DashboardPage {
     /***************************    C112    ****************************/
 
     getViewOffersButtonByType(type) {
-        return element(by.css("app-root md-sidenav-container app-producer-dashboard app-currency-summary md-card a[href='/producer/offer-list/" + type + "']"));
+        return $("app-root md-sidenav-container app-producer-dashboard app-currency-summary md-card a[href='/producer/offer-list/" + type + "']");
     }
 
     checkIfViewOffersButtonIsEnabledByType(type) {
@@ -204,7 +204,7 @@ export class DashboardPage {
     }
 
     getCountOfEnabledViewOffersButtons() {
-        return element.all(by.css("app-root md-sidenav-container app-producer-dashboard app-currency-summary md-card a[href^='/producer/offer-list/']")).filter((elm) => {
+        return $$("app-root md-sidenav-container app-producer-dashboard app-currency-summary md-card a[href^='/producer/offer-list/']").filter((elm) => {
             return elm.getAttribute("disabled").then((result) => {
                 return result != "true";
             })
@@ -232,14 +232,14 @@ export class DashboardPage {
     }
 
     clickFirstViewBidsOrPricingSummaryButton() {
-        let elm = element.all(by.css("app-root md-sidenav-container tix-offer-list data-grid table tbody a[href^='/producer/create-offer/bid-summary/']")).get(0);
+        let elm = $$("app-root md-sidenav-container tix-offer-list data-grid table tbody a[href^='/producer/create-offer/bid-summary/']").get(0);
         return browser.actions().mouseMove(elm).click().perform().then(() => {
             return true;
         });
     }
 
     clickCancelButtonOfViewBidsOrPricingSummary() {
-        let elm = element(by.css("app-root md-sidenav-container app-bid-summary app-breadcrumb button.mat-raised-button.mat-primary"));
+        let elm = $("app-root md-sidenav-container app-bid-summary app-breadcrumb button.mat-raised-button.mat-primary");
         return browser.actions().mouseMove(elm).click().perform().then(() => {
             return true;
         });
@@ -248,54 +248,54 @@ export class DashboardPage {
     /***************************    C114    ****************************/
 
     getUiHeaderTextOfBuyersList() {
-        return element(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers .padding-container .padding-top h1")).getText().then((innerText) => {
+        return $("app-root md-sidenav-container app-producer-create-offer-choose-buyers .padding-container .padding-top h1").getText().then((innerText) => {
             return innerText;
         });
     }
 
     getTotalNumberOfAvailableBuyers() {
-        return element.all(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers data-grid table tbody tr")).count();
+        return $$("app-root md-sidenav-container app-producer-create-offer-choose-buyers data-grid table tbody tr").count();
     }
 
     getTotalNumberOfSelectedBuyers() {
-        return element.all(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers data-grid table tbody tr md-checkbox.mat-checkbox-checked")).count();
+        return $$("app-root md-sidenav-container app-producer-create-offer-choose-buyers data-grid table tbody tr md-checkbox.mat-checkbox-checked").count();
     }
 
     getCountShowedForTotalAvailableBuyers() {
-        return element(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers app-subtotal md-card .available summary")).getText().then((innerText) => {
+        return $("app-root md-sidenav-container app-producer-create-offer-choose-buyers app-subtotal md-card .available summary").getText().then((innerText) => {
             return NumberUtil.stringToNumber(innerText);
         });
     }
 
     getCountShowedForTotalSelectedBuyers() {
-        return element(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers app-subtotal md-card .selected summary")).getText().then((innerText) => {
+        return $("app-root md-sidenav-container app-producer-create-offer-choose-buyers app-subtotal md-card .selected summary").getText().then((innerText) => {
             return NumberUtil.stringToNumber(innerText);
         });
     }
 
     getValueShowedForTotalAvailableBuyers() {
-        return element(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers app-subtotal md-card .available span")).getText().then((innerText) => {
+        return $("app-root md-sidenav-container app-producer-create-offer-choose-buyers app-subtotal md-card .available span").getText().then((innerText) => {
             return NumberUtil.stringToNumber(innerText);
         });
     }
 
     getValueShowedForTotalSelectedBuyers() {
-        return element(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers app-subtotal md-card .selected span")).getText().then((innerText) => {
+        return $("app-root md-sidenav-container app-producer-create-offer-choose-buyers app-subtotal md-card .selected span").getText().then((innerText) => {
             return NumberUtil.stringToNumber(innerText);
         });
     }
 
     getSumOfAllInvoiceValuesInList() {
-        return NumberUtil.getSumFromArrayOfElements(element.all(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers data-grid table tbody [ng-reflect-ng-switch='currency']")));
+        return NumberUtil.getSumFromArrayOfElements($$("app-root md-sidenav-container app-producer-create-offer-choose-buyers data-grid table tbody [ng-reflect-ng-switch='currency']"));
     }
 
     getSumOfSelectedInvoiceValuesInList() {
-        return NumberUtil.getSumFromArrayOfElements(element.all(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers data-grid table tbody tr.selected [ng-reflect-ng-switch='currency']")));
+        return NumberUtil.getSumFromArrayOfElements($$("app-root md-sidenav-container app-producer-create-offer-choose-buyers data-grid table tbody tr.selected [ng-reflect-ng-switch='currency']"));
     }
 
     checkIfDataGridColumnsNamesAsPerExpectation() {
         let columns = ["Buyer Name", "Entity Id", "Num. Invoices", "Total Invoice Value"];
-        return element.all(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers data-grid table thead th > div:nth-child(1):not(.mat-checkbox)")).map((elm) => {
+        return $$("app-root md-sidenav-container app-producer-create-offer-choose-buyers data-grid table thead th > div:nth-child(1):not(.mat-checkbox)").map((elm) => {
             return elm.getText();
         }).then((texts) => {
             return StringUtil.checkIfTwoArraysContainSimilarElements(columns, texts as Array<string>);
@@ -303,7 +303,7 @@ export class DashboardPage {
     }
 
     clickOnCancelButtonFromBuyersListView() {
-        let elm = element(by.css("app-root md-sidenav-container app-producer-create-offer-choose-buyers app-breadcrumb button.mat-button"));
+        let elm = $("app-root md-sidenav-container app-producer-create-offer-choose-buyers app-breadcrumb button.mat-button");
         return browser.actions().mouseMove(elm).click().perform().then(() => {
             return true;
         });

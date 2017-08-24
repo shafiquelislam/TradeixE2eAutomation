@@ -1,6 +1,10 @@
 {
     "envName": "uat",
+<<<<<<< HEAD
     "loginUserType": "admin",
+=======
+    "loginUserType": "supplier",
+>>>>>>> 11e60dd9d1e291abd1dbe0f06af4761db040f740
     "specsList": {
         "admin": [
             "./e2e/user-login/tests/*.login-spec.ts",
