@@ -3,5 +3,42 @@
     "loginCredentials": {
         "username": "admin@tix.com",
         "password": "tradeix~1"
+    },
+    "companyCreateData": {
+        "companyFieldData": [
+            {
+                "uniqueId": "Boral",
+                "name": "Boral",
+                "dunsNumber": "862459013",
+                "reference": "Boral",
+                "merchantId": "786544",
+                "regNumber": "",
+                "taxId": "",
+                "websiteUrl": "",
+                "sicCode": "",
+                "LEI": "",
+                "networkId": "",
+                "originationNetwork": "",
+                "lastSanctionCheckDate": ""
+            }
+        ],
+        "companyCheckBoxData": [
+            {
+                "Is Active": true,
+                "On-boarded": false,
+                "Sanctions Check": false,
+                "Last Sanction Check Approved": false,
+                "Referred": false,
+                "Buyer": true,
+                "Supplier": false,
+                "Funder": false,
+                "Settlement Network": false,
+                "Insurance Underwriter": false,
+                "Regulator": false,
+                "B2B Network": false,
+                "Servicer": false,
+                "Test999": false
+            }
+        ]
     }
 }
