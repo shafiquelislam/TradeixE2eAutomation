@@ -87,7 +87,7 @@ export class CompanyManagerPage {
 
     clickSaveCompanyButton() {
         return element(by.css('app-company-detail form .mat-tab-body-wrapper button')).click().then(() => {
-            return browser.sleep(1000).then(() => {
+            return browser.sleep(3000).then(() => {
                 return true;
             });
         });
@@ -166,6 +166,7 @@ export class CompanyManagerPage {
                 this.clickCompanyCheckBoxes(all_company_checkbox_data[0]);
 
                 return this.clickSaveCompanyButton().then(() => {
+                    browser.sleep(2000);
                     return this.clickBackButtonOfCreateCompanyPage();
                 });
             }
@@ -182,8 +183,21 @@ export class CompanyManagerPage {
 
     /*****************  Edit Functionality validation  ****************/
 
+    clickFirstCompanyEditButton() {
+        return element.all(by.css('app-company-list .padding-container data-grid .scroll-container table tbody .align-right button')).get(0)
+        .click().then(() => {
+            return browser.sleep(4000).then(() => {
+                return true;
+            });
+        });
+    }
 
-
+    updateFirstCompany() {
+        this.clickFirstCompanyEditButton().then(() => {
+            
+        });
+        
+    }
 
 
     /*****************  Advance Filter Functionality validation  ****************/
