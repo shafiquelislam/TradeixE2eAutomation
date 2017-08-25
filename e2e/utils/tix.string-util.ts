@@ -33,4 +33,12 @@ export class StringUtil {
         return isEqual;
     }
 
+    static checkIfAnElementExistsInAList(list, search_element): boolean {
+        if(list.length == 0 || search_element.length == 0){
+            return false;
+        }
+
+        //if()
+    }
+
 };

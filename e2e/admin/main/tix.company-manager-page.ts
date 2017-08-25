@@ -157,8 +157,8 @@ export class CompanyManagerPage {
     }
 
     createCompany() {
-        let all_company_field_data = data.companyCreateData.companyFieldData;
-        let all_company_checkbox_data = data.companyCreateData.companyCheckBoxData;
+        let all_company_field_data = data.company.create.fieldData;
+        let all_company_checkbox_data = data.company.create.checkBoxData;
         
         return this.clickAddButtonToCreateCompany().then((elm) => {
             if(elm == true){
@@ -173,13 +173,16 @@ export class CompanyManagerPage {
         });
     }
 
-    // checkCreatedCompanyAddedInCompanyList() {
-    //     this.clickBackButtonFromCreateCompanyPage().then((elm) => {
-    //         if(elm == true){
-    //             element(by.css('')) // Work here
-    //         }
-    //     });
-    // }
+    checkCreatedCompanyAddedInCompanyList() {
+        let all_company_uniqueId_list = [];
+        return element.all(by.css('app-company-list data-grid table tbody tr td:nth-child(1)')).array.forEach(elm => {
+            return all_company_uniqueId_list.push(elm.getText());
+        }).then(() => {
+            console.log(all_company_uniqueId_list);
+            
+        });
+
+    }
 
     /*****************  Edit Functionality validation  ****************/
 

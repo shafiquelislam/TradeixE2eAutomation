@@ -4,11 +4,48 @@
         "username": "admin@tix.com",
         "password": "tradeix~1"
     },
-    "companyCreateData": {
-        "companyFieldData": [
-            {
-                "uniqueId": "Boral",
-                "name": "Boral",
+    "company": {
+        "create": {
+            "fieldData": [
+                {
+                    "uniqueId": "Boral",        // uniqueId should start with later letters like z, x, y
+                    "name": "Boral",        // uniqueId should start with later letters like z, x, y
+                    "dunsNumber": "862459013",
+                    "reference": "Boral",
+                    "merchantId": "786544",
+                    "regNumber": "",
+                    "taxId": "",
+                    "websiteUrl": "",
+                    "sicCode": "",
+                    "LEI": "",
+                    "networkId": "",
+                    "originationNetwork": "",
+                    "lastSanctionCheckDate": ""
+                }
+            ],
+            "checkBoxData": [
+                {
+                    "Is Active": true,
+                    "On-boarded": false,
+                    "Sanctions Check": false,
+                    "Last Sanction Check Approved": false,
+                    "Referred": false,
+                    "Buyer": true,
+                    "Supplier": false,
+                    "Funder": false,
+                    "Settlement Network": false,
+                    "Insurance Underwriter": false,
+                    "Regulator": false,
+                    "B2B Network": false,
+                    "Servicer": false,
+                    "Test999": false
+                }
+            ]
+        },
+        "update": {
+            "fieldData": {
+                "uniqueId": "Boral",        // uniqueId should start with later letters like z, x, y
+                "name": "Boral",        // name should start with later letters like z, x, y
                 "dunsNumber": "862459013",
                 "reference": "Boral",
                 "merchantId": "786544",
@@ -20,10 +57,8 @@
                 "networkId": "",
                 "originationNetwork": "",
                 "lastSanctionCheckDate": ""
-            }
-        ],
-        "companyCheckBoxData": [
-            {
+            },
+            "checkBoxData": {
                 "Is Active": true,
                 "On-boarded": false,
                 "Sanctions Check": false,
@@ -39,39 +74,6 @@
                 "Servicer": false,
                 "Test999": false
             }
-        ]
-    },
-    "companyUpdateData": {
-        "firstCompanyFieldUpdateData": {
-            "uniqueId": "Boral",
-            "name": "Boral",
-            "dunsNumber": "862459013",
-            "reference": "Boral",
-            "merchantId": "786544",
-            "regNumber": "",
-            "taxId": "",
-            "websiteUrl": "",
-            "sicCode": "",
-            "LEI": "",
-            "networkId": "",
-            "originationNetwork": "",
-            "lastSanctionCheckDate": ""
-        },
-        "firstCompanyCheckBoxUpdateData": {
-            "Is Active": true,
-            "On-boarded": false,
-            "Sanctions Check": false,
-            "Last Sanction Check Approved": false,
-            "Referred": false,
-            "Buyer": true,
-            "Supplier": false,
-            "Funder": false,
-            "Settlement Network": false,
-            "Insurance Underwriter": false,
-            "Regulator": false,
-            "B2B Network": false,
-            "Servicer": false,
-            "Test999": false
         }
     }
 }
