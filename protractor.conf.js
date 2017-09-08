@@ -8,7 +8,7 @@ const showSpecReport = globalConfigs.showSpecReport;
 const showHtmlReport = globalConfigs.showHtmlReport;
 
 var htmlScreenshotReporter = new HtmlScreenshotReporter({
-  reportTitle: "Tradeix e2e Automation Report",
+  reportTitle: "Tradeix e2e Last Automation Log",
   dest: 'src/target/screenshots',
   filename: 'tradeix-e2e-report.html',
   captureOnlyFailedSpecs: true,
