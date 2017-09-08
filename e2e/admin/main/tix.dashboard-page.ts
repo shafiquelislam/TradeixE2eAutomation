@@ -1,5 +1,6 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, ExpectedConditions, protractor } from 'protractor';
 import { StringUtil } from '../../utils/tix.string-util';
+import { ElementUtil } from '../../utils/tix.element-util';
 
 var globalConfigs = require("../../tix.global-config.json");
 var data = require("../resources/tix." + globalConfigs.envName + "-config.json");
@@ -20,6 +21,8 @@ export class DashboardPage {
         return data.appUrl + '/' + this.action;
     }
 
+    /***************  COMMON  ****************/
+
     /***************    C122    ***************/
     
     hasTradeIxLogo() {
@@ -29,20 +32,26 @@ export class DashboardPage {
     }
     
     hasMenuIcon() {
-        return element(by.xpath('//md-icon[contains(text(),"menu")]')).isPresent().then((result) => {
+        return element(by.css('app-menu aside nav ul li:nth-child(1)')).isPresent().then((result) => {
             return result;
         });
     }
 
     hasProfileIcon() {
-        return element(by.xpath('//md-icon[contains(text(),"account_circle")]')).isPresent().then((result) => {
+        return element(by.css('app-menu aside nav ul li:nth-child(2)')).isPresent().then((result) => {
             return result;
         });
     }
 
-    clickMenuButton() {
-        return element(by.xpath('//md-icon[contains(text(),"menu")]')).click().then(() => {
-            return browser.sleep(1500);
+    clickMenuIconAndCheckForPageLoad() {
+        var findElm = element.all(by.css('.mat-sidenav-container .menu.mat-sidenav navigation-menu navigation-menu-item a span'));
+        var targetElment = element(by.css('app-menu aside nav ul li:nth-child(1)'));
+        var findTxt = 'Invoice Ledger';
+
+        return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
+            return browser.sleep(1000).then(() => {
+                return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
+            });
         });
     }
 

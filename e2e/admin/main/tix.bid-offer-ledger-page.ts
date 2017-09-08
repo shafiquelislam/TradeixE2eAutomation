@@ -1,5 +1,6 @@
 import { browser, by, element, $, $$ } from 'protractor';
 import { StringUtil } from '../../utils/tix.string-util';
+import { ElementUtil } from '../../utils/tix.element-util';
 import { DashboardPage } from './tix.dashboard-page';
 
 export class BidOfferLedgerPage {
@@ -8,20 +9,16 @@ export class BidOfferLedgerPage {
 
     /***************  UI validation  ****************/
 
-    clickBidOfferLedgerIcon() {
-        return element(by.css('md-sidenav-container navigation-menu a[href="/ledgers/bid-offers-ledger"]')).click()
-        .then(() => {
-            return browser.sleep(5000);
-        });
-    }
+    clickBidOfferIconAndcheckForPageLoad() {
+        let dashboardPage: DashboardPage = new DashboardPage();
 
-    hasBidOfferLedgerUniqueText() {
-        let dashboardPage = new DashboardPage();
-        return dashboardPage.clickMenuButton().then(() => {
-            return this.clickBidOfferLedgerIcon().then(() => {
-                return element(by.xpath('//div[contains(text(),"Asset Number")]')).isPresent().then((elm) => {
-                    return elm;
-                });
+        var findElm = element.all(by.css('app-bid-offer data-grid .ledger thead tr th div:nth-child(1)'));
+        var targetElment = element(by.css('md-sidenav-container navigation-menu a[href="/ledgers/bid-offers-ledger"]'));
+        var findTxt = 'Asset Number';
+
+        return dashboardPage.clickMenuIconAndCheckForPageLoad().then(() => {
+            return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
+                return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
             });
         });
     }
@@ -62,20 +59,24 @@ export class BidOfferLedgerPage {
     /*****************  Advance Filter Functionality validation  ****************/
 
     clickSearchIcon() {
-        return element(by.css('.padding-container data-grid .search-icon.padding-top .mat-icon.material-icons'))
-        .click()
-        .then(() => {
-            return browser.sleep(1000);
+        var findElm = element.all(by.css('tix-data-grid-filter #mainForm .title-row h3'));
+        var targetElment = element(by.css('app-bid-offer data-grid .search-icon.padding-top md-icon'));
+        var findTxt = 'Advanced Filter';
+
+        return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
+            return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
         });
     }
 
     typeIDAndClickSearchNow() {
-        return element.all(by.css('app-bid-offer data-grid .scroll-container tbody tr td')).then((elm) => {
+        return element.all(by.css('app-bid-offer data-grid .scroll-container tbody tr td:nth-child(1)')).then((elm) => {
             let txt = elm[0].getText();
-            return element(by.css('#mainForm #md-input-1')).sendKeys(txt).then(() => {
-                return element(by.css('#mainForm .mat-raised-button.mat-primary')).click()
-                .then(() => {
-                    return browser.sleep(1000);
+            return element(by.css("#mainForm input[placeholder='ID']")).sendKeys(txt).then(() => {
+
+                var findElm = element.all(by.css('app-bid-offer data-grid .scroll-container .ledger'));
+                var targetElment = element(by.css('#mainForm .mat-raised-button.mat-primary'));
+                return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
+                    return browser.sleep(500);
                 });
             });
         });
@@ -86,9 +87,13 @@ export class BidOfferLedgerPage {
             return this.typeIDAndClickSearchNow().then(() => {
                 return element.all(by.css('app-bid-offer data-grid .scroll-container tbody tr')).then((elm) => {
                     if(elm.length > 0){
+                        console.log('Search element is found');
                         return true;
                     }else{
-                        return false;
+                        element(by.css('app-invoice-ledger data-grid .no-rows-message h3')).isPresent().then((resp) => {
+                            console.log('Search element is not found');
+                            return resp;
+                        });
                     }
                 });
             });

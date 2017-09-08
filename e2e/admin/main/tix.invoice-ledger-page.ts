@@ -1,11 +1,13 @@
-import { browser, by, element, $, $$ } from 'protractor';
+import { browser, by, element, $, $$, ExpectedConditions, protractor } from 'protractor';
 import { StringUtil } from '../../utils/tix.string-util';
+import { ElementUtil } from '../../utils/tix.element-util';
 
-export class InvoiveLedgerPage {
+export class InvoiceLedgerPage {
 
     /***************    C123 - C128    ***************/
 
     /***************     Common     **************/
+
 
     getDataGridColumnItemList() {
         return element.all(by.css('app-invoice-ledger data-grid .scroll-container table thead tr th div:nth-child(1)')).map((elm) => {
@@ -17,10 +19,13 @@ export class InvoiveLedgerPage {
 
     /***************** invoice tab *****************/
     
-    clickInvoiceLedgerIcon() {
-        return element(by.css('md-sidenav-container navigation-menu a[href="/ledgers/invoices-ledger"]')).click()
-        .then(() => {
-            return browser.sleep(10000);
+    clickInvoiceLedgerIconAndCheckForPageLoad() {
+        var findElm = element.all(by.css('app-invoice-ledger data-grid .ledger thead tr th div:nth-child(1)'));
+        var targetElment = element(by.css('md-sidenav-container navigation-menu a[href="/ledgers/invoices-ledger"]'));
+        var findTxt = 'Buyer Name';
+
+        return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
+            return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
         });
     }
 
@@ -44,13 +49,6 @@ export class InvoiveLedgerPage {
         .getText().then((elm) => {
             return elm;
         })
-    }
-
-    hasInvoiceTabPageUniqueText() {
-        return element(by.xpath('//div[contains(text(),"Invoice Payments")]')).isPresent()
-        .then((elm) => {
-            return elm;
-        });
     }
 
     checkInvoiceLedgerTabList() {
@@ -99,17 +97,13 @@ export class InvoiveLedgerPage {
 
     /**************** Audit tab ******************/
 
-    clickAuditTab() {
-        return element(by.css('.mat-tab-labels #md-tab-label-0-1')).click()
-        .then(() => {
-            return browser.sleep(1500);
-        })
-    }
+    clickAuditTabAndcheckForPageLoad() {
+        var findElm = element.all(by.css('app-invoice-ledger data-grid .ledger thead tr th div:nth-child(1)'));
+        var targetElment = element(by.css('.mat-tab-labels #md-tab-label-0-1'));
+        var findTxt = 'Blockchain';
 
-    hasAuditTabPageUniqueText() {
-        return element(by.xpath('//div[contains(text(),"Blockchain")]')).isPresent()
-        .then((elm) => {
-            return elm;
+        return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
+            return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
         });
     }
 
@@ -137,17 +131,13 @@ export class InvoiveLedgerPage {
 
     /***************   Version tab   *****************/
 
-    clickVersionTab() {
-        return element(by.css('.mat-tab-labels #md-tab-label-0-2')).click()
-        .then(() => {
-            return browser.sleep(1500);
-        })
-    }
+    clickVersionTabAndcheckForPageLoad() {
+        var findElm = element.all(by.css('app-invoice-ledger data-grid .ledger thead tr th div:nth-child(1)'));
+        var targetElment = element(by.css('.mat-tab-labels #md-tab-label-0-2'));
+        var findTxt = 'Invoice Version';
 
-    hasVersionTabPageUniqueText() {
-        return element(by.xpath('//div[contains(text(),"Invoice Version")]')).isPresent()
-        .then((elm) => {
-            return elm;
+        return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
+            return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
         });
     }
 
@@ -168,17 +158,13 @@ export class InvoiveLedgerPage {
 
     /****************  Trade Tab  *****************/
 
-    clickTradeTab() {
-        return element(by.css('.mat-tab-labels #md-tab-label-0-3')).click()
-        .then(() => {
-            return browser.sleep(1500);
-        })
-    }
+    vlickTradeTabAndcheckForPageLoad() {
+        var findElm = element.all(by.css('app-invoice-ledger data-grid .ledger thead tr th div:nth-child(1)'));
+        var targetElment = element(by.css('.mat-tab-labels #md-tab-label-0-3'));
+        var findTxt = 'Trade Date';
 
-    hasTradeTabPageUniqueText() {
-        return element(by.xpath('//div[contains(text(),"Trade Date")]')).isPresent()
-        .then((elm) => {
-            return elm;
+        return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
+            return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
         });
     }
 
@@ -208,17 +194,13 @@ export class InvoiveLedgerPage {
 
     /*************** Insurance Tab *****************/
 
-    clickInsuranceTab() {
-        return element(by.css('.mat-tab-labels #md-tab-label-0-4')).click()
-        .then(() => {
-            return browser.sleep(1500);
-        })
-    }
+    clickInsuranceTabAndcheckForPageLoad() {
+        var findElm = element.all(by.css('app-invoice-ledger data-grid .ledger thead tr th div:nth-child(1)'));
+        var targetElment = element(by.css('.mat-tab-labels #md-tab-label-0-4'));
+        var findTxt = 'Insurance Amount';
 
-    hasInsuranceTabPageUniqueText() {
-        return element(by.xpath('//div[contains(text(),"Insurance Expiry Date")]')).isPresent()
-        .then((elm) => {
-            return elm;
+        return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
+            return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
         });
     }
 
@@ -245,20 +227,23 @@ export class InvoiveLedgerPage {
     /*****************  Advance Filter Functionality validation  ****************/
 
     clickSearchIcon() {
-        return element(by.css('.padding-container data-grid .search-icon.padding-top .mat-icon.material-icons'))
-        .click()
-        .then(() => {
-            return browser.sleep(1000);
+        var findElm = element.all(by.css('tix-data-grid-filter #mainForm .title-row h3'));
+        var targetElment = element(by.css('app-invoice-ledger data-grid .search-icon.padding-top md-icon'));
+        var findTxt = 'Advanced Filter';
+
+        return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
+            return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
         });
     }
 
     typeInoviceNumberAndClickSearchNow() {
         return element.all(by.css('app-invoice-ledger data-grid .scroll-container tbody strong')).then((elm) => {
             let txt = elm[0].getText();
-            return element(by.css('#mainForm #md-input-1')).sendKeys(txt).then(() => {
-                return element(by.css('#mainForm .mat-raised-button.mat-primary')).click()
-                .then(() => {
-                    return browser.sleep(1000);
+            return element(by.css("#mainForm input[placeholder='Invoice Number']")).sendKeys(txt).then(() => {
+                var findElm = element.all(by.css('app-invoice-ledger data-grid .scroll-container tbody strong'));
+                var targetElment = element(by.css('#mainForm .mat-raised-button.mat-primary'));
+                return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
+                    return browser.sleep(500);
                 });
             });
         });
@@ -269,9 +254,13 @@ export class InvoiveLedgerPage {
             return this.typeInoviceNumberAndClickSearchNow().then(() => {
                 return element.all(by.css('app-invoice-ledger data-grid .scroll-container tbody tr')).then((elm) => {
                     if(elm.length > 0){
+                        console.log('Search element is found');
                         return true;
                     }else{
-                        return false;
+                        element(by.css('app-invoice-ledger data-grid .no-rows-message h3')).isPresent().then((resp) => {
+                            console.log('Search element is not found');
+                            return resp;
+                        });
                     }
                 });
             });

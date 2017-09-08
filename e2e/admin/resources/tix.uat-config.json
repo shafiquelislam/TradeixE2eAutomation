@@ -1,4 +1,8 @@
 {
+    "INPUT_RESTRICTION": {
+        "company.create.fieldData.uniqueId": " must start with Z,Y,X or W .... ",
+        "Mandatory_update_field": "Company name"
+    },
     "appUrl": "https://app.uat.tradeix.com/",
     "loginCredentials": {
         "username": "admin@tix.com",
@@ -8,71 +12,69 @@
         "create": {
             "fieldData": [
                 {
-                    "uniqueId": "Boral",        // uniqueId should start with later letters like z, x, y
-                    "name": "Boral",        // uniqueId should start with later letters like z, x, y
-                    "dunsNumber": "862459013",
-                    "reference": "Boral",
-                    "merchantId": "786544",
-                    "regNumber": "",
-                    "taxId": "",
-                    "websiteUrl": "",
-                    "sicCode": "",
-                    "LEI": "",
-                    "networkId": "",
-                    "originationNetwork": "",
-                    "lastSanctionCheckDate": ""
+                    "uniqueId": "Uxassal-UID",
+                    "name": "Uxassal",
+                    "dunsNumber": "6224493177",
+                    "reference": "Uxassal-Ref",
+                    "merchantId": "7233943",
+                    "regNumber": "REG-279",
+                    "taxId": "TXID-2868",
+                    "websiteUrl": "www.uxassal.net",
+                    "sicCode": "SC-279",
+                    "lei": "L-28",
+                    "networkId": "NID-27857",
+                    "originationNetwork": "ONID-268"
                 }
             ],
             "checkBoxData": [
                 {
                     "Is Active": true,
-                    "On-boarded": false,
-                    "Sanctions Check": false,
+                    "On-boarded": true,
+                    "Sanctions Check": true,
                     "Last Sanction Check Approved": false,
-                    "Referred": false,
+                    "Referred": true,
                     "Buyer": true,
                     "Supplier": false,
                     "Funder": false,
-                    "Settlement Network": false,
+                    "Settlement Network": true,
                     "Insurance Underwriter": false,
-                    "Regulator": false,
-                    "B2B Network": false,
-                    "Servicer": false,
+                    "Regulator": true,
+                    "B2B Network": true,
+                    "Servicer": true,
                     "Test999": false
                 }
             ]
         },
         "update": {
             "fieldData": {
-                "uniqueId": "Boral",        // uniqueId should start with later letters like z, x, y
-                "name": "Boral",        // name should start with later letters like z, x, y
-                "dunsNumber": "862459013",
-                "reference": "Boral",
-                "merchantId": "786544",
+                "uniqueId": "",
+                "name": "Uxantel",
+                "dunsNumber": "1329003177",
+                "reference": "Uxantel-Ref",
+                "merchantId": "",
                 "regNumber": "",
                 "taxId": "",
-                "websiteUrl": "",
+                "websiteUrl": "www.uxantel.com",
                 "sicCode": "",
-                "LEI": "",
+                "lei": "",
                 "networkId": "",
-                "originationNetwork": "",
-                "lastSanctionCheckDate": ""
+                "originationNetwork": ""
             },
             "checkBoxData": {
                 "Is Active": true,
-                "On-boarded": false,
+                "On-boarded": true,
                 "Sanctions Check": false,
-                "Last Sanction Check Approved": false,
-                "Referred": false,
+                "Last Sanction Check Approved": true,
+                "Referred": true,
                 "Buyer": true,
                 "Supplier": false,
                 "Funder": false,
                 "Settlement Network": false,
                 "Insurance Underwriter": false,
-                "Regulator": false,
+                "Regulator": true,
                 "B2B Network": false,
                 "Servicer": false,
-                "Test999": false
+                "Test999": true
             }
         }
     }

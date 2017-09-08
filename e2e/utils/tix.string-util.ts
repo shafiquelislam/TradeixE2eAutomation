@@ -38,7 +38,16 @@ export class StringUtil {
             return false;
         }
 
-        //if()
+        return list.map((elm) => {
+            return elm.getText();
+            }).then((elm) => {
+            if(elm.indexOf(search_element) >= 0){
+                return true;
+            }else{
+                console.log(search_element + " is not found in the list " + elm);
+                return false;
+            }
+        })
     }
 
 };
