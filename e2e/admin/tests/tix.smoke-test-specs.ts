@@ -123,7 +123,7 @@ describe('Admin Panel smoke test', () => {
     describe('C126 - Trade tab UI validation', () => {
 
         it('should load Trade page on clicking Trade tab', (done) => {
-              expect(invoiceLedgerPage.vlickTradeTabAndcheckForPageLoad()).toBe(true);
+              expect(invoiceLedgerPage.clickTradeTabAndcheckForPageLoad()).toBe(true);
               done();
         });
 
@@ -152,7 +152,7 @@ describe('Admin Panel smoke test', () => {
     describe('C128 - Advance Filter functionality validation', () => {
 
         it('should display search data in search result', (done) => {
-            expect(invoiceLedgerPage.checkAdvanceFilterWorks()).toBe(true);
+            expect(invoiceLedgerPage.checkIfAdvanceFilterWorks()).toBe(true);
             done();
         });
 
@@ -189,7 +189,7 @@ describe('Admin Panel smoke test', () => {
     describe('C130 - Advance Filter functionality validation', () => {
 
         it('should display search data in search result', (done) => {
-            expect(bidOfferLedgerPage.checkAdvanceFilterWorks()).toBe(true);
+            expect(bidOfferLedgerPage.checkIfAdvanceFilterWorks()).toBe(true);
             done();
         });
 
@@ -258,7 +258,7 @@ describe('Admin Panel smoke test', () => {
     describe('C136 - Advance Filter functionality validation', () => {
 
         it('should display search data in search result', (done) => {
-            expect(companyManagerPage.checkAdvanceFilterWorks()).toBe(true);
+            expect(companyManagerPage.checkIfAdvanceFilterWorks()).toBe(true);
             done();
         });
 

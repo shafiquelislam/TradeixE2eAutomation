@@ -12,18 +12,18 @@
         "create": {
             "fieldData": [
                 {
-                    "uniqueId": "Uxassal-UID",
-                    "name": "Uxassal",
-                    "dunsNumber": "6224493177",
-                    "reference": "Uxassal-Ref",
-                    "merchantId": "7233943",
-                    "regNumber": "REG-279",
-                    "taxId": "TXID-2868",
-                    "websiteUrl": "www.uxassal.net",
-                    "sicCode": "SC-279",
-                    "lei": "L-28",
-                    "networkId": "NID-27857",
-                    "originationNetwork": "ONID-268"
+                    "uniqueId": "Zmassal-UID",
+                    "name": "Zmassal",
+                    "dunsNumber": "5224493177",
+                    "reference": "Zmassal-Ref",
+                    "merchantId": "5233943",
+                    "regNumber": "REG-579",
+                    "taxId": "TXID-5868",
+                    "websiteUrl": "www.zmassal.net",
+                    "sicCode": "SC-579",
+                    "lei": "L-58",
+                    "networkId": "NID-57857",
+                    "originationNetwork": "ONID-568"
                 }
             ],
             "checkBoxData": [
@@ -48,13 +48,13 @@
         "update": {
             "fieldData": {
                 "uniqueId": "",
-                "name": "Uxantel",
-                "dunsNumber": "1329003177",
-                "reference": "Uxantel-Ref",
+                "name": "Zmantel",
+                "dunsNumber": "5129003177",
+                "reference": "Zmantel-Ref",
                 "merchantId": "",
                 "regNumber": "",
                 "taxId": "",
-                "websiteUrl": "www.uxantel.com",
+                "websiteUrl": "www.zmantel.com",
                 "sicCode": "",
                 "lei": "",
                 "networkId": "",

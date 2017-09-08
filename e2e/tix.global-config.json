@@ -1,6 +1,6 @@
 {
     "envName": "uat",
-    "loginUserType": "supplier",
+    "loginUserType": "admin",
     "specs": {
         "admin": [
             "./e2e/admin/tests/*.smoke-test-specs.ts"

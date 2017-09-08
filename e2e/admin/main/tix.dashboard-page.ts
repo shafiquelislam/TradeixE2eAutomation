@@ -50,7 +50,7 @@ export class DashboardPage {
 
         return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
             return browser.sleep(1000).then(() => {
-                return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
+                return StringUtil.checkIfElementExistsInList(findElm, findTxt);
             });
         });
     }

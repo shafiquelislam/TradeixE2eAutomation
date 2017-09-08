@@ -25,7 +25,7 @@ export class InvoiceLedgerPage {
         var findTxt = 'Buyer Name';
 
         return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
+            return StringUtil.checkIfElementExistsInList(findElm, findTxt);
         });
     }
 
@@ -103,7 +103,7 @@ export class InvoiceLedgerPage {
         var findTxt = 'Blockchain';
 
         return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
+            return StringUtil.checkIfElementExistsInList(findElm, findTxt);
         });
     }
 
@@ -137,7 +137,7 @@ export class InvoiceLedgerPage {
         var findTxt = 'Invoice Version';
 
         return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
+            return StringUtil.checkIfElementExistsInList(findElm, findTxt);
         });
     }
 
@@ -158,13 +158,13 @@ export class InvoiceLedgerPage {
 
     /****************  Trade Tab  *****************/
 
-    vlickTradeTabAndcheckForPageLoad() {
+    clickTradeTabAndcheckForPageLoad() {
         var findElm = element.all(by.css('app-invoice-ledger data-grid .ledger thead tr th div:nth-child(1)'));
         var targetElment = element(by.css('.mat-tab-labels #md-tab-label-0-3'));
         var findTxt = 'Trade Date';
 
         return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
+            return StringUtil.checkIfElementExistsInList(findElm, findTxt);
         });
     }
 
@@ -200,7 +200,7 @@ export class InvoiceLedgerPage {
         var findTxt = 'Insurance Amount';
 
         return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
+            return StringUtil.checkIfElementExistsInList(findElm, findTxt);
         });
     }
 
@@ -232,7 +232,7 @@ export class InvoiceLedgerPage {
         var findTxt = 'Advanced Filter';
 
         return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
+            return StringUtil.checkIfElementExistsInList(findElm, findTxt);
         });
     }
 
@@ -249,7 +249,7 @@ export class InvoiceLedgerPage {
         });
     }
 
-    checkAdvanceFilterWorks() {
+    checkIfAdvanceFilterWorks() {
         return this.clickSearchIcon().then(() => {
             return this.typeInoviceNumberAndClickSearchNow().then(() => {
                 return element.all(by.css('app-invoice-ledger data-grid .scroll-container tbody tr')).then((elm) => {

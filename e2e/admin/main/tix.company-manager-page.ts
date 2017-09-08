@@ -20,7 +20,7 @@ export class CompanyManagerPage {
 
         return dashboardPage.clickMenuIconAndCheckForPageLoad().then(() => {
             return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-                return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
+                return StringUtil.checkIfElementExistsInList(findElm, findTxt);
             });
         });
     }
@@ -71,7 +71,7 @@ export class CompanyManagerPage {
         var findTxt = 'Buyer';
 
         return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
+            return StringUtil.checkIfElementExistsInList(findElm, findTxt);
         });
     }
 
@@ -97,8 +97,8 @@ export class CompanyManagerPage {
         var findTxt = 'Companies';
 
         return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return browser.sleep(1000).then(() => {
-                return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
+            return browser.sleep(300).then(() => {
+                return StringUtil.checkIfElementExistsInList(findElm, findTxt);
             });
         });
     }
@@ -150,7 +150,7 @@ export class CompanyManagerPage {
         let search_item = data.company.create.fieldData[0];
         let Elment = element.all(by.css('app-company-list data-grid table tbody tr td:nth-child(1)'));
 
-        return StringUtil.checkIfAnElementExistsInAList(Elment, search_item["uniqueId"]);
+        return StringUtil.checkIfElementExistsInList(Elment, search_item["uniqueId"]);
     }
 
     /*****************  Edit Functionality validation  ****************/
@@ -161,7 +161,7 @@ export class CompanyManagerPage {
         var findTxt = 'Buyer';
 
         return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
+            return StringUtil.checkIfElementExistsInList(findElm, findTxt);
         });
     }
 
@@ -196,7 +196,7 @@ export class CompanyManagerPage {
         let search_item = data.company.update.fieldData.name;
         let Elment = element.all(by.css('app-company-list data-grid table tbody tr td:nth-child(2)'));
 
-        return StringUtil.checkIfAnElementExistsInAList(Elment, search_item);
+        return StringUtil.checkIfElementExistsInList(Elment, search_item);
     }
 
     updateFirstCompany() {
@@ -222,7 +222,7 @@ export class CompanyManagerPage {
         var findTxt = 'Advanced Filter';
 
         return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return StringUtil.checkIfAnElementExistsInAList(findElm, findTxt);
+            return StringUtil.checkIfElementExistsInList(findElm, findTxt);
         });
     }
 
@@ -240,7 +240,7 @@ export class CompanyManagerPage {
         });
     }
 
-    checkAdvanceFilterWorks() {
+    checkIfAdvanceFilterWorks() {
         return this.clickSearchIcon().then(() => {
             return this.typeIDAndClickSearchNow().then(() => {
                 return element.all(by.css('app-company-list data-grid .scroll-container tbody tr')).then((elm) => {
