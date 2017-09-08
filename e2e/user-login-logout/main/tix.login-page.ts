@@ -1,7 +1,7 @@
 import { browser, by, element, protractor, $, $$ } from 'protractor';
 
-let globalConfigs = require("../../tix.global-config.json");
-let data = require("../../" + globalConfigs.loginUserType + "/resources/tix." + globalConfigs.envName + "-config.json");
+const globalConfigs = require('../../tix.global-config.json');
+const data = require('../../' + globalConfigs.loginUserType + '/resources/tix.' + globalConfigs.envName + '-config.json');
 
 export class LoginPage {
   private loginCredentials: any = data.loginCredentials;
@@ -21,11 +21,11 @@ export class LoginPage {
   }
 
   getEmailAddressField() {
-    return $("#emailAddress");
+    return $('#emailAddress');
   }
 
   getPasswordField() {
-    return $("#password");
+    return $('#password');
   }
 
   setEmailAddress() {
@@ -45,11 +45,11 @@ export class LoginPage {
   }
 
   clickLoginButton() {
-    return $("#login-button").click();
+    return $('#login-button').click();
   }
 
   submitLoginForm() {
-    return $("form.login-form").submit();
+    return $('form.login-form').submit();
   }
 
   pressEnterButton() {
@@ -58,10 +58,10 @@ export class LoginPage {
 
   performLoginAction() {
     return this.clickLoginButton().then(() => {
-      return $("app-root main").isPresent().then((result) => {
+      return $('app-root main').isPresent().then((result) => {
         return result;
       });
-    })
+    });
   }
 
 }

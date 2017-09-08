@@ -1,18 +1,22 @@
 import { browser } from 'protractor';
 import { DashboardPage } from '../main/tix.dashboard-page';
 
-var globalConfig = require("../../tix.global-config.json");
+const globalConfig = require('../../tix.global-config.json');
 
 describe('Producer Dashboard', () => {
 
   let dashboardPage: DashboardPage = new DashboardPage();
-  let defaultSpecDelayTime = globalConfig.defaultSpecDelayTime;
+  const defaultSpecDelayTime = globalConfig.defaultSpecDelayTime;
+
+  beforeAll(() => {
+    browser.sleep(defaultSpecDelayTime);
+  });
 
   afterEach(() => {
     browser.sleep(defaultSpecDelayTime);
   });
 
-  describe('C109 - Home Dashboard and Left Menu functionality UI validation', () => {
+  xdescribe('C109 - Home Dashboard and Left Menu functionality UI validation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -72,15 +76,14 @@ describe('Producer Dashboard', () => {
   });
 
   xdescribe('C111 - Create Offer and Bid Accept process vaidation', () => {
+
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
 
     it('should found at least one button as enabled of Fund USD/GBP/EUR', done => {
-      dashboardPage.getCountOfEnabledFundButtons().then((count) => {
-        expect(count).toBeGreaterThanOrEqual(1);
-        done();
-      });
+      expect(dashboardPage.getCountOfEnabledFundButtons()).toBeGreaterThanOrEqual(1);
+      done();
     });
 
     it('should click on first enabled Fund button of USD/GBP/EUR', done => {
@@ -191,7 +194,7 @@ describe('Producer Dashboard', () => {
     });
 
     it('check UI header text equals to "Available Buyers"', done => {
-      expect(dashboardPage.getUiHeaderTextOfBuyersList()).toEqual("Available Buyers");
+      expect(dashboardPage.getUiHeaderTextOfBuyersList()).toEqual('Available Buyers');
       done();
     });
 
@@ -201,7 +204,7 @@ describe('Producer Dashboard', () => {
     });
 
     it('check "Total Available (n)" value, where value should be equal to sum of the values of "Total Invoice Value" column', done => {
-      expect(dashboardPage.getValueShowedForTotalAvailableBuyers()).toEqual(dashboardPage.getSumOfAllInvoiceValuesInList());
+      expect(dashboardPage.getValueShowedForTotalAvailableBuyers()).toEqual(dashboardPage.getSumOfAllInvoiceValuesInBuyersList());
       done();
     });
 
@@ -211,12 +214,12 @@ describe('Producer Dashboard', () => {
     });
 
     it('check "Total Selected (n)" value, where value should be equal to sum of the values of "Total Invoice Value" column of the selected Buyers', done => {
-      expect(dashboardPage.getValueShowedForTotalSelectedBuyers()).toEqual(dashboardPage.getSumOfSelectedInvoiceValuesInList());
+      expect(dashboardPage.getValueShowedForTotalSelectedBuyers()).toEqual(dashboardPage.getSumOfSelectedInvoiceValuesInBuyersList());
       done();
     });
 
     it('should have appropriate column names in Data Grid columns', done => {
-      expect(dashboardPage.checkIfDataGridColumnsNamesAsPerExpectation()).toBe(true);
+      expect(dashboardPage.checkIfDataGridColumnsNamesOfBuyersListAsPerExpectation()).toBe(true);
       done();
     });
 
@@ -224,6 +227,97 @@ describe('Producer Dashboard', () => {
       expect(dashboardPage.clickOnCancelButtonFromBuyersListView()).toBe(true);
       done();
     });
+  });
+
+  xdescribe('C115 - Choose Invoice - UI validation and back to Dashboard', () => {
+    afterEach(() => {
+      browser.sleep(defaultSpecDelayTime);
+    });
+
+    it('should click on first enabled Fund USD/GBP/EUR button', done => {
+      expect(dashboardPage.clickOnActiveFundButton()).toBe(true);
+      done();
+    });
+
+    it('should click on top checkbox in buyer list', done => {
+      dashboardPage.uncheckAllBuyersInList();
+      expect(dashboardPage.getCountOfSelectedBuyersInList()).toBe(0);
+      done();
+    });
+
+    it('should select top two buyers in buyer list', done => {
+      dashboardPage.checkTopTwoBuyerInList();
+      expect(dashboardPage.getCountOfSelectedBuyersInList()).toBeGreaterThanOrEqual(1);
+      expect(dashboardPage.getCountOfSelectedBuyersInList()).toBeLessThanOrEqual(2);
+      done();
+    });
+
+    it('should click "Next" button and load "Choose Invoices" UI', done => {
+      expect(dashboardPage.clickNextButtonFromAvailabaleBuyersList()).toBe(true);
+      done();
+    });
+
+    it('check if all invoices are selected', done => {
+      expect(dashboardPage.getCountOfUnselectedInvoicesInList()).toBe(0);
+      done();
+    });
+
+    it('check UI header text equals to "Available Invoices"', done => {
+      expect(dashboardPage.getUiHeaderTextOfInvoiceList()).toEqual('Available Invoices');
+      done();
+    });
+
+    it('check "Total Available (n)" value, where n should be equal to sum of all amounts in "Value" column', done => {
+      expect(dashboardPage.getValueShowedForTotalAvailableInvoices()).toEqual(dashboardPage.getSumOfAllInvoiceValuesInInvoiceList());
+      done();
+    });
+
+    it('check "Total Selected (n)" value, where n should be equal to sum of amounts in "Value" column only for selected invoices', done => {
+      expect(dashboardPage.getValueShowedForTotalSelectedInvoices()).toEqual(dashboardPage.getSumOfSelectedInvoiceValuesInInvoiceList());
+      done();
+    });
+
+    it('should have appropriate column names in Data Grid columns', done => {
+      expect(dashboardPage.checkIfDataGridColumnsNamesOfInvoicesListAsPerExpectation()).toBe(true);
+      done();
+    });
+
+    it('should click on "Cancel" button and back to Producer Dashboard', done => {
+      expect(dashboardPage.clickOnCancelButtonFromInvoicesListView()).toBe(true);
+      done();
+    });
+
+  });
+
+  describe('C116 - View Offers - UI validation and back to Dashboard', () => {
+    beforeAll(() => {
+      browser.sleep(defaultSpecDelayTime);
+    });
+
+    afterEach(() => {
+      browser.sleep(defaultSpecDelayTime);
+    });
+
+    it('should click on "View Offers" Button', done => {
+      expect(dashboardPage.clickOnActiveViewOffersButton()).toBe(true);
+      done();
+    });
+
+    it('check UI header text equals to "Open Offers"', done => {
+      expect(dashboardPage.getUiHeaderTextOfViewOffersList()).toEqual('Open Offers');
+      done();
+    });
+
+    it('should have appropriate column names in Data Grid columns', done => {
+      expect(dashboardPage.checkIfDataGridColumnsNamesOfOpenOffersListAsPerExpectation()).toBe(true);
+      done();
+    });
+
+    it('should click on "Producer Dashboard" from left Menu', done => {
+      expect(dashboardPage.clickOnProducerDashboardFromLeftMenu()).toBe(true);
+      done();
+    });
+
   });
 
 });

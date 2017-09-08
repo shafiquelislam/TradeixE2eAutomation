@@ -4,6 +4,9 @@ const { SpecReporter } = require('jasmine-spec-reporter');
 var HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
 var globalConfigs = require('./e2e/tix.global-config.json');
 
+const showSpecReport = globalConfigs.showSpecReport;
+const showHtmlReport = globalConfigs.showHtmlReport;
+
 var htmlScreenshotReporter = new HtmlScreenshotReporter({
   reportTitle: "Tradeix e2e Automation Report",
   dest: 'src/target/screenshots',
@@ -12,48 +15,52 @@ var htmlScreenshotReporter = new HtmlScreenshotReporter({
   reportOnlyFailedSpecs: false
 });
 
-var specReporter = new SpecReporter({ 
-  spec: { 
-    displayStacktrace: true 
-  } 
+var specReporter = new SpecReporter({
+  spec: {
+    displayStacktrace: true
+  }
 });
 
-var showHtmlReport = globalConfigs.showHtmlReport;
+let allSpecs = [globalConfigs.specs.login].concat(globalConfigs.specs[globalConfigs.loginUserType], [globalConfigs.specs.logout]);
 
 exports.config = {
   allScriptsTimeout: 60000,
-  specs: globalConfigs.specsList[globalConfigs.loginUserType],
+  specs: allSpecs,
+  seleniumAddress: 'http://localhost:4444/wd/hub',
   capabilities: {
-    'browserName': globalConfigs.browserName
-  },
+    browserName: 'chrome',
+    os: 'Windows',
+   },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 60000,
-    print: function() {}
+    print: function () {}
   },
   onPrepare() {
     browser.driver.manage().window().maximize();
     require('ts-node').register({
       project: 'e2e/tsconfig.e2e.json'
     });
-    jasmine.getEnv().addReporter(specReporter);
+    if(showSpecReport) {
+      jasmine.getEnv().addReporter(specReporter);
+    }
     if(showHtmlReport) {
       jasmine.getEnv().addReporter(htmlScreenshotReporter);
     }
   },
   beforeLaunch: () => {
     return new Promise((resolve) => {
-      if(showHtmlReport) {
+      if (showHtmlReport) {
         htmlScreenshotReporter.beforeLaunch(resolve);
       }
     });
   },
   afterLaunch: (exitCode) => {
     return new Promise((resolve) => {
-      if(showHtmlReport) {
+      if (showHtmlReport) {
         htmlScreenshotReporter.afterLaunch(resolve.bind(this, exitCode));
       }
     });
