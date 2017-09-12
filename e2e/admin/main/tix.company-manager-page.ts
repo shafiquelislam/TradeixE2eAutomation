@@ -7,18 +7,22 @@ var data = require('../resources/tix.uat-config.json');
 
 export class CompanyManagerPage {
 
+    private dashboardPage: DashboardPage;
+
     /***************    C129 - C130    ***************/
 
     /***************  UI validation  ****************/
+    constructor() {
+        this.dashboardPage = new DashboardPage();
+    }
 
     checkForCompanyManagerPageLoad() {
-        let dashboardPage: DashboardPage = new DashboardPage();
 
         var findElm = element.all(by.css('app-company-list data-grid .scroll-container thead tr th div:nth-child(1)'));
         var targetElment = element(by.css('md-sidenav-container navigation-menu a[href="/company-manager"]'));
         var findTxt = 'Duns Number';
 
-        return dashboardPage.clickMenuIconAndCheckForPageLoad().then(() => {
+        return this.dashboardPage.clickMenuIconAndCheckForPageLoad().then(() => {
             return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
                 return StringUtil.checkIfElementExistsInList(findElm, findTxt);
             });
@@ -79,7 +83,7 @@ export class CompanyManagerPage {
         var findTxt = company_value['name'];
 
         return element(by.css('app-company-detail form .mat-tab-body-wrapper button')).click().then(() => {
-            return browser.sleep(500).then(() => {
+            return browser.sleep(4000).then(() => {
                 return element(by.css('app-company-detail > div:nth-child(1) h1')).getText().then((txt) => {
                     if (txt == findTxt) {
                         return true;
@@ -97,7 +101,7 @@ export class CompanyManagerPage {
         var findTxt = 'Companies';
 
         return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return browser.sleep(300).then(() => {
+            return browser.sleep(1000).then(() => {
                 return StringUtil.checkIfElementExistsInList(findElm, findTxt);
             });
         });
@@ -110,7 +114,7 @@ export class CompanyManagerPage {
                     var locator = 'app-company-detail form .mat-input-container input[ng-reflect-name="' + fieldName + '"]';
                     var elmnt = element(by.css(locator));
                     elmnt.sendKeys(comp_data[fieldName]);
-                    browser.sleep(100);
+                    browser.sleep(50);
                 }
             });
         });
@@ -124,7 +128,7 @@ export class CompanyManagerPage {
                 let value = comp_checkbox_data[text];
                 if (value) {
                     element.click();
-                    browser.sleep(100);
+                    browser.sleep(50);
                 }
             });
         });
@@ -172,7 +176,7 @@ export class CompanyManagerPage {
                     var locator = 'app-company-detail form .mat-input-container input[ng-reflect-name="' + fieldName + '"]';
                     var elmnt = element(by.css(locator));
                     elmnt.clear().then(() => {
-                        browser.sleep(100).then(() => {
+                        browser.sleep(50).then(() => {
                             elmnt.sendKeys(update_field_data[fieldName]);
                         });
                     });
@@ -186,7 +190,7 @@ export class CompanyManagerPage {
 
         checkboxDoms.each((element) => {
             element.click();
-            browser.sleep(100);
+            browser.sleep(50);
         }).then(() => {
             this.clickCompanyCheckBoxes(update_checkbox_data);
         });
@@ -253,6 +257,18 @@ export class CompanyManagerPage {
                             return resp;
                         });
                     }
+                });
+            });
+        });
+    }
+
+    resetPage() {
+        return this.clickSearchIcon().then(() => {
+            var targetElment = element(by.css('#mainForm button:nth-child(2)'));
+            var findElm = element.all(by.css('app-company-list data-grid .scroll-container tbody tr'));
+            return ElementUtil.waitForPageLoad(targetElment, findElm).then((resp) => {
+                return browser.sleep(3000).then(() => {
+                    return resp;
                 });
             });
         });

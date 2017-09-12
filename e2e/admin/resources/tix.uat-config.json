@@ -12,18 +12,18 @@
         "create": {
             "fieldData": [
                 {
-                    "uniqueId": "Zmassal-UID",
-                    "name": "Zmassal",
-                    "dunsNumber": "5224493177",
-                    "reference": "Zmassal-Ref",
-                    "merchantId": "5233943",
-                    "regNumber": "REG-579",
-                    "taxId": "TXID-5868",
-                    "websiteUrl": "www.zmassal.net",
-                    "sicCode": "SC-579",
-                    "lei": "L-58",
-                    "networkId": "NID-57857",
-                    "originationNetwork": "ONID-568"
+                    "uniqueId": "Woods Bagot-UID",
+                    "name": "Woods Bagot",
+                    "dunsNumber": "5222593177",
+                    "reference": "Woods Bagot-Ref",
+                    "merchantId": "7208843",
+                    "regNumber": "REG-609",
+                    "taxId": "",
+                    "websiteUrl": "",
+                    "sicCode": "",
+                    "lei": "",
+                    "networkId": "",
+                    "originationNetwork": ""
                 }
             ],
             "checkBoxData": [
@@ -32,14 +32,14 @@
                     "On-boarded": true,
                     "Sanctions Check": true,
                     "Last Sanction Check Approved": false,
-                    "Referred": true,
+                    "Referred": false,
                     "Buyer": true,
                     "Supplier": false,
                     "Funder": false,
-                    "Settlement Network": true,
+                    "Settlement Network": false,
                     "Insurance Underwriter": false,
-                    "Regulator": true,
-                    "B2B Network": true,
+                    "Regulator": false,
+                    "B2B Network": false,
                     "Servicer": true,
                     "Test999": false
                 }
@@ -48,13 +48,13 @@
         "update": {
             "fieldData": {
                 "uniqueId": "",
-                "name": "Zmantel",
-                "dunsNumber": "5129003177",
-                "reference": "Zmantel-Ref",
+                "name": "ZransPerth",
+                "dunsNumber": "0217790977",
+                "reference": "",
                 "merchantId": "",
                 "regNumber": "",
                 "taxId": "",
-                "websiteUrl": "www.zmantel.com",
+                "websiteUrl": "",
                 "sicCode": "",
                 "lei": "",
                 "networkId": "",

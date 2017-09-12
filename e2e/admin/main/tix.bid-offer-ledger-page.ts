@@ -5,18 +5,23 @@ import { DashboardPage } from './tix.dashboard-page';
 
 export class BidOfferLedgerPage {
 
+    private dashboardPage: DashboardPage;
+
     /***************    C129 - C130    ***************/
 
     /***************  UI validation  ****************/
 
+    constructor () {
+        this.dashboardPage = new DashboardPage();
+    }
+
     clickBidOfferIconAndcheckForPageLoad() {
-        let dashboardPage: DashboardPage = new DashboardPage();
 
         var findElm = element.all(by.css('app-bid-offer data-grid .ledger thead tr th div:nth-child(1)'));
         var targetElment = element(by.css('md-sidenav-container navigation-menu a[href="/ledgers/bid-offers-ledger"]'));
         var findTxt = 'Asset Number';
 
-        return dashboardPage.clickMenuIconAndCheckForPageLoad().then(() => {
+        return this.dashboardPage.clickMenuIconAndCheckForPageLoad().then(() => {
             return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
                 return StringUtil.checkIfElementExistsInList(findElm, findTxt);
             });
@@ -95,6 +100,18 @@ export class BidOfferLedgerPage {
                             return resp;
                         });
                     }
+                });
+            });
+        });
+    }
+
+    resetPage() {
+        return this.clickSearchIcon().then(() => {
+            var targetElment = element(by.css('#mainForm button:nth-child(2)'));
+            var findElm = element.all(by.css('app-bid-offer data-grid .scroll-container .ledger'));
+            return ElementUtil.waitForPageLoad(targetElment, findElm).then((resp) => {
+                return browser.sleep(2000).then(() => {
+                    return resp;
                 });
             });
         });

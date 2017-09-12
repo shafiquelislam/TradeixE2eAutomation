@@ -257,7 +257,7 @@ export class InvoiceLedgerPage {
                         console.log('Search element is found');
                         return true;
                     }else{
-                        element(by.css('app-invoice-ledger data-grid .no-rows-message h3')).isPresent().then((resp) => {
+                        return element(by.css('app-invoice-ledger data-grid .no-rows-message h3')).isPresent().then((resp) => {
                             console.log('Search element is not found');
                             return resp;
                         });
@@ -267,4 +267,15 @@ export class InvoiceLedgerPage {
         });
     }
 
+    resetPage() {
+        return this.clickSearchIcon().then(() => {
+            var targetElment = element(by.css('#mainForm button:nth-child(2)'));
+            var findElm = element.all(by.css('app-invoice-ledger data-grid .scroll-container tbody strong'));
+            return ElementUtil.waitForPageLoad(targetElment, findElm).then((resp) => {
+                return browser.sleep(2000).then(() => {
+                    return resp;
+                });
+            });
+        });
+    }
 }
