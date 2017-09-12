@@ -35,7 +35,7 @@ testem.log
 /debug.log
 
 # src
-/src/target/
+/src/app/test-report/screenshots/
 
 # e2e
 /e2e/*.js

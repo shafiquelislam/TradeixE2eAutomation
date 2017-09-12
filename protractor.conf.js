@@ -9,8 +9,8 @@ const showHtmlReport = globalConfigs.showHtmlReport;
 
 var htmlScreenshotReporter = new HtmlScreenshotReporter({
   reportTitle: "Tradeix e2e Last Automation Log",
-  dest: 'src/target/screenshots',
-  filename: 'tradeix-e2e-report.html',
+  dest: 'src/app/test-report/screenshots',
+  filename: 'test.component.html',
   captureOnlyFailedSpecs: true,
   reportOnlyFailedSpecs: false
 });

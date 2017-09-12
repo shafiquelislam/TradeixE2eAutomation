@@ -16,7 +16,7 @@ describe('Producer Dashboard', () => {
     browser.sleep(defaultSpecDelayTime);
   });
 
-  xdescribe('C109 - Home Dashboard and Left Menu functionality UI validation', () => {
+  describe('C109 - Home Dashboard and Left Menu functionality UI validation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -41,7 +41,7 @@ describe('Producer Dashboard', () => {
     });
   });
 
-  xdescribe('C110 - Create Offer and back to Dashboard process validation', () => {
+  describe('C110 - Create Offer and back to Dashboard process validation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -75,7 +75,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  xdescribe('C111 - Create Offer and Bid Accept process vaidation', () => {
+  describe('C111 - Create Offer and Bid Accept process vaidation', () => {
 
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
@@ -118,7 +118,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  xdescribe('C112 - View Offers, view Bid details and back to Dashboard process validation', () => {
+  describe('C112 - View Offers, view Bid details and back to Dashboard process validation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -147,7 +147,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  xdescribe('C113 - View Offers, view Bid details and Accept Bid process validation', () => {
+  describe('C113 - View Offers, view Bid details and Accept Bid process validation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -174,7 +174,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  xdescribe('C114 - Choose Buyers - UI validation and back to Dashboard', () => {
+  describe('C114 - Choose Buyers - UI validation and back to Dashboard', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -229,7 +229,7 @@ describe('Producer Dashboard', () => {
     });
   });
 
-  xdescribe('C115 - Choose Invoice - UI validation and back to Dashboard', () => {
+  describe('C115 - Choose Invoice - UI validation and back to Dashboard', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -290,9 +290,6 @@ describe('Producer Dashboard', () => {
   });
 
   describe('C116 - View Offers - UI validation and back to Dashboard', () => {
-    beforeAll(() => {
-      browser.sleep(defaultSpecDelayTime);
-    });
 
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
@@ -315,6 +312,38 @@ describe('Producer Dashboard', () => {
 
     it('should click on "Producer Dashboard" from left Menu', done => {
       expect(dashboardPage.clickOnProducerDashboardFromLeftMenu()).toBe(true);
+      done();
+    });
+
+  });
+
+  describe('C117 - Bid deatails - UI validation and back to Dashboard', () => {
+
+    beforeAll(() => {
+      browser.sleep(defaultSpecDelayTime);
+    });
+
+    afterEach(() => {
+      browser.sleep(defaultSpecDelayTime);
+    });
+
+    it('should click on enabled Currency of "USD/GBP/EUR"', done => {
+      expect(dashboardPage.clickOnEnabledCurrencyButton()).toBe(true);
+      done();
+    });
+
+    it('should display "Bids" at the left', done => {
+      expect(dashboardPage.checkIfBidsDisplayedOnLeft()).toBeGreaterThan(0);
+      done();
+    });
+
+    it('check if "Bid Details" contains Invoice, Purchase and Discount values', done => {
+      expect(dashboardPage.checkIfBidDetailsContainsThreeSections()).toBe(true);
+      done();
+    });
+
+    it('should click on "Cancel" button and return to Producer Dashboard', done => {
+      expect(dashboardPage.clickOnCancelButtonFromBidDetailsUI()).toBe(true);
       done();
     });
 

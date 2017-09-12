@@ -195,8 +195,12 @@ export class DashboardPage {
         }).count();
     }
 
+    getActiveViewOfferButton() {
+        return $('app-producer-dashboard app-currency-summary md-card a[href^="/producer/offer-list/"]:not([disabled="true"])');
+    }
+
     clickOnActiveViewOffersButton() {
-        return $('app-producer-dashboard app-currency-summary md-card a[href^="/producer/offer-list/"]:not([disabled="true"])').click().then(() => {
+        return this.getActiveViewOfferButton().click().then(() => {
             return true;
         });
     }
@@ -408,6 +412,50 @@ export class DashboardPage {
         let elm = $('app-root app-menu nav a[href="/producer"]');
         return browser.actions().mouseMove(elm).click().perform().then(() => {
             return true;
+        });
+    }
+
+
+    /***************************    C117    ****************************/
+
+
+    clickOnEnabledCurrencyButton() {
+        return this.getActiveViewOfferButton().getAttribute("href").then((href) => {
+            let currencyName = href.split("/").pop();
+            return $('app-root app-producer-dashboard app-currency-summary[ng-reflect-currency-code="' + currencyName + '"] md-card header [ng-reflect-class-base="currency-code-wrapper"]').click().then(() => {
+                return $('app-bid-summary').isPresent().then((result) => {
+                    return result;
+                });
+            });
+        });
+    }
+
+    checkIfBidsDisplayedOnLeft() {
+        return $$('app-root md-sidenav-container app-bid-summary aside li').count().then((count) => {
+            return count;
+        });
+    }
+
+    checkIfBidDetailsContainsThreeSections() {
+        let sectionNamesAsLowerCase = [
+            "total invoice value", 
+            "total purchase value", 
+            "discount and fees"
+        ];
+        return $$('app-root md-sidenav-container app-bid-summary section .statistics span.muted-text').map((elm) => {
+            return elm.getText().then((text) => {
+                return text.toLowerCase();
+            });
+        }).then((sectionTitles) => {
+            return StringUtil.checkIfTwoArraysContainSimilarElements(sectionTitles as Array<string>, sectionNamesAsLowerCase);
+        });
+    }
+
+    clickOnCancelButtonFromBidDetailsUI() {
+        return $('app-root md-sidenav-container app-bid-summary nav button.mat-raised-button.mat-primary').click().then(() => {
+            return $('app-producer-dashboard').isPresent().then((result) => {
+                return result;
+            });
         });
     }
 
