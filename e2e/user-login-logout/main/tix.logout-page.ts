@@ -1,16 +1,25 @@
 import { browser, by, element, protractor, $, $$ } from 'protractor';
 
 export class LogOutPage {
+
+    getProfileIconFromLeftBar() {
+        return $$('app-root app-menu nav li md-icon:not([ng-reflect-message])').last();
+    }
+
+    getLogoffButtonFromOpenedProfileMenuNav() {
+        return $('app-root md-sidenav-container md-sidenav.menu.mat-sidenav-opened profile-menu profile-menu-item a');
+    }
+
+    clickOnProfileIcon() {
+        return browser.actions().mouseMove(this.getProfileIconFromLeftBar()).click().perform().then(() => {
+            return true;
+        });
+    }
+
     logout() {
-        let elm = $$('app-root app-menu nav li md-icon:not([ng-reflect-message])').last();
-        return browser.actions().mouseMove(elm).click().perform().then(() => {
-            return browser.sleep(1000).then(() => {
-                let elm = $('app-root md-sidenav-container md-sidenav.menu.mat-sidenav-opened profile-menu profile-menu-item a');
-                return browser.actions().mouseMove(elm).click().perform().then(() => {
-                    return $("form.login-form").isPresent().then(result => {
-                        return result;
-                    });
-                });
+        return browser.actions().mouseMove(this.getLogoffButtonFromOpenedProfileMenuNav()).click().perform().then(() => {
+            return $("form.login-form").isPresent().then(result => {
+                return result;
             });
         });
     }
