@@ -19,4 +19,19 @@ export class ElementUtil {
         });
     }
 
+    static checkIfElementLoaded(elementLocator: string, timeout = 15000) {
+        var until = protractor.ExpectedConditions;
+        return browser.wait(until.presenceOf($(elementLocator)), timeout, 'Element taking too long to appear in the DOM').then(() => {
+            return true;
+        }, () => {
+            return false;
+        });
+    }
+
+    static clickAndWaitForElement(clickOn: string, waitFor: string, timeout = 15000) {
+        return browser.actions().mouseMove($(clickOn)).perform().then(() => {
+            return this.checkIfElementLoaded(waitFor, timeout);
+        });
+    }
+
 };
