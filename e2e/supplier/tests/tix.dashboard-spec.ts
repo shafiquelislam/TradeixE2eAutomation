@@ -223,6 +223,16 @@ describe('Producer Dashboard', () => {
       done();
     });
 
+    it('....should click on search icon to open "Advnced Filter" panel', done => {
+
+      done();
+    });
+
+    it('....should filter the list by a valid "Buyer Name" value', done => {
+
+      done();
+    });
+
     it('should click on "Cancel" button and back to Producer Dashboard', done => {
       expect(dashboardPage.clickOnCancelButtonFromBuyersListView()).toBe(true);
       done();

@@ -1,4 +1,4 @@
-import { browser, by, element, $, $$, ExpectedConditions, protractor } from 'protractor';
+import { browser, by, element, $, $$, protractor, ExpectedConditions, ElementFinder } from 'protractor';
 
 export class ElementUtil {
 
@@ -7,7 +7,7 @@ export class ElementUtil {
             var EC = protractor.ExpectedConditions;
             return browser.wait(EC.presenceOf(targetElm), 15000).then(() => {
                 return targetElm.isPresent().then((result) => {
-                     return result;
+                    return result;
                 }).catch(ex => {
                     console.log("Element is not present");
                     return false;
@@ -19,18 +19,25 @@ export class ElementUtil {
         });
     }
 
-    static checkIfElementLoaded(elementLocator: string, timeout = 15000) {
+    static checkIfElementLoadedByFinder(element: ElementFinder, timeout = 15000) {
         var until = protractor.ExpectedConditions;
-        return browser.wait(until.presenceOf($(elementLocator)), timeout, 'Element taking too long to appear in the DOM').then(() => {
+        return browser.wait(until.presenceOf(element), timeout).then(() => {
             return true;
         }, () => {
+            console.log("Element is either not found or taking too long to appear in the DOM");
             return false;
         });
     }
 
-    static clickAndWaitForElement(clickOn: string, waitFor: string, timeout = 15000) {
-        return browser.actions().mouseMove($(clickOn)).perform().then(() => {
-            return this.checkIfElementLoaded(waitFor, timeout);
+    static clickAndWaitForElement(clickOnCss: string, waitForCss: string, timeout = 15000) {
+        return browser.actions().mouseMove($(clickOnCss)).perform().then(() => {
+            return this.checkIfElementLoadedByFinder($(waitForCss), timeout);
+        });
+    }
+
+    static clickAndWaitForElementByFinder(clickOnElement: ElementFinder, waitForElement: ElementFinder, timeout = 15000) {
+        return browser.actions().mouseMove(clickOnElement).perform().then(() => {
+            return this.checkIfElementLoadedByFinder(waitForElement, timeout);
         });
     }
 
