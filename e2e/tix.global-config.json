@@ -12,8 +12,8 @@
         "supplier": [
             "./e2e/supplier/tests/*.dashboard-spec.ts"
         ],
-        "login": "./e2e/user-login-logout/tests/*.login-spec.ts",
-        "logout": "./e2e/user-login-logout/tests/*.logout-spec.ts"
+        "login": "./e2e/user-login/tests/*.login-spec.ts",
+        "logout": "./e2e/user-login/tests/*.logout-spec.ts"
     },
     "browserName": "chrome",
     "defaultSpecDelayTime": 1500,
