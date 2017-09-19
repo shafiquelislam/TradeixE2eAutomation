@@ -22,12 +22,12 @@ describe('C129-C130 Admin panel Bid/Offer ledger validation', () => {
         });
 
         it('should display "Bid/Offer Ledger" as header text', (done) => {
-            expect(bidOfferLedgerPage.getBidOfferLedgerHeaderText()).toEqual('Bid/Offer Ledger');
+            expect(bidOfferLedgerPage.getBidOfferLedgerPageHeaderText()).toEqual('Bid/Offer Ledger');
             done();
         });
 
-        it('should display "Bid/Offer Ledger" grid column names', (done) => {
-            expect(bidOfferLedgerPage.checkBidOfferDataGridColumnItemList()).toBe(true);
+        it('should display "Bid/Offer Ledger" table column names', (done) => {
+            expect(bidOfferLedgerPage.checkBidOfferPageTableColumnNames()).toBe(true);
             done();
         });
 

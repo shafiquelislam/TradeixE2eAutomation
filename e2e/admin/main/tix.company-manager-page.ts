@@ -16,35 +16,43 @@ export class CompanyManagerPage {
         this.dashboardPage = new DashboardPage();
     }
 
-    checkForCompanyManagerPageLoad() {
+    private companyCountBeforeReset;
 
-        var findElm = element.all(by.css('app-company-list data-grid .scroll-container thead tr th div:nth-child(1)'));
-        var targetElment = element(by.css('md-sidenav-container navigation-menu a[href="/company-manager"]'));
-        var findTxt = 'Duns Number';
+    clickCompanyManagerIconAndcheckForPageLoad() {
+        var loadElement = $('app-company-list data-grid .scroll-container table');
+        var companyManagerLedgerIcon = $('md-sidenav-container navigation-menu navigation-menu-item a[href="/company-manager"]');
+        var tableColumnnames = $$('app-company-list data-grid .scroll-container table thead tr th div:nth-child(1)');
+        var findColumnName = 'Duns Number';
 
-        return this.dashboardPage.clickMenuIconAndCheckForPageLoad().then(() => {
-            return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-                return StringUtil.checkIfElementExistsInList(findElm, findTxt);
+        return this.dashboardPage.clickMenuIcon().then(() => {
+            return ElementUtil.clickAndWaitForPageLoad(companyManagerLedgerIcon, loadElement).then(() => {
+                return browser.sleep(2000).then(() => {
+                    this.companyCountBeforeReset = $$('app-company-list data-grid .scroll-container table tbody tr').then((bidOffer) => {
+                        return bidOffer.length;
+                    });
+
+                    return StringUtil.checkIfElementExistsInList(tableColumnnames, findColumnName);
+                });
             });
         });
     }
 
-    getCompanyManagerHeaderText() {
-        return element(by.css('app-company-list h1')).getText().then((text) => {
+    getCompanyManagerPageHeaderText() {
+        return $('app-company-list h1').getText().then((text) => {
             return text;
         });
     }
 
-    getDataGridColumnItemList() {
-        return element.all(by.css('app-company-list .padding-container data-grid .scroll-container table th div:nth-child(1)')).map((elm) => {
-            return elm.getText();
+    getTableColumnNames() {
+        return $$('app-company-list .padding-container data-grid .scroll-container table th div:nth-child(1)').map((colNames) => {
+            return colNames.getText();
         }).then((texts) => {
             return texts;
         });
     }
 
-    checkCompanyManagerDataGridColumnItemList() {
-        let company_manager_column_list = [
+    checkCompanyManagerPageTableColumnNames() {
+        let tableColumnNames = [
             'UniqueId',
             'Name',
             'Duns Number',
@@ -54,38 +62,45 @@ export class CompanyManagerPage {
             ''
         ];
 
-        return this.getDataGridColumnItemList().then((elm) => {
-            let company_manager_col_item_list = [];
-            company_manager_col_item_list = elm;
-            return StringUtil.checkIfTwoArraysContainSimilarElements(company_manager_column_list, company_manager_col_item_list);
+        return this.getTableColumnNames().then((colNames) => {
+            let tableColNameList = [];
+            tableColNameList = colNames;
+            return StringUtil.checkIfTwoArraysContainSimilarElements(tableColumnNames, tableColNameList);
         });
     }
 
-    checkForAddButton() {
-        return element(by.css('app-company-list .padding-container .mat-raised-button.mat-primary')).isPresent().then((elm) => {
-            return elm;
+    checkIfAddButtonExists() {
+        return $('app-company-list .padding-container .mat-raised-button.mat-primary').isPresent().then((result) => {
+            return result;
         });
     }
 
     /*****************  Add functionality validation  ****************/
 
     clickAddButtonToCreateCompany() {
-        var findElm = element.all(by.css('app-company-detail form .mat-tab-body-wrapper div[ng-reflect-name="entityTypes"] md-checkbox .mat-checkbox-label'));
-        var targetElment = element(by.css('app-company-list .padding-container .mat-raised-button.mat-primary'));
-        var findTxt = 'Buyer';
+        var loadElement = $('app-company-detail form');
+        var addButton = $('app-company-list .padding-container .mat-raised-button.mat-primary');
 
-        return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return StringUtil.checkIfElementExistsInList(findElm, findTxt);
+        return ElementUtil.clickAndWaitForPageLoad(addButton, loadElement).then(() => {
+            return browser.sleep(2000).then(() => {
+                return $('app-company-detail h1').getText().then((headerText) => {
+                    if(headerText == 'Create Company'){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                });
+            });
         });
     }
 
-    clickSaveCompanyButton(company_value) {
-        var findTxt = company_value['name'];
+    clickSaveCompanyButton(companyValue) {
+        var companyName = companyValue['name'];
 
-        return element(by.css('app-company-detail form .mat-tab-body-wrapper button')).click().then(() => {
+        return $('app-company-detail form .mat-tab-body-wrapper button').click().then(() => {
             return browser.sleep(4000).then(() => {
-                return element(by.css('app-company-detail > div:nth-child(1) h1')).getText().then((txt) => {
-                    if (txt == findTxt) {
+                return $('app-company-detail > div:nth-child(1) h1').getText().then((text) => {
+                    if (text == companyName) {
                         return true;
                     } else {
                         return false;
@@ -96,88 +111,89 @@ export class CompanyManagerPage {
     }
 
     clickBackButtonOfCreateCompanyPage() {
-        var findElm = element.all(by.css('app-company-list h1'));
-        var targetElment = element(by.css('app-company-detail .padding-container > button'));
-        var findTxt = 'Companies';
+        var loadElement = $('app-company-list data-grid .scroll-container table');
+        var backButton = $('app-company-detail .padding-container > button');
 
-        return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return browser.sleep(1000).then(() => {
-                return StringUtil.checkIfElementExistsInList(findElm, findTxt);
+        return ElementUtil.clickAndWaitForPageLoad(backButton, loadElement).then(() => {
+            return browser.sleep(1500).then(() => {
+                return true;
             });
         });
     }
 
-    setCompanyFieldValue(comp_data) {
-        element.all(by.css('app-company-detail form input[id^="md-input-"]:not([type="date"])')).each((elm) => {
-            elm.getAttribute('ng-reflect-name').then((fieldName) => {
-                if (comp_data[fieldName] != "") {
-                    var locator = 'app-company-detail form .mat-input-container input[ng-reflect-name="' + fieldName + '"]';
-                    var elmnt = element(by.css(locator));
-                    elmnt.sendKeys(comp_data[fieldName]);
-                    browser.sleep(50);
+    setCompanyFieldValue(compData) {
+        $$('app-company-detail form input[id^="md-input-"]:not([type="date"])').each((inputFields) => {
+            inputFields.getAttribute('ng-reflect-name').then((fieldName) => {
+                if (compData[fieldName] != "") {
+                    let locator = 'app-company-detail form .mat-input-container input[ng-reflect-name="' + fieldName + '"]';
+                    let field = $(locator);
+                    field.sendKeys(compData[fieldName]).then(() => {
+                        browser.sleep(50);
+                    });
                 }
             });
         });
     }
 
-    clickCompanyCheckBoxes(comp_checkbox_data) {
-        let checkboxDoms = element.all(by.css('[for^="input-md-checkbox-"]'));
-        
-        checkboxDoms.each(element => {
-            element.getText().then(text => {
-                let value = comp_checkbox_data[text];
+    clickCompanyCheckBoxes(compCheckboxData) {
+        let checkboxDoms = $$('[for^="input-md-checkbox-"]');
+        checkboxDoms.each((checkBox) => {
+            checkBox.getText().then(text => {
+                let value = compCheckboxData[text];
                 if (value) {
-                    element.click();
-                    browser.sleep(50);
+                    checkBox.click().then(() => {
+                        browser.sleep(100);
+                    });
                 }
             });
         });
     }
 
     createCompany() {
-        let all_company_field_data = data.company.create.fieldData;
-        let all_company_checkbox_data = data.company.create.checkBoxData;
+        let allCompanyFieldData = data.company.create.fieldData;
+        let allCompanyCheckboxData = data.company.create.checkBoxData;
 
-        return this.clickAddButtonToCreateCompany().then((elm) => {
-            if (elm == true) {
-                this.setCompanyFieldValue(all_company_field_data[0]);
-                this.clickCompanyCheckBoxes(all_company_checkbox_data[0]);
+        return this.clickAddButtonToCreateCompany().then((result) => {
+            if (result == true) {
+                this.setCompanyFieldValue(allCompanyFieldData[0]);
+                this.clickCompanyCheckBoxes(allCompanyCheckboxData[0]);
 
-                return this.clickSaveCompanyButton(all_company_field_data[0]).then(() => {
+                return this.clickSaveCompanyButton(allCompanyFieldData[0]).then(() => {
                     return this.clickBackButtonOfCreateCompanyPage();
                 });
             }
         });
     }
 
-    checkCreatedCompanyAddedInCompanyList() {
-        let search_item = data.company.create.fieldData[0];
-        let Elment = element.all(by.css('app-company-list data-grid table tbody tr td:nth-child(1)'));
+    checkIfCreatedCompanyAddedInCompanyList() {
+        let createdCompanyUniqueId = data.company.create.fieldData[0];
+        let allUniqueId = $$('app-company-list data-grid table tbody tr td:nth-child(1)');
 
-        return StringUtil.checkIfElementExistsInList(Elment, search_item["uniqueId"]);
+        return StringUtil.checkIfElementExistsInList(allUniqueId, createdCompanyUniqueId["uniqueId"]);
     }
 
     /*****************  Edit Functionality validation  ****************/
 
     clickFirstCompanyEditButton() {
-        var findElm = element.all(by.css('app-company-detail form .mat-tab-body-wrapper div[ng-reflect-name="entityTypes"] md-checkbox .mat-checkbox-label'));
-        var targetElment = element.all(by.css('app-company-list .padding-container data-grid .scroll-container table tbody .align-right button')).get(0);
-        var findTxt = 'Buyer';
+        var loadElement = $('app-company-detail form');
+        var editIcon = $$('app-company-list .padding-container data-grid .scroll-container table tbody .align-right button').get(0);
 
-        return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return StringUtil.checkIfElementExistsInList(findElm, findTxt);
+        return ElementUtil.clickAndWaitForPageLoad(editIcon, loadElement).then((res) => {
+            return browser.sleep(5000).then(() => {
+                return true;
+            });
         });
     }
 
-    updateCompanyFieldValue(update_field_data) {
-        element.all(by.css('app-company-detail form input[id^="md-input-"]:not([type="date"])')).each((elm) => {
-            elm.getAttribute('ng-reflect-name').then((fieldName) => {
-                if (update_field_data[fieldName] != "") {
+    updateCompanyFieldValue(updateFieldData) {
+        $$('app-company-detail form input[id^="md-input-"]:not([type="date"])').each((inputFields) => {
+            inputFields.getAttribute('ng-reflect-name').then((fieldName) => {
+                if (updateFieldData[fieldName] != "") {
                     var locator = 'app-company-detail form .mat-input-container input[ng-reflect-name="' + fieldName + '"]';
-                    var elmnt = element(by.css(locator));
-                    elmnt.clear().then(() => {
-                        browser.sleep(50).then(() => {
-                            elmnt.sendKeys(update_field_data[fieldName]);
+                    var field = $(locator);
+                    field.clear().then(() => {
+                        browser.sleep(100).then(() => {
+                            field.sendKeys(updateFieldData[fieldName]);
                         });
                     });
                 }
@@ -185,60 +201,60 @@ export class CompanyManagerPage {
         });
     }
 
-    updateCompanyCheckbox(update_checkbox_data) {
-        let checkboxDoms = element.all(by.css('.mat-checkbox.mat-checkbox-checked [for^="input-md-checkbox-"]'));
+    updateCompanyCheckbox(updateCheckboxData) {
+        let checkboxDoms = $$('.mat-checkbox.mat-checkbox-checked [for^="input-md-checkbox-"]');
 
-        checkboxDoms.each((element) => {
-            element.click();
-            browser.sleep(50);
+        checkboxDoms.each((checkBox) => {
+            checkBox.click().then(() => {
+                browser.sleep(100);
+            });
         }).then(() => {
-            this.clickCompanyCheckBoxes(update_checkbox_data);
+            this.clickCompanyCheckBoxes(updateCheckboxData);
         });
-    }
-
-    checkCompanyUpdatedInCompanyList() {
-        let search_item = data.company.update.fieldData.name;
-        let Elment = element.all(by.css('app-company-list data-grid table tbody tr td:nth-child(2)'));
-
-        return StringUtil.checkIfElementExistsInList(Elment, search_item);
     }
 
     updateFirstCompany() {
-        let company_field_update_data = data.company.update.fieldData;
-        let company_checkbox_update_data = data.company.update.checkBoxData;
+        let companyFieldUpdateData = data.company.update.fieldData;
+        let companyCheckboxUpdateData = data.company.update.checkBoxData;
 
         return this.clickFirstCompanyEditButton().then(() => {
-            this.updateCompanyFieldValue(company_field_update_data);
-            this.updateCompanyCheckbox(company_checkbox_update_data);
+            this.updateCompanyFieldValue(companyFieldUpdateData);
+            this.updateCompanyCheckbox(companyCheckboxUpdateData);
 
-            return this.clickSaveCompanyButton(company_field_update_data).then(() => {
+            return this.clickSaveCompanyButton(companyFieldUpdateData).then(() => {
                 return this.clickBackButtonOfCreateCompanyPage();
             });
         });
+    }
+
+    checkIfCompanyUpdatedInCompanyList() {
+        let updatedCompanyName = data.company.update.fieldData.name;
+        let allNames = $$('app-company-list data-grid table tbody tr td:nth-child(2)');
+
+        return StringUtil.checkIfElementExistsInList(allNames, updatedCompanyName);
     }
 
 
     /*****************  Advance Filter Functionality validation  ****************/
 
     clickSearchIcon() {
-        var findElm = element.all(by.css('tix-data-grid-filter #mainForm .title-row h3'));
-        var targetElment = element(by.css('app-company-list data-grid .search-icon.padding-top md-icon'));
-        var findTxt = 'Advanced Filter';
-
-        return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return StringUtil.checkIfElementExistsInList(findElm, findTxt);
+        return $('app-company-list data-grid .search-icon.padding-top md-icon').click().then(() => {
+            return browser.sleep(2000).then(() => {
+                return $('.mat-sidenav.mat-sidenav-end.mat-sidenav-over.mat-sidenav-opened').isPresent().then((result) => {
+                    return result;
+                });
+            });
         });
     }
 
     typeIDAndClickSearchNow() {
-        return element.all(by.css('app-company-list data-grid .scroll-container tbody tr td:nth-child(1)')).then((elm) => {
+        return $$('app-company-list data-grid .scroll-container tbody tr td:nth-child(1)').then((elm) => {
             let txt = elm[0].getText();
-            return element(by.css("#mainForm input[placeholder='UniqueId']")).sendKeys(txt).then(() => {
-
-                var findElm = element.all(by.css('app-company-list data-grid .scroll-container tbody tr'));
-                var targetElment = element(by.css('#mainForm .mat-raised-button.mat-primary'));
-                return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-                    return browser.sleep(500);
+            return $$('#mainForm input[id^="md-input"]').get(0).sendKeys(txt).then(() => {
+                var loadElement = $('app-company-list data-grid .scroll-container');
+                var searchNowButton = $('#mainForm .mat-raised-button.mat-primary');
+                return ElementUtil.clickAndWaitForPageLoad(searchNowButton, loadElement).then(() => {
+                    return browser.sleep(1000);
                 });
             });
         });
@@ -247,15 +263,13 @@ export class CompanyManagerPage {
     checkIfAdvanceFilterWorks() {
         return this.clickSearchIcon().then(() => {
             return this.typeIDAndClickSearchNow().then(() => {
-                return element.all(by.css('app-company-list data-grid .scroll-container tbody tr')).then((elm) => {
-                    if (elm.length > 0) {
+                return $('app-company-list data-grid .scroll-container table').isPresent().then((result) => {
+                    if(result == true){
                         console.log('Search element is found');
-                        return true;
-                    } else {
-                        element(by.css('app-company-list data-grid .no-rows-message h3')).isPresent().then((resp) => {
-                            console.log('Search element is not found');
-                            return resp;
-                        });
+                        return result;
+                    }else{
+                        console.log('Search element is not found');
+                        return result;
                     }
                 });
             });
@@ -264,11 +278,19 @@ export class CompanyManagerPage {
 
     resetPage() {
         return this.clickSearchIcon().then(() => {
-            var targetElment = element(by.css('#mainForm button:nth-child(2)'));
-            var findElm = element.all(by.css('app-company-list data-grid .scroll-container tbody tr'));
-            return ElementUtil.waitForPageLoad(targetElment, findElm).then((resp) => {
-                return browser.sleep(3000).then(() => {
-                    return resp;
+            var resetButton = $('#mainForm button:nth-child(2)');
+            var loadElement = $('app-company-list data-grid .scroll-container table');
+            return ElementUtil.clickAndWaitForPageLoad(resetButton, loadElement).then(() => {
+                return browser.sleep(4000).then(() => {
+                    return $$('app-company-list data-grid .scroll-container table tbody tr').then((companies) => {
+                        return this.companyCountBeforeReset.then((companyListLen) => {
+                            if(companyListLen == companies.length){
+                                return true;
+                            }else{
+                                return false;
+                            }
+                        });
+                    });
                 });
             });
         });

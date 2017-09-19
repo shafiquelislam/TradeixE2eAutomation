@@ -15,27 +15,24 @@ describe('C133-C136 Admin panel Company Manager validation', () => {
     let companyManagerPage = new CompanyManagerPage();
 
     describe('C133 - UI validation', () => {
-        beforeAll(() => {
-            browser.sleep(defaultSpecDelayTime);
-        });
 
         it('should load Company Manager ledger page on clicking Company Manager Icon', (done) => {
-            expect(companyManagerPage.checkForCompanyManagerPageLoad()).toBe(true);
+            expect(companyManagerPage.clickCompanyManagerIconAndcheckForPageLoad()).toBe(true);
             done();
         });
 
         it('should display "Companies" as header text', (done) => {
-            expect(companyManagerPage.getCompanyManagerHeaderText()).toEqual('Companies');
+            expect(companyManagerPage.getCompanyManagerPageHeaderText()).toEqual('Companies');
             done();
         });
 
-        it('should display "Company manager" grid column names', (done) => {
-            expect(companyManagerPage.checkCompanyManagerDataGridColumnItemList()).toBe(true);
+        it('should display "Company manager" table column names', (done) => {
+            expect(companyManagerPage.checkCompanyManagerPageTableColumnNames()).toBe(true);
             done();
         });
 
         it('should display "Add" button on top-right corner', (done) => {
-            expect(companyManagerPage.checkForAddButton()).toBe(true);
+            expect(companyManagerPage.checkIfAddButtonExists()).toBe(true);
             done();
         });
 
@@ -50,7 +47,7 @@ describe('C133-C136 Admin panel Company Manager validation', () => {
         });
 
         it('should add the newly created company in company list', (done) => {
-            expect(companyManagerPage.checkCreatedCompanyAddedInCompanyList()).toBe(true);
+            expect(companyManagerPage.checkIfCreatedCompanyAddedInCompanyList()).toBe(true);
             done();
         });
 
@@ -64,7 +61,7 @@ describe('C133-C136 Admin panel Company Manager validation', () => {
         });
 
         it('should add the updated company in company list', (done) => {
-            expect(companyManagerPage.checkCompanyUpdatedInCompanyList()).toBe(true);
+            expect(companyManagerPage.checkIfCompanyUpdatedInCompanyList()).toBe(true);
             done();
         });
 

@@ -12,12 +12,12 @@
         "create": {
             "fieldData": [
                 {
-                    "uniqueId": "Woods Bagot-UID",
-                    "name": "Woods Bagot",
-                    "dunsNumber": "5222593177",
-                    "reference": "Woods Bagot-Ref",
-                    "merchantId": "7208843",
-                    "regNumber": "REG-609",
+                    "uniqueId": "Zions-UID",
+                    "name": "Zions",
+                    "dunsNumber": "5287603177",
+                    "reference": "Zions-Ref",
+                    "merchantId": "7956943",
+                    "regNumber": "REG-845",
                     "taxId": "",
                     "websiteUrl": "",
                     "sicCode": "",
@@ -33,8 +33,8 @@
                     "Sanctions Check": true,
                     "Last Sanction Check Approved": false,
                     "Referred": false,
-                    "Buyer": true,
-                    "Supplier": false,
+                    "Buyer": false,
+                    "Supplier": true,
                     "Funder": false,
                     "Settlement Network": false,
                     "Insurance Underwriter": false,
@@ -49,7 +49,7 @@
             "fieldData": {
                 "uniqueId": "",
                 "name": "ZransPerth",
-                "dunsNumber": "0217790977",
+                "dunsNumber": "",
                 "reference": "",
                 "merchantId": "",
                 "regNumber": "",
@@ -67,7 +67,7 @@
                 "Last Sanction Check Approved": true,
                 "Referred": true,
                 "Buyer": true,
-                "Supplier": false,
+                "Supplier": true,
                 "Funder": false,
                 "Settlement Network": false,
                 "Insurance Underwriter": false,
@@ -76,6 +76,18 @@
                 "Servicer": false,
                 "Test999": true
             }
+        }
+    },
+    "entityType": {
+        "createData": [
+            {
+                "name": "ABC",
+                "description": "ABC"
+            }
+        ],
+        "updateData": {
+            "name": "Funder",
+            "description": "Funder"
         }
     }
 }

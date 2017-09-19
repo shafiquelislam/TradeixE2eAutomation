@@ -21,12 +21,12 @@ describe('C123-C128 - Admin panel Invoice Ledger validation', () => {
         });
 
         it('should display all invoice ledger tabs', (done) => {
-            expect(invoiceLedgerPage.checkInvoiceLedgerTabList()).toBe(true);
+            expect(invoiceLedgerPage.checkInvoiceLedgerPageTabNames()).toBe(true);
             done();
         });
 
         it('should varify Invoice as only default tab', (done) => {
-            invoiceLedgerPage.getDefaultTabText().then((elm) => {
+            invoiceLedgerPage.getDefaultTabName().then((elm) => {
                 expect(elm).toEqual('Invoice');
                 expect(elm).not.toEqual('Audit');
                 expect(elm).not.toEqual('Version');
@@ -37,12 +37,12 @@ describe('C123-C128 - Admin panel Invoice Ledger validation', () => {
         });
 
         it('should display "Invoice Ledger" as header text', (done) => {
-            expect(invoiceLedgerPage.getInvoiceLedgerHeaderText()).toEqual('Invoice Ledger');
+            expect(invoiceLedgerPage.getInvoiceLedgerPageHeaderText()).toEqual('Invoice Ledger');
             done();
         });
 
-        it('should display Invoice data grid column names', (done) => {
-            expect(invoiceLedgerPage.checkInvoiceDataGridColumnItemList()).toEqual(true);
+        it('should display Invoice data table column names', (done) => {
+            expect(invoiceLedgerPage.checkInvoicePageTableColumnNames()).toEqual(true);
             done();
         });
 
@@ -56,8 +56,8 @@ describe('C123-C128 - Admin panel Invoice Ledger validation', () => {
             done();
         });
 
-        it('should display Audit data grid column names', (done) => {
-            expect(invoiceLedgerPage.checkAuditDataGridColumnItemList()).toBe(true);
+        it('should display Audit data table column names', (done) => {
+            expect(invoiceLedgerPage.checkAuditPageTableColumnNames()).toBe(true);
             done();
         });
 
@@ -71,8 +71,8 @@ describe('C123-C128 - Admin panel Invoice Ledger validation', () => {
                 done();
         });
 
-        it('should display Version data grid column names', (done) => {
-            expect(invoiceLedgerPage.checkVersionDataGridColumnItemList()).toBe(true);
+        it('should display Version data table column names', (done) => {
+            expect(invoiceLedgerPage.checkVersionPageTableColumnNames()).toBe(true);
             done();
         });
 
@@ -86,8 +86,8 @@ describe('C123-C128 - Admin panel Invoice Ledger validation', () => {
                 done();
         });
 
-        it('should display Trade data grid column names', (done) => {
-            expect(invoiceLedgerPage.checkTradeDataGridColumnItemList()).toBe(true);
+        it('should display Trade data table column names', (done) => {
+            expect(invoiceLedgerPage.checkTradePageTableColumnNames()).toBe(true);
             done();
         });
 
@@ -101,8 +101,8 @@ describe('C123-C128 - Admin panel Invoice Ledger validation', () => {
             done();
         });
 
-        it('should display Insurance data grid column names', (done) => {
-            expect(invoiceLedgerPage.checkInsuranceDataGridColumnItemList()).toBe(true);
+        it('should display Insurance data table column names', (done) => {
+            expect(invoiceLedgerPage.checkInsurancePageTableColumnNames()).toBe(true);
             done();
         });
 

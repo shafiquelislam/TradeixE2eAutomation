@@ -4,14 +4,16 @@ import { ElementUtil } from '../../utils/tix.element-util';
 
 export class InvoiceLedgerPage {
 
+    
+
     /***************    C123 - C128    ***************/
 
     /***************     Common     **************/
 
 
-    getDataGridColumnItemList() {
-        return element.all(by.css('app-invoice-ledger data-grid .scroll-container table thead tr th div:nth-child(1)')).map((elm) => {
-            return elm.getText();
+    getTableColumnNames() {
+        return $$('app-invoice-ledger data-grid .scroll-container table thead tr th div:nth-child(1)').map((columnNames) => {
+            return columnNames.getText();
         }).then((texts) => {
             return texts;
         });
@@ -20,39 +22,40 @@ export class InvoiceLedgerPage {
     /***************** invoice tab *****************/
     
     clickInvoiceLedgerIconAndCheckForPageLoad() {
-        var findElm = element.all(by.css('app-invoice-ledger data-grid .ledger thead tr th div:nth-child(1)'));
-        var targetElment = element(by.css('md-sidenav-container navigation-menu a[href="/ledgers/invoices-ledger"]'));
-        var findTxt = 'Buyer Name';
+        var loadElement = $('app-invoice-ledger data-grid .ledger');
+        var invoiceLedgerIcon = $('md-sidenav-container navigation-menu a[href="/ledgers/invoices-ledger"]');
+        var tableColumnnames = $$('app-invoice-ledger data-grid .ledger thead tr th div:nth-child(1)');
+        var findColumnName = 'Buyer Name';
 
-        return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return StringUtil.checkIfElementExistsInList(findElm, findTxt);
+        return ElementUtil.clickAndWaitForPageLoad(invoiceLedgerIcon, loadElement).then(() => {
+            return StringUtil.checkIfElementExistsInList(tableColumnnames, findColumnName);
         });
     }
 
-    getInvoiceLedgerTabList() {
-        return element.all(by.css('app-invoice-ledger md-tab-group md-tab-header .mat-tab-labels .mat-tab-label.mat-ripple')).map((elm) => {
-            return elm.getText();
+    getInvoiceLedgerPageTabNames() {
+        return $$('app-invoice-ledger md-tab-group md-tab-header .mat-tab-labels .mat-tab-label.mat-ripple').map((tabNames) => {
+            return tabNames.getText();
         }).then((texts) => {
             return texts;
         });
     }
 
-    getInvoiceLedgerHeaderText() {
-        return element(by.css('app-invoice-ledger h1')).getText()
+    getInvoiceLedgerPageHeaderText() {
+        return $('app-invoice-ledger h1').getText()
         .then((text) => {
             return text;
         });
     }
 
-    getDefaultTabText() {
-        return element(by.css('app-invoice-ledger md-tab-group md-tab-header .mat-tab-labels .mat-tab-label.mat-ripple.mat-tab-label-active'))
-        .getText().then((elm) => {
-            return elm;
-        })
+    getDefaultTabName() {
+        return $('app-invoice-ledger md-tab-group md-tab-header .mat-tab-labels .mat-tab-label.mat-ripple.mat-tab-label-active')
+        .getText().then((text) => {
+            return text;
+        });
     }
 
-    checkInvoiceLedgerTabList() {
-        let tab_list = [
+    checkInvoiceLedgerPageTabNames() {
+        let tab_names = [
             'Invoice', 
             'Audit', 
             'Version', 
@@ -60,15 +63,15 @@ export class InvoiceLedgerPage {
             'Insurance'
             ];
 
-        return this.getInvoiceLedgerTabList().then((elm) => {
+        return this.getInvoiceLedgerPageTabNames().then((tabNames) => {
             let tab_name_list = [];
-            tab_name_list = elm;
-            return StringUtil.checkIfTwoArraysContainSimilarElements(tab_list, tab_name_list);
+            tab_name_list = tabNames;
+            return StringUtil.checkIfTwoArraysContainSimilarElements(tab_names, tab_name_list);
         });
     }
 
-    checkInvoiceDataGridColumnItemList() {
-        let invoice_column_list = [
+    checkInvoicePageTableColumnNames() {
+        let table_column_names = [
             'Invoice Number',
             'Invoice Type',
             'Invoice Date',
@@ -87,10 +90,10 @@ export class InvoiceLedgerPage {
             'Invoice Value'
             ];
 
-        return this.getDataGridColumnItemList().then((elm) => {
-            let inv_col_item_list = [];
-            inv_col_item_list = elm;
-            return StringUtil.checkIfTwoArraysContainSimilarElements(invoice_column_list, inv_col_item_list);
+        return this.getTableColumnNames().then((colNames) => {
+            let table_col_name_list = [];
+            table_col_name_list = colNames;
+            return StringUtil.checkIfTwoArraysContainSimilarElements(table_column_names, table_col_name_list);
         });
     }
 
@@ -98,17 +101,18 @@ export class InvoiceLedgerPage {
     /**************** Audit tab ******************/
 
     clickAuditTabAndcheckForPageLoad() {
-        var findElm = element.all(by.css('app-invoice-ledger data-grid .ledger thead tr th div:nth-child(1)'));
-        var targetElment = element(by.css('.mat-tab-labels #md-tab-label-0-1'));
-        var findTxt = 'Blockchain';
+        var loadElement = $('app-invoice-ledger data-grid .ledger');
+        var auditTabButton = $$('.mat-tab-labels div[id^="md-tab-label-"]').get(1);
+        var tableColumnnames = $$('app-invoice-ledger data-grid .ledger thead tr th div:nth-child(1)');
+        var findColumnName = 'Blockchain';
 
-        return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return StringUtil.checkIfElementExistsInList(findElm, findTxt);
+        return ElementUtil.clickAndWaitForPageLoad(auditTabButton, loadElement).then(() => {
+            return StringUtil.checkIfElementExistsInList(tableColumnnames, findColumnName);
         });
     }
 
-    checkAuditDataGridColumnItemList() {
-        let audit_column_list = [
+    checkAuditPageTableColumnNames() {
+        let table_column_names = [
             'Invoice Number',
             'Document Created',
             'Document Submitted',
@@ -122,54 +126,56 @@ export class InvoiceLedgerPage {
             'Hash'
         ]
 
-        return this.getDataGridColumnItemList().then((elm) => {
-            let audit_col_item_list = [];
-            audit_col_item_list = elm;
-            return StringUtil.checkIfTwoArraysContainSimilarElements(audit_column_list, audit_col_item_list);
+        return this.getTableColumnNames().then((colNames) => {
+            let table_col_name_list = [];
+            table_col_name_list = colNames;
+            return StringUtil.checkIfTwoArraysContainSimilarElements(table_column_names, table_col_name_list);
         });
     }
 
     /***************   Version tab   *****************/
 
     clickVersionTabAndcheckForPageLoad() {
-        var findElm = element.all(by.css('app-invoice-ledger data-grid .ledger thead tr th div:nth-child(1)'));
-        var targetElment = element(by.css('.mat-tab-labels #md-tab-label-0-2'));
-        var findTxt = 'Invoice Version';
+        var loadElement = $('app-invoice-ledger data-grid .ledger');
+        var versionTabButton = $$('.mat-tab-labels div[id^="md-tab-label-"]').get(2);
+        var tableColumnnames = $$('app-invoice-ledger data-grid .ledger thead tr th div:nth-child(1)');
+        var findColumnName = 'Invoice Version';
 
-        return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return StringUtil.checkIfElementExistsInList(findElm, findTxt);
+        return ElementUtil.clickAndWaitForPageLoad(versionTabButton, loadElement).then(() => {
+            return StringUtil.checkIfElementExistsInList(tableColumnnames, findColumnName);
         });
     }
 
-    checkVersionDataGridColumnItemList() {
-        let version_column_list = [
+    checkVersionPageTableColumnNames() {
+        let table_column_names = [
             'Invoice Number',
             'Network Invoice UID',
             'Invoice Version',
             'Invoice Version Date'
         ]
 
-        return this.getDataGridColumnItemList().then((elm) => {
-            let version_col_item_list = [];
-            version_col_item_list = elm;
-            return StringUtil.checkIfTwoArraysContainSimilarElements(version_column_list, version_col_item_list);
+        return this.getTableColumnNames().then((colNames) => {
+            let table_column_name_list = [];
+            table_column_name_list = colNames;
+            return StringUtil.checkIfTwoArraysContainSimilarElements(table_column_names, table_column_name_list);
         });
     }
 
     /****************  Trade Tab  *****************/
 
     clickTradeTabAndcheckForPageLoad() {
-        var findElm = element.all(by.css('app-invoice-ledger data-grid .ledger thead tr th div:nth-child(1)'));
-        var targetElment = element(by.css('.mat-tab-labels #md-tab-label-0-3'));
-        var findTxt = 'Trade Date';
+        var loadElement = $('app-invoice-ledger data-grid .ledger');
+        var tradeTabButton = $$('.mat-tab-labels div[id^="md-tab-label-"]').get(3);
+        var tableColumnnames = $$('app-invoice-ledger data-grid .ledger thead tr th div:nth-child(1)');
+        var findColumnName = 'Trade Date';
 
-        return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return StringUtil.checkIfElementExistsInList(findElm, findTxt);
+        return ElementUtil.clickAndWaitForPageLoad(tradeTabButton, loadElement).then(() => {
+            return StringUtil.checkIfElementExistsInList(tableColumnnames, findColumnName);
         });
     }
 
-    checkTradeDataGridColumnItemList() {
-        let trade_column_list = [
+    checkTradePageTableColumnNames() {
+        let table_column_names = [
             'Invoice Number',
             'Retention',
             'Mandatory Reconciliation Date',
@@ -185,27 +191,36 @@ export class InvoiceLedgerPage {
             'Eligible Value'
         ]
 
-        return this.getDataGridColumnItemList().then((elm) => {
-            let trade_col_item_list = [];
-            trade_col_item_list = elm;
-            return StringUtil.checkIfTwoArraysContainSimilarElements(trade_column_list, trade_col_item_list);
+        return this.getTableColumnNames().then((colNames) => {
+            let table_col_name_list = [];
+            table_col_name_list = colNames;
+            return StringUtil.checkIfTwoArraysContainSimilarElements(table_column_names, table_col_name_list);
         });
     }
 
     /*************** Insurance Tab *****************/
 
-    clickInsuranceTabAndcheckForPageLoad() {
-        var findElm = element.all(by.css('app-invoice-ledger data-grid .ledger thead tr th div:nth-child(1)'));
-        var targetElment = element(by.css('.mat-tab-labels #md-tab-label-0-4'));
-        var findTxt = 'Insurance Amount';
+    private insuranceCountBeforeReset;
 
-        return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return StringUtil.checkIfElementExistsInList(findElm, findTxt);
+    clickInsuranceTabAndcheckForPageLoad() {
+        var loadElement = $('app-invoice-ledger data-grid .ledger');
+        var insuranceTabButton = $$('.mat-tab-labels div[id^="md-tab-label-"]').get(4);
+        var tableColumnnames = $$('app-invoice-ledger data-grid .ledger thead tr th div:nth-child(1)');
+        var findColumnName = 'Insurance Amount';
+
+        return ElementUtil.clickAndWaitForPageLoad(insuranceTabButton, loadElement).then(() => {
+            return browser.sleep(2000).then(() => {
+                this.insuranceCountBeforeReset = $$('app-invoice-ledger data-grid .scroll-container tbody strong').then((insurances) => {
+                    return insurances.length;
+                });
+
+                return StringUtil.checkIfElementExistsInList(tableColumnnames, findColumnName);
+            });
         });
     }
 
-    checkInsuranceDataGridColumnItemList() {
-        let insurance_column_list = [
+    checkInsurancePageTableColumnNames() {
+        let table_column_names = [
             'Invoice Number',
             'Endorsement ID',
             'Endorsement Date',
@@ -217,33 +232,33 @@ export class InvoiceLedgerPage {
             'Policy Number'
         ]
 
-        return this.getDataGridColumnItemList().then((elm) => {
-            let insurance_col_item_list = [];
-            insurance_col_item_list = elm;
-            return StringUtil.checkIfTwoArraysContainSimilarElements(insurance_column_list, insurance_col_item_list);
+        return this.getTableColumnNames().then((colNames) => {
+            let table_col_name_list = [];
+            table_col_name_list = colNames;
+            return StringUtil.checkIfTwoArraysContainSimilarElements(table_column_names, table_col_name_list);
         });
     }
 
     /*****************  Advance Filter Functionality validation  ****************/
-
+    
     clickSearchIcon() {
-        var findElm = element.all(by.css('tix-data-grid-filter #mainForm .title-row h3'));
-        var targetElment = element(by.css('app-invoice-ledger data-grid .search-icon.padding-top md-icon'));
-        var findTxt = 'Advanced Filter';
-
-        return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return StringUtil.checkIfElementExistsInList(findElm, findTxt);
+        return $('app-invoice-ledger data-grid .search-icon.padding-top md-icon').click().then(() => {
+            return browser.sleep(2000).then(() => {
+                return $('.mat-sidenav.mat-sidenav-end.mat-sidenav-over.mat-sidenav-opened').isPresent().then((result) => {
+                    return result;
+                });
+            });
         });
     }
 
     typeInoviceNumberAndClickSearchNow() {
-        return element.all(by.css('app-invoice-ledger data-grid .scroll-container tbody strong')).then((elm) => {
-            let txt = elm[0].getText();
-            return element(by.css("#mainForm input[placeholder='Invoice Number']")).sendKeys(txt).then(() => {
-                var findElm = element.all(by.css('app-invoice-ledger data-grid .scroll-container tbody strong'));
-                var targetElment = element(by.css('#mainForm .mat-raised-button.mat-primary'));
-                return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-                    return browser.sleep(500);
+        return $$('app-invoice-ledger data-grid .scroll-container tbody strong').then((invoiceNumbers) => {
+            let invoiceNumber = invoiceNumbers[0].getText();
+            return $("#mainForm input[placeholder='Invoice Number']").sendKeys(invoiceNumber).then(() => {
+                var loadElement = $('app-invoice-ledger data-grid .scroll-container');
+                var searchNowButton = $('#mainForm .mat-raised-button.mat-primary');
+                return ElementUtil.clickAndWaitForPageLoad(searchNowButton, loadElement).then(() => {
+                    return browser.sleep(1000);
                 });
             });
         });
@@ -252,15 +267,13 @@ export class InvoiceLedgerPage {
     checkIfAdvanceFilterWorks() {
         return this.clickSearchIcon().then(() => {
             return this.typeInoviceNumberAndClickSearchNow().then(() => {
-                return element.all(by.css('app-invoice-ledger data-grid .scroll-container tbody tr')).then((elm) => {
-                    if(elm.length > 0){
+                return $('app-invoice-ledger data-grid .scroll-container table').isPresent().then((result) => {
+                    if(result == true){
                         console.log('Search element is found');
-                        return true;
+                        return result;
                     }else{
-                        return element(by.css('app-invoice-ledger data-grid .no-rows-message h3')).isPresent().then((resp) => {
-                            console.log('Search element is not found');
-                            return resp;
-                        });
+                        console.log('Search element is not found');
+                        return result;
                     }
                 });
             });
@@ -269,11 +282,19 @@ export class InvoiceLedgerPage {
 
     resetPage() {
         return this.clickSearchIcon().then(() => {
-            var targetElment = element(by.css('#mainForm button:nth-child(2)'));
-            var findElm = element.all(by.css('app-invoice-ledger data-grid .scroll-container tbody strong'));
-            return ElementUtil.waitForPageLoad(targetElment, findElm).then((resp) => {
-                return browser.sleep(2000).then(() => {
-                    return resp;
+            var resetButton = $('#mainForm button:nth-child(2)');
+            var loadElement = $('app-invoice-ledger data-grid .scroll-container .ledger');
+            return ElementUtil.clickAndWaitForPageLoad(resetButton, loadElement).then(() => {
+                return browser.sleep(4000).then(() => {
+                    return $$('app-invoice-ledger data-grid .scroll-container .ledger tbody tr').then((insurances) => {
+                        return this.insuranceCountBeforeReset.then((insuranceListLen) => {
+                            if(insuranceListLen == insurances.length){
+                                return true;
+                            }else{
+                                return false;
+                            }
+                        });
+                    });
                 });
             });
         });
