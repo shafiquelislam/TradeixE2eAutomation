@@ -1,4 +1,4 @@
-import { browser, by, element, ExpectedConditions, protractor } from 'protractor';
+import { browser, by, element, ExpectedConditions, protractor, $, $$ } from 'protractor';
 import { StringUtil } from '../../utils/tix.string-util';
 import { ElementUtil } from '../../utils/tix.element-util';
 
@@ -23,48 +23,42 @@ export class DashboardPage {
 
     /***************  COMMON  ****************/
 
+    clickMenuIcon() {
+        return  $('app-menu aside nav ul li:nth-child(1)').click().then(() => {
+            return browser.sleep(500);
+        });
+    }
+
     /***************    C122    ***************/
     
     hasTradeIxLogo() {
-        return element(by.css('app-menu-bar .logo')).isPresent().then((result) => {
+        return $('app-menu-bar .logo').isPresent().then((result) => {
             return result;
         });
     }
     
     hasMenuIcon() {
-        return element(by.css('app-menu aside nav ul li:nth-child(1)')).isPresent().then((result) => {
+        return $('app-menu aside nav ul li:nth-child(1)').isPresent().then((result) => {
             return result;
         });
     }
 
     hasProfileIcon() {
-        return element(by.css('app-menu aside nav ul li:nth-child(2)')).isPresent().then((result) => {
+        return $('app-menu aside nav ul li:nth-child(2)').isPresent().then((result) => {
             return result;
         });
     }
 
-    clickMenuIconAndCheckForPageLoad() {
-        var findElm = element.all(by.css('.mat-sidenav-container .menu.mat-sidenav navigation-menu navigation-menu-item a span'));
-        var targetElment = element(by.css('app-menu aside nav ul li:nth-child(1)'));
-        var findTxt = 'Invoice Ledger';
-
-        return ElementUtil.waitForPageLoad(targetElment, findElm).then(() => {
-            return browser.sleep(1000).then(() => {
-                return StringUtil.checkIfElementExistsInList(findElm, findTxt);
-            });
-        });
-    }
-
     getMenuItemList() {
-        return element.all(by.css("app-root md-sidenav-container md-sidenav.menu.mat-sidenav.mat-sidenav-over navigation-menu navigation-menu-item a span")).map((elm) => {
-            return elm.getText();
+        return $$("app-root md-sidenav-container md-sidenav.menu.mat-sidenav.mat-sidenav-over navigation-menu navigation-menu-item a span").map((menuItemNames) => {
+            return menuItemNames.getText();
         }).then((texts) => {
             return texts;
         });
     }
 
     checkMenuItemist() {
-        let menu_items = [
+        let menu_names = [
           'Seeders',
           'Admin Home',
           'Entity Types',
@@ -77,10 +71,12 @@ export class DashboardPage {
           'Create Offer'
           ];
           
-        return this.getMenuItemList().then((elm) => {
-            let mnu_items  = [];
-            mnu_items = elm;
-            return StringUtil.checkIfTwoArraysContainSimilarElements(menu_items, mnu_items);
+        return this.clickMenuIcon().then(() => {
+            return this.getMenuItemList().then((texts) => {
+                let menu_items_names  = [];
+                menu_items_names = texts;
+                return StringUtil.checkIfTwoArraysContainSimilarElements(menu_names, menu_items_names);
+            });
         });
     }
 
