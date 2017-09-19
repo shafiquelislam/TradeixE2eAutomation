@@ -6,7 +6,7 @@ export class StringUtil {
     }
 
     static removeExtraSpaces(str: string): string {
-        if(this.isValidString(str)) {
+        if (this.isValidString(str)) {
             return str.trim().replace(/ +/g, ' ');
         } else {
             return "";
@@ -14,17 +14,17 @@ export class StringUtil {
     }
 
     static checkIfTwoArraysContainSimilarElements(first: Array<string>, second: Array<string>): boolean {
-        if(first.length != second.length) {
+        if (first.length != second.length) {
             return false;
         }
         let isEqual: boolean = true;
-        for(let i=0; i< first.length; i++) {
+        for (let i = 0; i < first.length; i++) {
             first[i] = this.removeExtraSpaces(first[i]);
             second[i] = this.removeExtraSpaces(second[i]);
         }
-        for(let i=0; i< second.length; i++) {
+        for (let i = 0; i < second.length; i++) {
             let str = this.removeExtraSpaces(second[i]);
-            if(first.indexOf(str) >= 0) {
+            if (first.indexOf(str) >= 0) {
                 continue;
             } else {
                 isEqual = false;
@@ -34,17 +34,26 @@ export class StringUtil {
         return isEqual;
     }
 
+    static checkIfAllArrayElementsEqualToSpecificString(list: Array<string>, text: string): boolean {
+        if (list.length === 0) {
+            return false;
+        }
+        return list.every((item) => {
+            return item == text;
+        });
+    }
+
     static checkIfElementExistsInList(list, search_element): boolean {
-        if(list.length == 0 || search_element.length == 0){
+        if (list.length == 0 || search_element.length == 0) {
             return false;
         }
 
         return list.map((elm) => {
             return elm.getText();
-            }).then((elm) => {
-            if(elm.indexOf(search_element) >= 0){
+        }).then((elm) => {
+            if (elm.indexOf(search_element) >= 0) {
                 return true;
-            }else{
+            } else {
                 console.log(search_element + " is not found in the list " + elm);
                 return false;
             }
