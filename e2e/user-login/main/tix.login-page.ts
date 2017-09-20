@@ -6,7 +6,7 @@ const data = require('../../' + globalConfigs.loginUserType + '/resources/tix.' 
 const credentials = require('../../tix.credentials.json');
 
 export class LoginPage {
-  private loginCredentials: any = credentials; // N.B.: credentials should be replaced after adding to private git repo by data.loginCredentials;
+  private loginCredentials: any = credentials.loginCredentials; // N.B.: {credentials.loginCredentials} should be replaced after adding to private git repo by {data.loginCredentials};
   private defaultSpecDelayTime: number = globalConfigs.defaultSpecDelayTime;
 
   constructor() {
