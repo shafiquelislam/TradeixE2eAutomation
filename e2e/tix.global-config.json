@@ -1,6 +1,6 @@
 {
-    "envName": "uat",
-    "loginUserType": "admin",
+    "envName": "staging",
+    "loginUserType": "supplier",
     "specs": {
         "admin": [
             "./e2e/admin/tests/*.dashboard-test-specs.ts",
@@ -10,7 +10,7 @@
             "./e2e/admin/tests/*.entity-type-test-specs.ts"
         ],
         "supplier": [
-            "./e2e/supplier/tests/*.dashboard-spec.ts"
+            
         ],
         "login": "./e2e/user-login/tests/*.login-spec.ts",
         "logout": "./e2e/user-login/tests/*.logout-spec.ts"

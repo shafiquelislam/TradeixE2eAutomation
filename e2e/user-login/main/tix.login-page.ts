@@ -3,8 +3,10 @@ import { browser, by, element, protractor, $, $$ } from 'protractor';
 const globalConfigs = require('../../tix.global-config.json');
 const data = require('../../' + globalConfigs.loginUserType + '/resources/tix.' + globalConfigs.envName + '-config.json');
 
+const credentials = require('../../tix.credentials.json');
+
 export class LoginPage {
-  private loginCredentials: any = data.loginCredentials;
+  private loginCredentials: any = credentials; // N.B.: credentials should be replaced after adding to private git repo by data.loginCredentials;
   private defaultSpecDelayTime: number = globalConfigs.defaultSpecDelayTime;
 
   constructor() {

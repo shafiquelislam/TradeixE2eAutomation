@@ -5,8 +5,8 @@
     },
     "appUrl": "https://app.uat.tradeix.com/",
     "loginCredentials": {
-        "username": "admin@tix.com",
-        "password": "tradeix~1"
+        "username": "abc@tix.com",
+        "password": "********"
     },
     "company": {
         "create": {
