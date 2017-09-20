@@ -19,6 +19,12 @@ export class ElementUtil {
         });
     }
 
+    /**
+     * 
+     * @param element The ElementFinder for which browser will wait for its presence 
+     * @param timeout Maximum timeout to be wait for the presence of the @param element
+     * @return A Promise of boolean type indicating if the @param element is found or not
+     */
     static checkIfElementLoadedByFinder(element: ElementFinder, timeout = 15000) {
         var until = protractor.ExpectedConditions;
         return browser.wait(until.presenceOf(element), timeout).then(() => {
@@ -29,12 +35,26 @@ export class ElementUtil {
         });
     }
 
-    static clickAndWaitForElement(clickOnCss: string, waitForCss: string, timeout = 15000) {
-        return browser.actions().mouseMove($(clickOnCss)).perform().then(() => {
-            return this.checkIfElementLoadedByFinder($(waitForCss), timeout);
+    /**
+     * 
+     * @param clickOnCssPath The CSS path of ElementFinder on which click action will be performed 
+     * @param waitForCssPath The CSS path of ElementFinder for which browser will wait for its presence
+     * @param timeout Maximum timeout to be wait for the presence of the ElementFinder at CSS path @param waitForCssPath
+     * @return A Promise of boolean type indicating if the @param element is found or not
+     */
+    static clickAndWaitForElement(clickOnCssPath: string, waitForCssPath: string, timeout = 15000) {
+        return browser.actions().mouseMove($(clickOnCssPath)).perform().then(() => {
+            return this.checkIfElementLoadedByFinder($(waitForCssPath), timeout);
         });
     }
 
+    /**
+     * 
+     * @param clickOnElement The ElementFinder on which click action will be performed 
+     * @param waitForElement The ElementFinder for which browser will wait for its presence
+     * @param timeout Maximum timeout to be wait for the presence of the @param waitForElement
+     * @return A Promise of boolean type indicating if the @param waitForElement is found or not
+     */    
     static clickAndWaitForElementByFinder(clickOnElement: ElementFinder, waitForElement: ElementFinder, timeout = 15000) {
         return browser.actions().mouseMove(clickOnElement).perform().then(() => {
             return this.checkIfElementLoadedByFinder(waitForElement, timeout);

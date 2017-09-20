@@ -2,12 +2,28 @@ import { StringUtil } from './tix.string-util';
 
 export class NumberUtil {
 
+    /**
+     * Returns true if the argument is a valid number in Javascript
+     * 
+     * @static
+     * @param {any} n 
+     * @returns {boolean} 
+     * @memberof NumberUtil
+     */
     static isNumber(n): boolean {
         return typeof n == 'number' && !isNaN(n) && isFinite(n);
     }
 
-    static stringToNumber(str: string): number {
-        let numString: string = str.replace(/[^\d\.]*/g, '');
+    /**
+     * Converts a string to a number. Returns null for invalid string.
+     * 
+     * @static
+     * @param {string} text 
+     * @returns {number} 
+     * @memberof NumberUtil
+     */
+    static stringToNumber(text: string): number {
+        let numString: string = text.replace(/[^\d\.]*/g, '');
         if(StringUtil.isValidString(numString)) {
             if(numString.indexOf('.') >= 0) {
                 return parseFloat(numString);
@@ -19,6 +35,14 @@ export class NumberUtil {
         }
     }
 
+    /**
+     * Aggregates all numbers from an Array of string
+     * 
+     * @static
+     * @param {any} strList 
+     * @returns {number} 
+     * @memberof NumberUtil
+     */
     static addNumbersFromListOfString(strList): number {
         let sum: number = 0;
         strList.forEach(str => {
@@ -28,12 +52,14 @@ export class NumberUtil {
         return sum;
     }
 
-    /*static addNumbersFromListOfStringUsingReduce(strList): number {
-        return strList.reduce((str1, str2) => {
-            return this.stringToNumber(str1) + this.stringToNumber(str1);
-        });
-    }*/
-
+    /**
+     * Aggregates all numbers from an Array of elements of type ElementFinder
+     * 
+     * @static
+     * @param {any} elements 
+     * @returns {number} 
+     * @memberof NumberUtil
+     */
     static getSumFromArrayOfElements(elements): number {
         return elements.map((elm) => {
             return elm.getText();
