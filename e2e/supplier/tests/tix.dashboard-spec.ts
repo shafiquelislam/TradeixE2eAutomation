@@ -41,16 +41,14 @@ describe('Producer Dashboard', () => {
     });
   });
 
-  describe('C110 - Create Offer and back to Dashboard process validation', () => {
+  xdescribe('C110 - Create Offer and back to Dashboard process validation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
 
     it('1. should found at least one button as enabled of Fund USD/GBP/EUR', done => {
-      dashboardPage.getCountOfEnabledFundButtons().then((count) => {
-        expect(count).toBeGreaterThanOrEqual(1);
-        done();
-      });
+      expect(dashboardPage.checkIfEnabledFundButtonExists()).toBe(true);
+      done();
     });
 
     it('2. should click on Fund USD button', done => {
@@ -75,14 +73,14 @@ describe('Producer Dashboard', () => {
 
   });
 
-  describe('C111 - Create Offer and Bid Accept process vaidation', () => {
+  xdescribe('C111 - Create Offer and Bid Accept process vaidation', () => {
 
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
 
     it('1. should found at least one button as enabled of Fund USD/GBP/EUR', done => {
-      expect(dashboardPage.getCountOfEnabledFundButtons()).toBeGreaterThanOrEqual(1);
+      expect(dashboardPage.checkIfEnabledFundButtonExists()).toBe(true);
       done();
     });
 
@@ -118,16 +116,14 @@ describe('Producer Dashboard', () => {
 
   });
 
-  describe('C112 - View Offers, view Bid details and back to Dashboard process validation', () => {
+  xdescribe('C112 - View Offers, view Bid details and back to Dashboard process validation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
 
     it('1. should found at least one "View Offers" button as enabled for Fund USD/GBP/EUR', done => {
-      dashboardPage.getCountOfEnabledViewOffersButtons().then((count) => {
-        expect(count).toBeGreaterThanOrEqual(1);
-        done();
-      });
+      expect(dashboardPage.checkIfEnabledViewOffersButtonExists()).toBe(true);
+      done();
     });
 
     it('2. should click on first enabled "View Offers" button of USD/GBP/EUR', done => {
@@ -147,7 +143,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  describe('C113 - View Offers, view Bid details and Accept Bid process validation', () => {
+  xdescribe('C113 - View Offers, view Bid details and Accept Bid process validation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -184,7 +180,7 @@ describe('Producer Dashboard', () => {
       done();
     });
 
-    it('2. check if all buyers are selected by default', done => {
+    xit('2. check if all buyers are selected by default', done => {
       dashboardPage.getTotalNumberOfAvailableBuyers().then((totalRow) => {
         dashboardPage.getTotalNumberOfSelectedBuyers().then((totalSelected) => {
           expect(totalRow).toEqual(totalSelected);
@@ -193,27 +189,27 @@ describe('Producer Dashboard', () => {
       });
     });
 
-    it('3. check UI header text equals to "Available Buyers"', done => {
+    xit('3. check UI header text equals to "Available Buyers"', done => {
       expect(dashboardPage.getUiHeaderTextOfBuyersList()).toEqual('Available Buyers');
       done();
     });
 
-    it('4. check "Total Available (n)" count, where n should be equal to total number of Buyers in list', done => {
+    xit('4. check "Total Available (n)" count, where n should be equal to total number of Buyers in list', done => {
       expect(dashboardPage.getTotalNumberOfAvailableBuyers()).toEqual(dashboardPage.getCountShowedForTotalAvailableBuyers());
       done();
     });
 
-    it('5. check "Total Available (n)" value, where value should be equal to sum of the values of "Total Invoice Value" column', done => {
+    xit('5. check "Total Available (n)" value, where value should be equal to sum of the values of "Total Invoice Value" column', done => {
       expect(dashboardPage.getValueShowedForTotalAvailableBuyers()).toEqual(dashboardPage.getSumOfAllInvoiceValuesInBuyersList());
       done();
     });
 
-    it('6. check "Total Selected (n)" count, where n should be equal to total number of selected Buyers in list', done => {
+    xit('6. check "Total Selected (n)" count, where n should be equal to total number of selected Buyers in list', done => {
       expect(dashboardPage.getTotalNumberOfSelectedBuyers()).toEqual(dashboardPage.getCountShowedForTotalSelectedBuyers());
       done();
     });
 
-    it('7. check "Total Selected (n)" value, where value should be equal to sum of the values of "Total Invoice Value" column of the selected Buyers', done => {
+    xit('7. check "Total Selected (n)" value, where value should be equal to sum of the values of "Total Invoice Value" column of the selected Buyers', done => {
       expect(dashboardPage.getValueShowedForTotalSelectedBuyers()).toEqual(dashboardPage.getSumOfSelectedInvoiceValuesInBuyersList());
       done();
     });
@@ -223,13 +219,13 @@ describe('Producer Dashboard', () => {
       done();
     });
 
-    it('9. ....should click on search icon to open "Advnced Filter" panel', done => {
-
+    it('9. should click on search icon to open "Advnced Filter" panel', done => {
+      expect(dashboardPage.clickOnSearchIconToOpenAdvancedFilter()).toBe(true);
       done();
     });
 
-    it('10. ....should filter the list by a valid "Buyer Name" value', done => {
-
+    it('10. should filter the list by a valid "Buyer Name" value', done => {
+      expect(dashboardPage.filterAvilableBuyerByBuyerName()).toBe(true);
       done();
     });
 
@@ -239,7 +235,7 @@ describe('Producer Dashboard', () => {
     });
   });
 
-  describe('C115 - Choose Invoice - UI validation and back to Dashboard', () => {
+  xdescribe('C115 - Choose Invoice - UI validation and back to Dashboard', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -309,7 +305,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  describe('C116 - View Offers - UI validation and back to Dashboard', () => {
+  xdescribe('C116 - View Offers - UI validation and back to Dashboard', () => {
 
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
@@ -337,7 +333,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  describe('C117 - Bid deatails - UI validation and back to Dashboard', () => {
+  xdescribe('C117 - Bid deatails - UI validation and back to Dashboard', () => {
 
     beforeAll(() => {
       browser.sleep(defaultSpecDelayTime);

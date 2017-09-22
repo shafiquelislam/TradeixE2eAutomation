@@ -1,3 +1,4 @@
+import { ElementUtil } from './../../utils/tix.element-util';
 import { browser, by, element, $, $$ } from 'protractor';
 import { NumberUtil } from '../../utils/tix.number-util';
 import { StringUtil } from '../../utils/tix.string-util';
@@ -63,21 +64,17 @@ export class DashboardPage {
 
     checkIfFundButtonIsEnabledByType(type) {
         return this.getFundButtonByType(type).getAttribute('disabled').then((result) => {
-            console.log("result for " + type + ": " + result);
             return result !== 'true';
         });
     }
 
-    getCountOfEnabledFundButtons() {
-        return $$('app-producer-dashboard app-currency-summary md-card a[href^="/producer/create-offer/choose-buyers/"]:not([disabled="true"])').count().then(count => {
-            return count;
-        });
+    checkIfEnabledFundButtonExists() {
+        return $('app-producer-dashboard app-currency-summary md-card a[href^="/producer/create-offer/choose-buyers/"]:not([disabled="true"])').isPresent();
     }
 
     clickOnActiveFundButton() {
-        return $('app-producer-dashboard app-currency-summary md-card a[href^="/producer/create-offer/choose-buyers/"]:not([disabled="true"])').click().then(() => {
-            return true;
-        });
+        let clickOnElement = $$('app-producer-dashboard app-currency-summary md-card a[href^="/producer/create-offer/choose-buyers/"]:not([disabled="true"])').get(0);
+        return ElementUtil.clickAndWaitForElementByFinder(clickOnElement, $('app-root app-producer-create-offer-choose-buyers'));
     }
 
     getListOfAvailableItemsInList() {
@@ -93,22 +90,21 @@ export class DashboardPage {
     }
 
     clickNextButtonFromAvailabaleBuyersList() {
-        let elm = $('app-root md-sidenav-container app-producer-create-offer-choose-buyers app-breadcrumb button.mat-raised-button');
-        return browser.actions().mouseMove(elm).click().perform().then(() => {
-            return true;
-        });
+        let clickOn = 'app-root md-sidenav-container app-producer-create-offer-choose-buyers app-breadcrumb button.mat-raised-button';
+        let waitFor = 'app-root md-sidenav-container app-choose-invoices';
+        return ElementUtil.clickAndWaitForElement(clickOn, waitFor);
     }
 
     clickNextButtonFromAvailabaleInvoicesList() {
-        let elm = $('app-root md-sidenav-container app-choose-invoices app-breadcrumb button.mat-raised-button');
-        return browser.actions().mouseMove(elm).click().perform();
+        let clickOn = 'app-root md-sidenav-container app-choose-invoices app-breadcrumb button.mat-raised-button';
+        let waitFor = '[id^="cdk-overlay-"] invoice-funders-dialog';
+        return ElementUtil.clickAndWaitForElement(clickOn, waitFor);
     }
 
     clickReturnToDashboardButtonFromPopup() {
-        let elm = $('[id^="cdk-overlay-"] md-dialog-container invoice-funders-dialog md-dialog-actions button.mat-button');
-        return browser.actions().mouseMove(elm).click().perform().then(() => {
-            return true;
-        });
+        let clickOn = '[id^="cdk-overlay-"] md-dialog-container invoice-funders-dialog md-dialog-actions button.mat-button';
+        let waitFor = 'app-root app-producer-dashboard';
+        return ElementUtil.clickAndWaitForElement(clickOn, waitFor);
     }
 
     keepBrowserWaiting() {
@@ -138,9 +134,7 @@ export class DashboardPage {
                 return this.keepBrowserWaiting().then(() => {
                     return this.checkFirstBuyerInList().then(() => {
                         return this.keepBrowserWaiting().then(() => {
-                            return this.clickNextButtonFromAvailabaleInvoicesList().then(() => {
-                                return true;
-                            });
+                            return this.clickNextButtonFromAvailabaleInvoicesList();
                         });
                     });
                 });
@@ -162,16 +156,12 @@ export class DashboardPage {
 
     clickAcceptButtonFromBidDetails() {
         let elm = $('app-root md-sidenav-container app-bid-summary section md-card button.mat-raised-button.mat-accent');
-        return browser.actions().mouseMove(elm).click().perform().then(() => {
-            return true;
-        });
+        return ElementUtil.clickAndWaitForElementByFinder(elm, $('*[id^="cdk-overlay-"] app-accept-dialog'));
     }
 
     clickOkButtonFromBidAcceptedPopup() {
-        let elm = $('*[id^="cdk-overlay-"] md-dialog-container app-accept-dialog md-dialog-actions button.mat-button.mat-primary');
-        return browser.actions().mouseMove(elm).click().perform().then(() => {
-            return true;
-        });
+        let elm = $('*[id^="cdk-overlay-"] app-accept-dialog md-dialog-actions button.mat-button.mat-primary');
+        return ElementUtil.clickAndWaitForElementByFinder(elm, $('app-root app-producer-dashboard'));
     }
 
 
@@ -187,12 +177,8 @@ export class DashboardPage {
         });
     }
 
-    getCountOfEnabledViewOffersButtons() {
-        return $$('app-root md-sidenav-container app-producer-dashboard app-currency-summary md-card a[href^="/producer/offer-list/"]').filter((elm) => {
-            return elm.getAttribute('disabled').then((result) => {
-                return result !== 'true';
-            });
-        }).count();
+    checkIfEnabledViewOffersButtonExists() {
+        return $('app-producer-dashboard app-currency-summary md-card a[href^="/producer/offer-list/"]:not([disabled="true"])').isPresent();
     }
 
     getActiveViewOfferButton() {
@@ -200,43 +186,17 @@ export class DashboardPage {
     }
 
     clickOnActiveViewOffersButton() {
-        return this.getActiveViewOfferButton().click().then(() => {
-            return true;
-        });
-    }
-
-    __clickOnActiveViewOffersButton() {
-        let fundButton: any;
-        if (this.checkIfViewOffersButtonIsEnabledByType('USD')) {
-            fundButton = this.getViewOffersButtonByType('USD');
-        } else if (this.checkIfViewOffersButtonIsEnabledByType('EUR')) {
-            fundButton = this.getViewOffersButtonByType('EUR');
-        } else if (this.checkIfViewOffersButtonIsEnabledByType('GBP')) {
-            fundButton = this.getViewOffersButtonByType('GBP');
-        }
-        return fundButton.isDisplayed().then((displayed) => {
-            if (displayed) {
-                return fundButton.click().then(() => {
-                    return true;
-                });
-            } else {
-                return false;
-            }
-        });
+        return ElementUtil.clickAndWaitForElementByFinder(this.getActiveViewOfferButton(), $('app-root tix-offer-list'));
     }
 
     clickFirstViewBidsOrPricingSummaryButton() {
         let elm = $$('app-root md-sidenav-container tix-offer-list data-grid table tbody a[href^="/producer/create-offer/bid-summary/"]').get(0);
-        return browser.actions().mouseMove(elm).click().perform().then(() => {
-            return true;
-        });
+        return ElementUtil.clickAndWaitForElementByFinder(elm, $('app-root app-bid-summary'));
     }
 
     clickCancelButtonOfViewBidsOrPricingSummary() {
         let elm = $('app-root md-sidenav-container app-bid-summary app-breadcrumb button.mat-raised-button.mat-primary');
-        return browser.actions().mouseMove(elm).click().perform().then(() => {
-            return true;
-        });
+        return ElementUtil.clickAndWaitForElementByFinder(elm, $('app-root app-producer-dashboard'));
     }
 
     /***************************    C114    ****************************/
@@ -301,11 +261,21 @@ export class DashboardPage {
         });
     }
 
+    clickOnSearchIconToOpenAdvancedFilter() {
+        let searchIconSelector = 'app-root data-grid .search-icon';
+        let filterSelector = 'app-root .mat-sidenav.mat-sidenav-end.mat-sidenav-opened tix-data-grid-filter'
+        return ElementUtil.clickAndWaitForElement(searchIconSelector, filterSelector);
+    }
+
+    filterAvilableBuyerByBuyerName() {
+        let columnSelector = 'app-root md-sidenav-container data-grid table > tbody td:nth-child(2)';
+        let filterInputFieldSelector = '#mainForm .form-group md-input-container input[ng-reflect-placeholder="Buyer Name"]';
+        return ElementUtil.filterTableByTextInColumn(columnSelector, filterInputFieldSelector);
+    }
+
     clickOnCancelButtonFromBuyersListView() {
         let elm = $('app-root md-sidenav-container app-producer-create-offer-choose-buyers app-breadcrumb button.mat-button');
-        return browser.actions().mouseMove(elm).click().perform().then(() => {
-            return true;
-        });
+        return ElementUtil.clickAndWaitForElementByFinder(elm, $('app-root app-producer-dashboard'));
     }
 
 
@@ -438,8 +408,8 @@ export class DashboardPage {
 
     checkIfBidDetailsContainsThreeSections() {
         let sectionNamesAsLowerCase = [
-            "total invoice value", 
-            "total purchase value", 
+            "total invoice value",
+            "total purchase value",
             "discount and fees"
         ];
         return $$('app-root md-sidenav-container app-bid-summary section .statistics span.muted-text').map((elm) => {

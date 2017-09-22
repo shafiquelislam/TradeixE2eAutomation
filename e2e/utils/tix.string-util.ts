@@ -68,8 +68,8 @@ export class StringUtil {
      * @returns {boolean} 
      * @memberof StringUtil
      */
-    static checkIfAllArrayElementsEqualToSpecificString(list: Array<string>, text: string): boolean {
-        if (list.length === 0) {
+    static isArrayContainsDistinctText(list: Array<string>, text: string): boolean {        
+        if (list.length == 0) {
             return false;
         }
         return list.every((item) => {
