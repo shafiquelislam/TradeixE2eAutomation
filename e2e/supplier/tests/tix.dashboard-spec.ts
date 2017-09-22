@@ -21,19 +21,19 @@ describe('Producer Dashboard', () => {
       browser.sleep(defaultSpecDelayTime);
     });
 
-    it('should display tradeix logo', done => {
+    it('1. should display tradeix logo', done => {
       expect(dashboardPage.hasTradeixLogo()).toBe(true);
       done();
     });
 
-    it('should contain three options in left menu', done => {
+    it('2. should contain three options in left menu', done => {
       expect(dashboardPage.isProducerDashboardMenuExists()).toBe(true);
       expect(dashboardPage.isFileUploadMenuExists()).toBe(true);
       expect(dashboardPage.isProfileMenuExits()).toBe(true);
       done();
     });
 
-    it('should display minimum 1 and maximum 3 currency box at producer dashboard', done => {
+    it('3. should display minimum 1 and maximum 3 currency box at producer dashboard', done => {
       dashboardPage.getNumberOfCurrencyBoxes().then((count) => {
         expect(count >= 1 && count <= 3).toBe(true);
         done();
@@ -46,29 +46,29 @@ describe('Producer Dashboard', () => {
       browser.sleep(defaultSpecDelayTime);
     });
 
-    it('should found at least one button as enabled of Fund USD/GBP/EUR', done => {
+    it('1. should found at least one button as enabled of Fund USD/GBP/EUR', done => {
       dashboardPage.getCountOfEnabledFundButtons().then((count) => {
         expect(count).toBeGreaterThanOrEqual(1);
         done();
       });
     });
 
-    it('should click on Fund USD button', done => {
+    it('2. should click on Fund USD button', done => {
       expect(dashboardPage.clickOnActiveFundButton()).toBe(true);
       done();
     });
 
-    it('should choose any one Buyer from the list and then click on "Next" button', done => {
+    it('3. should choose any one Buyer from the list and then click on "Next" button', done => {
       expect(dashboardPage.chooseFirstAvailabaleBuyerAndClickNext()).toBe(true);
       done();
     });
 
-    it('should choose any one Invoice from the list and then click on "Next" button', done => {
+    it('4. should choose any one Invoice from the list and then click on "Next" button', done => {
       expect(dashboardPage.chooseFirstAvailableInvoiceAndClickNext()).toBe(true);
       done();
     });
 
-    it('should click on "Return to dashboard" button from pop-up', done => {
+    it('5. should click on "Return to dashboard" button from pop-up', done => {
       expect(dashboardPage.clickReturnToDashboardButtonFromPopup()).toBe(true);
       done();
     });
@@ -81,37 +81,37 @@ describe('Producer Dashboard', () => {
       browser.sleep(defaultSpecDelayTime);
     });
 
-    it('should found at least one button as enabled of Fund USD/GBP/EUR', done => {
+    it('1. should found at least one button as enabled of Fund USD/GBP/EUR', done => {
       expect(dashboardPage.getCountOfEnabledFundButtons()).toBeGreaterThanOrEqual(1);
       done();
     });
 
-    it('should click on first enabled Fund button of USD/GBP/EUR', done => {
+    it('2. should click on first enabled Fund button of USD/GBP/EUR', done => {
       expect(dashboardPage.clickOnActiveFundButton()).toBe(true);
       done();
     });
 
-    it('should choose any one Buyer from the list and then click on "Next" button', done => {
+    it('3. should choose any one Buyer from the list and then click on "Next" button', done => {
       expect(dashboardPage.chooseFirstAvailabaleBuyerAndClickNext()).toBe(true);
       done();
     });
 
-    it('should choose any one Invoice from the list and then click on "Next" button', done => {
+    it('4. should choose any one Invoice from the list and then click on "Next" button', done => {
       expect(dashboardPage.chooseFirstAvailableInvoiceAndClickNext()).toBe(true);
       done();
     });
 
-    it('should click on Review Pricing / bid(s) button', done => {
+    it('5. should click on Review Pricing / bid(s) button', done => {
       expect(dashboardPage.clickReviewPricingOrBidsButtonFromPopup()).toBe(true);
       done();
     });
 
-    it('should click  on "Accept" button', done => {
+    it('6. should click  on "Accept" button', done => {
       expect(dashboardPage.clickAcceptButtonFromBidDetails()).toBe(true);
       done();
     });
 
-    it('should click on "Ok" button from the "Bid Accepted" pop-up', done => {
+    it('7. should click on "Ok" button from the "Bid Accepted" pop-up', done => {
       expect(dashboardPage.clickOkButtonFromBidAcceptedPopup()).toBe(true);
       done();
     });
@@ -123,24 +123,24 @@ describe('Producer Dashboard', () => {
       browser.sleep(defaultSpecDelayTime);
     });
 
-    it('should found at least one "View Offers" button as enabled for Fund USD/GBP/EUR', done => {
+    it('1. should found at least one "View Offers" button as enabled for Fund USD/GBP/EUR', done => {
       dashboardPage.getCountOfEnabledViewOffersButtons().then((count) => {
         expect(count).toBeGreaterThanOrEqual(1);
         done();
       });
     });
 
-    it('should click on first enabled "View Offers" button of USD/GBP/EUR', done => {
+    it('2. should click on first enabled "View Offers" button of USD/GBP/EUR', done => {
       expect(dashboardPage.clickOnActiveViewOffersButton()).toBe(true);
       done();
     });
 
-    it('should click on any "View bid(s)/ Pricing Summary" button', done => {
+    it('3. should click on any "View bid(s)/ Pricing Summary" button', done => {
       expect(dashboardPage.clickFirstViewBidsOrPricingSummaryButton()).toBe(true);
       done();
     });
 
-    it('should click on "Cancel" button of view bid(s) or pricing summary', done => {
+    it('4. should click on "Cancel" button of view bid(s) or pricing summary', done => {
       expect(dashboardPage.clickCancelButtonOfViewBidsOrPricingSummary()).toBe(true);
       done();
     });
@@ -152,22 +152,22 @@ describe('Producer Dashboard', () => {
       browser.sleep(defaultSpecDelayTime);
     });
 
-    it('should click on first enabled "View Offers" button of USD/GBP/EUR', done => {
+    it('1. should click on first enabled "View Offers" button of USD/GBP/EUR', done => {
       expect(dashboardPage.clickOnActiveViewOffersButton()).toBe(true);
       done();
     });
 
-    it('should click on any "View bid(s)/ Pricing Summary" button', done => {
+    it('2. should click on any "View bid(s)/ Pricing Summary" button', done => {
       expect(dashboardPage.clickFirstViewBidsOrPricingSummaryButton()).toBe(true);
       done();
     });
 
-    it('should click on "Accept" button from Bid Details', done => {
+    it('3. should click on "Accept" button from Bid Details', done => {
       expect(dashboardPage.clickAcceptButtonFromBidDetails()).toBe(true);
       done();
     });
 
-    it('should click on "Ok" button from the "Bid Accepted" pop-up', done => {
+    it('4. should click on "Ok" button from the "Bid Accepted" pop-up', done => {
       expect(dashboardPage.clickOkButtonFromBidAcceptedPopup()).toBe(true);
       done();
     });
@@ -179,12 +179,12 @@ describe('Producer Dashboard', () => {
       browser.sleep(defaultSpecDelayTime);
     });
 
-    it('should click on first enabled Fund USD/GBP/EUR button', done => {
+    it('1. should click on first enabled Fund USD/GBP/EUR button', done => {
       expect(dashboardPage.clickOnActiveFundButton()).toBe(true);
       done();
     });
 
-    it('check if all buyers are selected by default', done => {
+    it('2. check if all buyers are selected by default', done => {
       dashboardPage.getTotalNumberOfAvailableBuyers().then((totalRow) => {
         dashboardPage.getTotalNumberOfSelectedBuyers().then((totalSelected) => {
           expect(totalRow).toEqual(totalSelected);
@@ -193,47 +193,47 @@ describe('Producer Dashboard', () => {
       });
     });
 
-    it('check UI header text equals to "Available Buyers"', done => {
+    it('3. check UI header text equals to "Available Buyers"', done => {
       expect(dashboardPage.getUiHeaderTextOfBuyersList()).toEqual('Available Buyers');
       done();
     });
 
-    it('check "Total Available (n)" count, where n should be equal to total number of Buyers in list', done => {
+    it('4. check "Total Available (n)" count, where n should be equal to total number of Buyers in list', done => {
       expect(dashboardPage.getTotalNumberOfAvailableBuyers()).toEqual(dashboardPage.getCountShowedForTotalAvailableBuyers());
       done();
     });
 
-    it('check "Total Available (n)" value, where value should be equal to sum of the values of "Total Invoice Value" column', done => {
+    it('5. check "Total Available (n)" value, where value should be equal to sum of the values of "Total Invoice Value" column', done => {
       expect(dashboardPage.getValueShowedForTotalAvailableBuyers()).toEqual(dashboardPage.getSumOfAllInvoiceValuesInBuyersList());
       done();
     });
 
-    it('check "Total Selected (n)" count, where n should be equal to total number of selected Buyers in list', done => {
+    it('6. check "Total Selected (n)" count, where n should be equal to total number of selected Buyers in list', done => {
       expect(dashboardPage.getTotalNumberOfSelectedBuyers()).toEqual(dashboardPage.getCountShowedForTotalSelectedBuyers());
       done();
     });
 
-    it('check "Total Selected (n)" value, where value should be equal to sum of the values of "Total Invoice Value" column of the selected Buyers', done => {
+    it('7. check "Total Selected (n)" value, where value should be equal to sum of the values of "Total Invoice Value" column of the selected Buyers', done => {
       expect(dashboardPage.getValueShowedForTotalSelectedBuyers()).toEqual(dashboardPage.getSumOfSelectedInvoiceValuesInBuyersList());
       done();
     });
 
-    it('should have appropriate column names in Data Grid columns', done => {
+    it('8. should have appropriate column names in Data Grid columns', done => {
       expect(dashboardPage.checkIfDataGridColumnsNamesOfBuyersListAsPerExpectation()).toBe(true);
       done();
     });
 
-    it('....should click on search icon to open "Advnced Filter" panel', done => {
+    it('9. ....should click on search icon to open "Advnced Filter" panel', done => {
 
       done();
     });
 
-    it('....should filter the list by a valid "Buyer Name" value', done => {
+    it('10. ....should filter the list by a valid "Buyer Name" value', done => {
 
       done();
     });
 
-    it('should click on "Cancel" button and back to Producer Dashboard', done => {
+    it('11. should click on "Cancel" button and back to Producer Dashboard', done => {
       expect(dashboardPage.clickOnCancelButtonFromBuyersListView()).toBe(true);
       done();
     });
@@ -244,55 +244,65 @@ describe('Producer Dashboard', () => {
       browser.sleep(defaultSpecDelayTime);
     });
 
-    it('should click on first enabled Fund USD/GBP/EUR button', done => {
+    it('1. should click on first enabled Fund USD/GBP/EUR button', done => {
       expect(dashboardPage.clickOnActiveFundButton()).toBe(true);
       done();
     });
 
-    it('should click on top checkbox in buyer list', done => {
+    it('2. should click on top checkbox in buyer list', done => {
       dashboardPage.uncheckAllBuyersInList();
       expect(dashboardPage.getCountOfSelectedBuyersInList()).toBe(0);
       done();
     });
 
-    it('should select top two buyers in buyer list', done => {
+    it('3. should select top two buyers in buyer list', done => {
       dashboardPage.checkTopTwoBuyerInList();
       expect(dashboardPage.getCountOfSelectedBuyersInList()).toBeGreaterThanOrEqual(1);
       expect(dashboardPage.getCountOfSelectedBuyersInList()).toBeLessThanOrEqual(2);
       done();
     });
 
-    it('should click "Next" button and load "Choose Invoices" UI', done => {
+    it('4. should click "Next" button and load "Choose Invoices" UI', done => {
       expect(dashboardPage.clickNextButtonFromAvailabaleBuyersList()).toBe(true);
       done();
     });
 
-    it('check if all invoices are selected', done => {
+    it('5. check if all invoices are selected', done => {
       expect(dashboardPage.getCountOfUnselectedInvoicesInList()).toBe(0);
       done();
     });
 
-    it('check UI header text equals to "Available Invoices"', done => {
+    it('6. check UI header text equals to "Available Invoices"', done => {
       expect(dashboardPage.getUiHeaderTextOfInvoiceList()).toEqual('Available Invoices');
       done();
     });
 
-    it('check "Total Available (n)" value, where n should be equal to sum of all amounts in "Value" column', done => {
+    it('7. check "Total Available (n)" value, where n should be equal to sum of all amounts in "Value" column', done => {
       expect(dashboardPage.getValueShowedForTotalAvailableInvoices()).toEqual(dashboardPage.getSumOfAllInvoiceValuesInInvoiceList());
       done();
     });
 
-    it('check "Total Selected (n)" value, where n should be equal to sum of amounts in "Value" column only for selected invoices', done => {
+    it('8. check "Total Selected (n)" value, where n should be equal to sum of amounts in "Value" column only for selected invoices', done => {
       expect(dashboardPage.getValueShowedForTotalSelectedInvoices()).toEqual(dashboardPage.getSumOfSelectedInvoiceValuesInInvoiceList());
       done();
     });
 
-    it('should have appropriate column names in Data Grid columns', done => {
+    it('9. should have appropriate column names in Data Grid columns', done => {
       expect(dashboardPage.checkIfDataGridColumnsNamesOfInvoicesListAsPerExpectation()).toBe(true);
       done();
     });
 
-    it('should click on "Cancel" button and back to Producer Dashboard', done => {
+    it('10. ****should click on search icon to open "Advnced Filter" panel', done => {
+
+      done();
+    });
+
+    it('11. ****should filter the list by a valid "Buyer Name" value', done => {
+
+      done();
+    });
+
+    it('12. should click on "Cancel" button and back to Producer Dashboard', done => {
       expect(dashboardPage.clickOnCancelButtonFromInvoicesListView()).toBe(true);
       done();
     });
@@ -305,22 +315,22 @@ describe('Producer Dashboard', () => {
       browser.sleep(defaultSpecDelayTime);
     });
 
-    it('should click on "View Offers" Button', done => {
+    it('1. should click on "View Offers" Button', done => {
       expect(dashboardPage.clickOnActiveViewOffersButton()).toBe(true);
       done();
     });
 
-    it('check UI header text equals to "Open Offers"', done => {
+    it('2. check UI header text equals to "Open Offers"', done => {
       expect(dashboardPage.getUiHeaderTextOfViewOffersList()).toEqual('Open Offers');
       done();
     });
 
-    it('should have appropriate column names in Data Grid columns', done => {
+    it('3. should have appropriate column names in Data Grid columns', done => {
       expect(dashboardPage.checkIfDataGridColumnsNamesOfOpenOffersListAsPerExpectation()).toBe(true);
       done();
     });
 
-    it('should click on "Producer Dashboard" from left Menu', done => {
+    it('4. should click on "Producer Dashboard" from left Menu', done => {
       expect(dashboardPage.clickOnProducerDashboardFromLeftMenu()).toBe(true);
       done();
     });
@@ -337,22 +347,22 @@ describe('Producer Dashboard', () => {
       browser.sleep(defaultSpecDelayTime);
     });
 
-    it('should click on enabled Currency of "USD/GBP/EUR"', done => {
+    it('1. should click on enabled Currency of "USD/GBP/EUR"', done => {
       expect(dashboardPage.clickOnEnabledCurrencyButton()).toBe(true);
       done();
     });
 
-    it('should display "Bids" at the left', done => {
+    it('2. should display "Bids" at the left', done => {
       expect(dashboardPage.checkIfBidsDisplayedOnLeft()).toBeGreaterThan(0);
       done();
     });
 
-    it('check if "Bid Details" contains Invoice, Purchase and Discount values', done => {
+    it('3. check if "Bid Details" contains Invoice, Purchase and Discount values', done => {
       expect(dashboardPage.checkIfBidDetailsContainsThreeSections()).toBe(true);
       done();
     });
 
-    it('should click on "Cancel" button and return to Producer Dashboard', done => {
+    it('4. should click on "Cancel" button and return to Producer Dashboard', done => {
       expect(dashboardPage.clickOnCancelButtonFromBidDetailsUI()).toBe(true);
       done();
     });
