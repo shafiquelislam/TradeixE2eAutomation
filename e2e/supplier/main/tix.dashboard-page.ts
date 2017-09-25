@@ -342,15 +342,20 @@ export class DashboardPage {
         });
     }
 
+
+    filterAvilableBuyersByBuyerField() {
+        let columnSelector = 'app-root md-sidenav-container data-grid table > tbody td:nth-child(2)';
+        let filterInputFieldSelector = '#mainForm .form-group md-input-container input[ng-reflect-placeholder="Buyer"]';
+        return ElementUtil.filterTableByTextInColumn(columnSelector, filterInputFieldSelector);
+    }
+
     clickOnCancelButtonFromInvoicesListView() {
         let cancelButton = $$('app-root md-sidenav-container app-choose-invoices app-breadcrumb button.mat-button').filter((elm) => {
             return elm.getText().then(text => {
                 return text == 'Cancel';
             });
         }).get(0);
-        return browser.actions().mouseMove(cancelButton).click().perform().then(() => {
-            return true;
-        });
+        return ElementUtil.clickAndWaitForElementByFinder(cancelButton, $('app-root app-producer-dashboard'));
     }
 
 

@@ -41,7 +41,7 @@ describe('Producer Dashboard', () => {
     });
   });
 
-  xdescribe('C110 - Create Offer and back to Dashboard process validation', () => {
+  describe('C110 - Create Offer and back to Dashboard process validation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -73,7 +73,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  xdescribe('C111 - Create Offer and Bid Accept process vaidation', () => {
+  describe('C111 - Create Offer and Bid Accept process vaidation', () => {
 
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
@@ -116,7 +116,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  xdescribe('C112 - View Offers, view Bid details and back to Dashboard process validation', () => {
+  describe('C112 - View Offers, view Bid details and back to Dashboard process validation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -143,7 +143,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  xdescribe('C113 - View Offers, view Bid details and Accept Bid process validation', () => {
+  describe('C113 - View Offers, view Bid details and Accept Bid process validation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -180,7 +180,7 @@ describe('Producer Dashboard', () => {
       done();
     });
 
-    xit('2. check if all buyers are selected by default', done => {
+    it('2. check if all buyers are selected by default', done => {
       dashboardPage.getTotalNumberOfAvailableBuyers().then((totalRow) => {
         dashboardPage.getTotalNumberOfSelectedBuyers().then((totalSelected) => {
           expect(totalRow).toEqual(totalSelected);
@@ -189,27 +189,27 @@ describe('Producer Dashboard', () => {
       });
     });
 
-    xit('3. check UI header text equals to "Available Buyers"', done => {
+    it('3. check UI header text equals to "Available Buyers"', done => {
       expect(dashboardPage.getUiHeaderTextOfBuyersList()).toEqual('Available Buyers');
       done();
     });
 
-    xit('4. check "Total Available (n)" count, where n should be equal to total number of Buyers in list', done => {
+    it('4. check "Total Available (n)" count, where n should be equal to total number of Buyers in list', done => {
       expect(dashboardPage.getTotalNumberOfAvailableBuyers()).toEqual(dashboardPage.getCountShowedForTotalAvailableBuyers());
       done();
     });
 
-    xit('5. check "Total Available (n)" value, where value should be equal to sum of the values of "Total Invoice Value" column', done => {
+    it('5. check "Total Available (n)" value, where value should be equal to sum of the values of "Total Invoice Value" column', done => {
       expect(dashboardPage.getValueShowedForTotalAvailableBuyers()).toEqual(dashboardPage.getSumOfAllInvoiceValuesInBuyersList());
       done();
     });
 
-    xit('6. check "Total Selected (n)" count, where n should be equal to total number of selected Buyers in list', done => {
+    it('6. check "Total Selected (n)" count, where n should be equal to total number of selected Buyers in list', done => {
       expect(dashboardPage.getTotalNumberOfSelectedBuyers()).toEqual(dashboardPage.getCountShowedForTotalSelectedBuyers());
       done();
     });
 
-    xit('7. check "Total Selected (n)" value, where value should be equal to sum of the values of "Total Invoice Value" column of the selected Buyers', done => {
+    it('7. check "Total Selected (n)" value, where value should be equal to sum of the values of "Total Invoice Value" column of the selected Buyers', done => {
       expect(dashboardPage.getValueShowedForTotalSelectedBuyers()).toEqual(dashboardPage.getSumOfSelectedInvoiceValuesInBuyersList());
       done();
     });
@@ -224,7 +224,7 @@ describe('Producer Dashboard', () => {
       done();
     });
 
-    it('10. should filter the list by a valid "Buyer Name" value', done => {
+    it('10. should filter the list by a valid "Buyer" value', done => {
       expect(dashboardPage.filterAvilableBuyerByBuyerName()).toBe(true);
       done();
     });
@@ -235,7 +235,7 @@ describe('Producer Dashboard', () => {
     });
   });
 
-  xdescribe('C115 - Choose Invoice - UI validation and back to Dashboard', () => {
+  describe('C115 - Choose Invoice - UI validation and back to Dashboard', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -288,13 +288,13 @@ describe('Producer Dashboard', () => {
       done();
     });
 
-    it('10. ****should click on search icon to open "Advnced Filter" panel', done => {
-
+    it('10. should click on search icon to open "Advnced Filter" panel', done => {
+      expect(dashboardPage.clickOnSearchIconToOpenAdvancedFilter()).toBe(true);
       done();
     });
 
-    it('11. ****should filter the list by a valid "Buyer Name" value', done => {
-
+    it('11. should filter the list by a valid "Buyer" value', done => {
+      expect(dashboardPage.filterAvilableBuyersByBuyerField()).toBe(true);
       done();
     });
 
@@ -305,7 +305,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  xdescribe('C116 - View Offers - UI validation and back to Dashboard', () => {
+  describe('C116 - View Offers - UI validation and back to Dashboard', () => {
 
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
@@ -333,7 +333,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  xdescribe('C117 - Bid deatails - UI validation and back to Dashboard', () => {
+  describe('C117 - Bid deatails - UI validation and back to Dashboard', () => {
 
     beforeAll(() => {
       browser.sleep(defaultSpecDelayTime);
