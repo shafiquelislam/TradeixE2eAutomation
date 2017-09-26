@@ -45,7 +45,6 @@ export class StringUtil {
         let isEqual: boolean = true;
         for (let i = 0; i < first.length; i++) {
             first[i] = this.removeExtraSpaces(first[i]);
-            second[i] = this.removeExtraSpaces(second[i]);
         }
         for (let i = 0; i < second.length; i++) {
             let str = this.removeExtraSpaces(second[i]);

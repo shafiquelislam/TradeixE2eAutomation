@@ -1,3 +1,4 @@
+import { UserUtil } from './../../utils/tix.user-util';
 import { browser } from 'protractor';
 import { DashboardPage } from '../main/tix.dashboard-page';
 
@@ -21,6 +22,11 @@ describe('Producer Dashboard', () => {
       browser.sleep(defaultSpecDelayTime);
     });
 
+    it("Pre-1. Authenticated & Authorized user(supplier) must be logged in", done => {
+      expect(UserUtil.isAuthorized()).toBe(true);
+      done();
+    });
+
     it('1. should display tradeix logo', done => {
       expect(dashboardPage.hasTradeixLogo()).toBe(true);
       done();
@@ -41,7 +47,7 @@ describe('Producer Dashboard', () => {
     });
   });
 
-  describe('C110 - Create Offer and back to Dashboard process validation', () => {
+  xdescribe('C110 - Create Offer and back to Dashboard process validation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -73,7 +79,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  describe('C111 - Create Offer and Bid Accept process vaidation', () => {
+  xdescribe('C111 - Create Offer and Bid Accept process vaidation', () => {
 
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
@@ -116,7 +122,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  describe('C112 - View Offers, view Bid details and back to Dashboard process validation', () => {
+  xdescribe('C112 - View Offers, view Bid details and back to Dashboard process validation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -143,7 +149,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  describe('C113 - View Offers, view Bid details and Accept Bid process validation', () => {
+  xdescribe('C113 - View Offers, view Bid details and Accept Bid process validation', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -170,7 +176,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  describe('C114 - Choose Buyers - UI validation and back to Dashboard', () => {
+  xdescribe('C114 - Choose Buyers - UI validation and back to Dashboard', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -235,7 +241,7 @@ describe('Producer Dashboard', () => {
     });
   });
 
-  describe('C115 - Choose Invoice - UI validation and back to Dashboard', () => {
+  xdescribe('C115 - Choose Invoice - UI validation and back to Dashboard', () => {
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
     });
@@ -305,7 +311,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  describe('C116 - View Offers - UI validation and back to Dashboard', () => {
+  xdescribe('C116 - View Offers - UI validation and back to Dashboard', () => {
 
     afterEach(() => {
       browser.sleep(defaultSpecDelayTime);
@@ -333,7 +339,7 @@ describe('Producer Dashboard', () => {
 
   });
 
-  describe('C117 - Bid deatails - UI validation and back to Dashboard', () => {
+  xdescribe('C117 - Bid deatails - UI validation and back to Dashboard', () => {
 
     beforeAll(() => {
       browser.sleep(defaultSpecDelayTime);

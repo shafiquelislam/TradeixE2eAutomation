@@ -384,10 +384,7 @@ export class DashboardPage {
     }
 
     clickOnProducerDashboardFromLeftMenu() {
-        let elm = $('app-root app-menu nav a[href="/producer"]');
-        return browser.actions().mouseMove(elm).click().perform().then(() => {
-            return true;
-        });
+        return ElementUtil.clickAndWaitForElement('app-root app-menu nav a[href="/producer"]', 'app-root app-producer-dashboard');
     }
 
 
@@ -397,11 +394,8 @@ export class DashboardPage {
     clickOnEnabledCurrencyButton() {
         return this.getActiveViewOfferButton().getAttribute("href").then((href) => {
             let currencyName = href.split("/").pop();
-            return $('app-root app-producer-dashboard app-currency-summary[ng-reflect-currency-code="' + currencyName + '"] md-card header [ng-reflect-class-base="currency-code-wrapper"]').click().then(() => {
-                return $('app-bid-summary').isPresent().then((result) => {
-                    return result;
-                });
-            });
+            let clickOn = 'app-root app-producer-dashboard app-currency-summary[ng-reflect-currency-code="' + currencyName + '"] md-card header [ng-reflect-class-base="currency-code-wrapper"]';
+            return ElementUtil.clickAndWaitForElement(clickOn, 'app-root app-bid-summary');
         });
     }
 
@@ -427,11 +421,8 @@ export class DashboardPage {
     }
 
     clickOnCancelButtonFromBidDetailsUI() {
-        return $('app-root md-sidenav-container app-bid-summary nav button.mat-raised-button.mat-primary').click().then(() => {
-            return $('app-producer-dashboard').isPresent().then((result) => {
-                return result;
-            });
-        });
+        let clickOn = 'app-root md-sidenav-container app-bid-summary nav button.mat-raised-button.mat-primary';
+        return ElementUtil.clickAndWaitForElement(clickOn, 'app-root app-producer-dashboard');
     }
 
 }
